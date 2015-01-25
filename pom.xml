@@ -19,11 +19,6 @@
 	</properties>
 	<repositories>
 		<repository>
-			<id>repo.springsource.org.milestone</id>
-			<name>Spring Framework Maven Milestone Repository</name>
-			<url>https://repo.springsource.org/milestone</url>
-		</repository>
-		<repository>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
