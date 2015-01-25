@@ -3,6 +3,8 @@ package com.leonarduk.core.config;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -50,6 +52,18 @@ public class Config {
 	 */
 	public String getProperty(String fieldName) {
 		return this.props.getProperty(fieldName);
+	}
+
+	/**
+	 * 
+	 * @param fieldName
+	 * @return
+	 */
+	public String[] getArrayProperty(String fieldName) {
+		String value = getProperty(fieldName);
+		if (null == value)
+			return null;
+		return value.replaceAll("\"", "").split("\\s*,\\s*");
 	}
 
 	/**

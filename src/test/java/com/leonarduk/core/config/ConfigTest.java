@@ -1,6 +1,6 @@
 package com.leonarduk.core.config;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNull;
 
 import java.io.FileNotFoundException;
@@ -26,6 +26,13 @@ public class ConfigTest {
 	@Test
 	public final void testGetProperty() {
 		assertEquals("eggs and bacon", config.getProperty("test.string"));
+	}
+
+	@Test
+	public final void testGetArrayProperty() {
+		String[] expected = new String[] { "one", "two", "three" };
+		assertArrayEquals(expected,
+				config.getArrayProperty("test.string.array"));
 	}
 
 	@Test
