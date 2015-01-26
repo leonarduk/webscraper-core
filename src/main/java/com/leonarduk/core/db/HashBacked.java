@@ -1,4 +1,4 @@
-package com.leonarduk.db;
+package com.leonarduk.core.db;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

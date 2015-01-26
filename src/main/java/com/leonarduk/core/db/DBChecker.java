@@ -1,4 +1,4 @@
-package com.leonarduk.db;
+package com.leonarduk.core.db;
 
 import java.sql.SQLException;
 

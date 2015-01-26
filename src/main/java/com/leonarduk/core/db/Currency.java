@@ -1,4 +1,4 @@
-package com.leonarduk.db;
+package com.leonarduk.core.db;
 
 /*
  * Copyright (c) 2000-2007, CyberFOX Software, Inc. All Rights Reserved.
