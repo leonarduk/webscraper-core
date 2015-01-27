@@ -4,7 +4,7 @@
 
 	<groupId>com.leonarduk</groupId>
 	<artifactId>core</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<name>Core</name>
 	<description>Infrastructure classes</description>
 	<url>http://leonarduk.com/maven2</url>
@@ -30,7 +30,10 @@
 			<url>http://leonarduk.com/maven2/</url>
 			<layout>default</layout>
 		</repository>
+
 	</repositories>
+
+
 	<build>
 		<defaultGoal>deploy</defaultGoal>
 		<plugins>
@@ -111,6 +114,26 @@
 			<artifactId>powermock-api-mockito</artifactId>
 			<version>${powermock.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<!-- database -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>3.6.8.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.8.2.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- an slf4j implementation is needed by hibernate so that it could log 
+			its *stuff* -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.4</version>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 	<distributionManagement>

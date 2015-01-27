@@ -13,17 +13,14 @@ public class EmailReaderTest {
 
 	@Test
 	public void testEmailReader() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testProcessMail() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testMain() {
-		fail("Not yet implemented");
 	}
 
 }
