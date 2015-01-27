@@ -14,14 +14,14 @@ import javax.mail.Store;
 import javax.mail.StoreClosedException;
 import javax.mail.internet.InternetAddress;
 
-public class ReadEmails {
+public class EmailReader {
 
 	enum ServerType {
 		imap, pop3;
 	}
 
 	// Constructor Call
-	public ReadEmails() {
+	public EmailReader() {
 	}
 
 	// Responsible for printing Data to Console
@@ -178,7 +178,7 @@ public class ReadEmails {
 	// Main Function for The readEmail Class
 	public static void main(String args[]) {
 		// Creating new readEmail Object
-		ReadEmails readMail = new ReadEmails();
+		EmailReader readMail = new EmailReader();
 
 		// Calling processMail Function to read from IMAP Account
 //		readMail.processMail("leonarduk.com", "leonard", "SW179TNKT26LJ",
