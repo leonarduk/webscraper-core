@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package com.leonarduk.core.db.demo;
 
 import javax.persistence.Basic;
@@ -10,24 +13,29 @@ import javax.persistence.Table;
 public class Test {
 
 	@Id
-    private int id;
+	private int	   id;
 
 	@Basic
-    private String data;
-
-	public int getId() {
-	    return id;
-    }
-
-	public void setId(int id) {
-	    this.id = id;
-    }
+	private String	data;
 
 	public String getData() {
-	    return data;
-    }
+		return this.data;
+	}
 
-	public void setData(String data) {
-	    this.data = data;
-    }
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public int getId() {
+		return this.id;
+	}
+
+	public void setData(final String data) {
+		this.data = data;
+	}
+
+	public void setId(final int id) {
+		this.id = id;
+	}
 }

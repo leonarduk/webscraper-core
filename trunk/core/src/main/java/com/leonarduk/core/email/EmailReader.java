@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package com.leonarduk.core.email;
 
 import javax.mail.AuthenticationFailedException;
@@ -20,17 +23,42 @@ public class EmailReader {
 		imap, pop3;
 	}
 
+	// Main Function for The readEmail Class
+	public static void main(final String args[]) {
+		// Creating new readEmail Object
+		final EmailReader readMail = new EmailReader();
+
+		// Calling processMail Function to read from IMAP Account
+		// readMail.processMail("leonarduk.com", "leonard", "SW179TNKT26LJ",
+		// ServerType.imap);
+
+		// Calling processMail Function to read from IMAP Account
+		readMail.processMail("localhost", "steve", "", ServerType.pop3);
+	}
+
 	// Constructor Call
 	public EmailReader() {
 	}
 
 	// Responsible for printing Data to Console
-	private void printData(String data) {
+	private void printData(final String data) {
 		System.out.println(data);
 	}
 
-	public void processMail(String server, String userName, String password,
-			ServerType serverType) {
+	/**
+	 * Process mail.
+	 *
+	 * @param server
+	 *            the server
+	 * @param userName
+	 *            the user name
+	 * @param password
+	 *            the password
+	 * @param serverType
+	 *            the server type
+	 */
+	public void processMail(final String server, final String userName, final String password,
+	        final ServerType serverType) {
 		Session session = null;
 		Store store = null;
 		Folder folder = null;
@@ -44,19 +72,19 @@ public class EmailReader {
 		String contentType = null;
 
 		try {
-			printData("--------------processing mails started-----------------");
+			this.printData("--------------processing mails started-----------------");
 			session = Session.getDefaultInstance(System.getProperties(), null);
 
-			printData("getting the session for accessing email.");
+			this.printData("getting the session for accessing email.");
 			store = session.getStore(serverType.name());
 
 			store.connect(server, userName, password);
-			printData("Connection established with IMAP server.");
+			this.printData("Connection established with IMAP server.");
 
 			// Get a handle on the default folder
 			folder = store.getDefaultFolder();
 
-			printData("Getting the Inbox folder.");
+			this.printData("Getting the Inbox folder.");
 
 			// Retrieve the "Inbox"
 			folder = folder.getFolder("inbox");
@@ -68,39 +96,37 @@ public class EmailReader {
 			messages = folder.getMessages();
 
 			// Loop over all of the messages
-			for (int messageNumber = 0; messageNumber < messages.length; messageNumber++) {
+			for (final Message message2 : messages) {
 				// Retrieve the next message to be read
-				message = messages[messageNumber];
+				message = message2;
 
 				// Retrieve the message content
 				messagecontentObject = message.getContent();
 
 				// Determine email type
 				if (messagecontentObject instanceof Multipart) {
-					printData("Found Email with Attachment");
-					sender = ((InternetAddress) message.getFrom()[0])
-							.getPersonal();
+					this.printData("Found Email with Attachment");
+					sender = ((InternetAddress) message.getFrom()[0]).getPersonal();
 
 					// If the "personal" information has no entry, check the
 					// address for the sender information
-					printData("If the personal information has no entry, check the address for the sender information.");
+					this.printData("If the personal information has no entry, check the address for the sender information.");
 
 					if (sender == null) {
-						sender = ((InternetAddress) message.getFrom()[0])
-								.getAddress();
-						printData("sender in NULL. Printing Address:" + sender);
+						sender = ((InternetAddress) message.getFrom()[0]).getAddress();
+						this.printData("sender in NULL. Printing Address:" + sender);
 					}
-					printData("Sender -." + sender);
+					this.printData("Sender -." + sender);
 
 					// Get the subject information
 					subject = message.getSubject();
 
-					printData("subject=" + subject);
+					this.printData("subject=" + subject);
 
 					// Retrieve the Multipart object from the message
 					multipart = (Multipart) message.getContent();
 
-					printData("Retrieve the Multipart object from the message");
+					this.printData("Retrieve the Multipart object from the message");
 
 					// Loop over the parts of the email
 					for (int i = 0; i < multipart.getCount(); i++) {
@@ -111,36 +137,36 @@ public class EmailReader {
 						contentType = part.getContentType();
 
 						// Display the content type
-						printData("Content: " + contentType);
+						this.printData("Content: " + contentType);
 
 						if (contentType.startsWith("text/plain")) {
-							printData("---------reading content type text/plain  mail -------------");
+							this.printData("---------reading content type text/plain  mail -------------");
 
 							System.out.println(part.getContent());
-						} else {
+						}
+						else {
 							// Retrieve the file name
-							String fileName = part.getFileName();
-							printData("retrive the fileName=" + fileName);
+							final String fileName = part.getFileName();
+							this.printData("retrive the fileName=" + fileName);
 						}
 					}
-				} else {
-					printData("Found Mail Without Attachment");
-					sender = ((InternetAddress) message.getFrom()[0])
-							.getPersonal();
+				}
+				else {
+					this.printData("Found Mail Without Attachment");
+					sender = ((InternetAddress) message.getFrom()[0]).getPersonal();
 
 					// If the "personal" information has no entry, check the
 					// address for the sender information
-					printData("If the personal information has no entry, check the address for the sender information.");
+					this.printData("If the personal information has no entry, check the address for the sender information.");
 
 					if (sender == null) {
-						sender = ((InternetAddress) message.getFrom()[0])
-								.getAddress();
-						printData("sender in NULL. Printing Address:" + sender);
+						sender = ((InternetAddress) message.getFrom()[0]).getAddress();
+						this.printData("sender in NULL. Printing Address:" + sender);
 					}
 
 					// Get the subject information
 					subject = message.getSubject();
-					printData("subject=" + subject);
+					this.printData("subject=" + subject);
 
 					System.out.println(messagecontentObject.toString());
 				}
@@ -151,43 +177,35 @@ public class EmailReader {
 
 			// Close the message store
 			store.close();
-		} catch (AuthenticationFailedException e) {
-			printData("Not able to process the mail reading.");
-			e.printStackTrace();
-		} catch (FolderClosedException e) {
-			printData("Not able to process the mail reading.");
-			e.printStackTrace();
-		} catch (FolderNotFoundException e) {
-			printData("Not able to process the mail reading.");
-			e.printStackTrace();
-		} catch (NoSuchProviderException e) {
-			printData("Not able to process the mail reading.");
-			e.printStackTrace();
-		} catch (ReadOnlyFolderException e) {
-			printData("Not able to process the mail reading.");
-			e.printStackTrace();
-		} catch (StoreClosedException e) {
-			printData("Not able to process the mail reading.");
-			e.printStackTrace();
-		} catch (Exception e) {
-			printData("Not able to process the mail reading.");
+		}
+		catch (final AuthenticationFailedException e) {
+			this.printData("Not able to process the mail reading.");
 			e.printStackTrace();
 		}
-	}
-
-	// Main Function for The readEmail Class
-	public static void main(String args[]) {
-		// Creating new readEmail Object
-		EmailReader readMail = new EmailReader();
-
-		// Calling processMail Function to read from IMAP Account
-//		readMail.processMail("leonarduk.com", "leonard", "SW179TNKT26LJ",
-//				ServerType.imap);
-		
-
-		// Calling processMail Function to read from IMAP Account
-		readMail.processMail("localhost", "steve", "",
-				ServerType.pop3);
+		catch (final FolderClosedException e) {
+			this.printData("Not able to process the mail reading.");
+			e.printStackTrace();
+		}
+		catch (final FolderNotFoundException e) {
+			this.printData("Not able to process the mail reading.");
+			e.printStackTrace();
+		}
+		catch (final NoSuchProviderException e) {
+			this.printData("Not able to process the mail reading.");
+			e.printStackTrace();
+		}
+		catch (final ReadOnlyFolderException e) {
+			this.printData("Not able to process the mail reading.");
+			e.printStackTrace();
+		}
+		catch (final StoreClosedException e) {
+			this.printData("Not able to process the mail reading.");
+			e.printStackTrace();
+		}
+		catch (final Exception e) {
+			this.printData("Not able to process the mail reading.");
+			e.printStackTrace();
+		}
 	}
 
 }

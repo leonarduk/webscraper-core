@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package com.leonarduk.core.db.demo;
 
 import javax.persistence.EntityManager;
@@ -6,11 +9,17 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 public class TestClass {
-	public static void main(String[] args) {
-		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("test");
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
+
+	/**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 */
+	public static void main(final String[] args) {
+		final EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
+		final EntityManager em = emf.createEntityManager();
+		final EntityTransaction tx = em.getTransaction();
 
 		Test test = em.find(Test.class, 1);
 		if (test == null) {

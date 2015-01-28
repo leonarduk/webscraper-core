@@ -1,44 +1,45 @@
+/**
+ *
+ */
 package com.leonarduk.core.config;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
 
 /**
- * 
- * 
+ * The Class Config.
  *
  * @author Stephen Leonard
- * @since 24 Jan 2015
- *
  * @version $Author:: $: Author of last commit
  * @version $Rev:: $: Revision of last commit
  * @version $Date:: $: Date of last commit
- *
+ * @since 24 Jan 2015
  */
 public class Config {
 
-	/**
-	 * 
-	 */
-	private Properties props;
+	/** The props. */
+	private final Properties	props;
 
 	/**
-	 * 
+	 * Instantiates a new config.
+	 *
+	 * @param propFileName
+	 *            the prop file name
 	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public Config(String propFileName) throws IOException {
+	public Config(final String propFileName) throws IOException {
 		this.props = new Properties();
 
-		InputStream inputStream = getClass().getClassLoader()
+		final InputStream inputStream = this.getClass().getClassLoader()
 				.getResourceAsStream(propFileName);
 
 		if (inputStream != null) {
-			props.load(inputStream);
-		} else {
+			this.props.load(inputStream);
+		}
+		else {
 			throw new FileNotFoundException("property file '" + propFileName
 					+ "' not found in the classpath");
 		}
@@ -46,51 +47,62 @@ public class Config {
 	}
 
 	/**
-	 * 
+	 * Gets the array property.
+	 *
 	 * @param fieldName
-	 * @return
+	 *            the field name
+	 * @return the array property
 	 */
-	public String getProperty(String fieldName) {
-		return this.props.getProperty(fieldName);
-	}
-
-	/**
-	 * 
-	 * @param fieldName
-	 * @return
-	 */
-	public String[] getArrayProperty(String fieldName) {
-		String value = getProperty(fieldName);
-		if (null == value)
+	public String[] getArrayProperty(final String fieldName) {
+		final String value = this.getProperty(fieldName);
+		if (null == value) {
 			return null;
+		}
 		return value.replaceAll("\"", "").split("\\s*,\\s*");
 	}
 
 	/**
-	 * 
+	 * Gets the double property.
+	 *
 	 * @param fieldName
-	 * @return
+	 *            the field name
+	 * @return the double property
 	 * @throws NumberFormatException
+	 *             the number format exception
 	 */
-	public Integer getIntegerProperty(String fieldName)
-			throws NumberFormatException {
-		String value = getProperty(fieldName);
-		if (null == value)
+	public Double getDoubleProperty(final String fieldName) throws NumberFormatException {
+		final String value = this.getProperty(fieldName);
+		if (null == value) {
 			return null;
+		}
+		return Double.valueOf(value);
+	}
+
+	/**
+	 * Gets the integer property.
+	 *
+	 * @param fieldName
+	 *            the field name
+	 * @return the integer property
+	 * @throws NumberFormatException
+	 *             the number format exception
+	 */
+	public Integer getIntegerProperty(final String fieldName) throws NumberFormatException {
+		final String value = this.getProperty(fieldName);
+		if (null == value) {
+			return null;
+		}
 		return Integer.valueOf(value);
 	}
 
 	/**
-	 * 
+	 * Gets the property.
+	 *
 	 * @param fieldName
-	 * @return
-	 * @throws NumberFormatException
+	 *            the field name
+	 * @return the property
 	 */
-	public Double getDoubleProperty(String fieldName)
-			throws NumberFormatException {
-		String value = getProperty(fieldName);
-		if (null == value)
-			return null;
-		return Double.valueOf(value);
+	public String getProperty(final String fieldName) {
+		return this.props.getProperty(fieldName);
 	}
 }

@@ -1,6 +1,7 @@
+/**
+ *
+ */
 package com.leonarduk.core.email;
-
-import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,12 +16,15 @@ public class EmailReaderTest {
 	public void testEmailReader() {
 	}
 
+	/**
+	 * Test main.
+	 */
 	@Test
-	public void testProcessMail() {
+	public void testMain() {
 	}
 
 	@Test
-	public void testMain() {
+	public void testProcessMail() {
 	}
 
 }
