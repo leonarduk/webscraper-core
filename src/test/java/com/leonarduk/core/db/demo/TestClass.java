@@ -15,15 +15,15 @@ public class TestClass {
 		Test test = em.find(Test.class, 1);
 		if (test == null) {
 			test = new Test();
-			test.id = 1;
-			test.data = "a";
+			test.setId(1);
+			test.setData("a");
 
 			tx.begin();
 			em.persist(test);
 			tx.commit();
 		}
 
-		System.out.format("Test{id=%s, data=%s}\n", test.id, test.data);
+		System.out.format("Test{id=%s, data=%s}\n", test.getId(), test.getData());
 
 		em.close();
 		emf.close();
