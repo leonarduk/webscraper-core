@@ -58,7 +58,7 @@ public class EmailReader {
 	 *            the server type
 	 */
 	public void processMail(final String server, final String userName, final String password,
-	        final ServerType serverType) {
+			final ServerType serverType) {
 		Session session = null;
 		Store store = null;
 		Folder folder = null;
