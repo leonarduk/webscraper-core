@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package com.leonarduk.core.email;
 
 import java.io.UnsupportedEncodingException;
@@ -13,54 +16,46 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmailSender.
+ */
 public class EmailSender {
-	private static Logger logger = Logger.getLogger(EmailSender.class);
+
+	/** The logger. */
+	private static Logger	logger	= Logger.getLogger(EmailSender.class);
 
 	/**
-	 * 
+	 * Creates the message.
+	 *
 	 * @param fromEmail
+	 *            the from email
 	 * @param fromName
+	 *            the from name
 	 * @param subject
+	 *            the subject
 	 * @param msgBody
+	 *            the msg body
 	 * @param html
+	 *            the html
 	 * @param session
+	 *            the session
 	 * @param to
-	 */
-	public void sendMessage(String fromEmail, String fromName, String subject,
-			String msgBody, boolean html, EmailSession session, String... to) {
-		try {
-			logger.info("sendMessage: from " + fromEmail + " to " + to);
-			Message msg = createMessage(fromEmail, fromName, subject, msgBody,
-					html, session, to);
-
-			Transport.send(msg);
-
-		} catch (MessagingException | UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 
-	 * @param fromEmail
-	 * @param fromName
-	 * @param subject
-	 * @param msgBody
-	 * @param html
-	 * @param session
-	 * @param to
-	 * @return
+	 *            the to
+	 * @return the message
 	 * @throws AddressException
+	 *             the address exception
 	 * @throws MessagingException
+	 *             the messaging exception
 	 * @throws UnsupportedEncodingException
+	 *             the unsupported encoding exception
 	 */
-	public Message createMessage(String fromEmail, String fromName,
-			String subject, String msgBody, boolean html, EmailSession session,
-			String... to) throws AddressException, MessagingException,
-			UnsupportedEncodingException {
-		Message msg = new MimeMessage(session.getSession());
-		InternetAddress[] addressTo = new InternetAddress[to.length];
+	public Message createMessage(final String fromEmail, final String fromName,
+	        final String subject, final String msgBody, final boolean html,
+	        final EmailSession session, final String... to) throws AddressException,
+	        MessagingException, UnsupportedEncodingException {
+		final Message msg = new MimeMessage(session.getSession());
+		final InternetAddress[] addressTo = new InternetAddress[to.length];
 		for (int i = 0; i < to.length; i++) {
 			addressTo[i] = new InternetAddress(to[i]);
 		}
@@ -71,10 +66,46 @@ public class EmailSender {
 		msg.setSubject(subject);
 		if (html) {
 			msg.setContent(msgBody, "text/html");
-		} else {
+		}
+		else {
 			msg.setText(msgBody);
 		}
 		return msg;
+	}
+
+	/**
+	 * Send message.
+	 *
+	 * @param fromEmail
+	 *            the from email
+	 * @param fromName
+	 *            the from name
+	 * @param subject
+	 *            the subject
+	 * @param msgBody
+	 *            the msg body
+	 * @param html
+	 *            the html
+	 * @param session
+	 *            the session
+	 * @param to
+	 *            the to
+	 */
+	public void sendMessage(final String fromEmail, final String fromName, final String subject,
+	        final String msgBody, final boolean html, final EmailSession session,
+	        final String... to) {
+		try {
+			EmailSender.logger.info("sendMessage: from " + fromEmail + " to " + to);
+			final Message msg = this.createMessage(fromEmail, fromName, subject, msgBody, html,
+			        session, to);
+
+			Transport.send(msg);
+
+		}
+		catch (MessagingException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

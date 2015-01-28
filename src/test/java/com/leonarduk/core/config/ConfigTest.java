@@ -1,74 +1,118 @@
+/**
+ *
+ */
 package com.leonarduk.core.config;
-
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConfigTest.
+ */
 public class ConfigTest {
 
-	private Config config;
+	/** The config. */
+	private Config	config;
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		config = new Config("test.properties");
+		this.config = new Config("test.properties");
 	}
 
+	/**
+	 * Test config.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@Test(expected = FileNotFoundException.class)
 	public final void testConfig() throws IOException {
 		new Config("missing.test.properties");
 	}
 
-	@Test
-	public final void testGetProperty() {
-		assertEquals("eggs and bacon", config.getProperty("test.string"));
-	}
-
+	/**
+	 * Test get array property.
+	 */
 	@Test
 	public final void testGetArrayProperty() {
-		String[] expected = new String[] { "one", "two", "three" };
-		assertArrayEquals(expected,
-				config.getArrayProperty("test.string.array"));
+		final String[] expected = new String[] { "one", "two", "three" };
+		Assert.assertArrayEquals(expected, this.config.getArrayProperty("test.string.array"));
 	}
 
-	@Test
-	public final void testGetIntegerProperty() {
-		final int expected = 12;
-		assertEquals(expected, config.getIntegerProperty("test.int"), 0);
-	}
-
+	/**
+	 * Test get double property.
+	 */
 	@Test
 	public final void testGetDoubleProperty() {
 		final double expected = 12.34;
-		assertEquals(expected, config.getDoubleProperty("test.double"), 0);
+		Assert.assertEquals(expected, this.config.getDoubleProperty("test.double"), 0);
 	}
 
+	/**
+	 * Test get integer property.
+	 */
 	@Test
-	public final void testGetMissingProperty() {
-		assertNull(config.getProperty("test.string.missing"));
+	public final void testGetIntegerProperty() {
+		final int expected = 12;
+		Assert.assertEquals(expected, this.config.getIntegerProperty("test.int"), 0);
 	}
 
-	@Test
-	public final void testGetMissingIntegerProperty() {
-		assertNull(config.getIntegerProperty("test.int.missing"));
-	}
-
-	@Test
-	public final void testGetMissingDoubleProperty() {
-		assertNull(config.getDoubleProperty("test.double.missing"));
-	}
-
-	@Test(expected = NumberFormatException.class)
-	public final void testGetInvalidIntegerProperty() {
-		assertNull(config.getIntegerProperty("test.string"));
-	}
-
+	/**
+	 * Test get invalid double property.
+	 */
 	@Test(expected = NumberFormatException.class)
 	public final void testGetInvalidDoubleProperty() {
-		assertNull(config.getDoubleProperty("test.string"));
+		Assert.assertNull(this.config.getDoubleProperty("test.string"));
+	}
+
+	/**
+	 * Test get invalid integer property.
+	 */
+	@Test(expected = NumberFormatException.class)
+	public final void testGetInvalidIntegerProperty() {
+		Assert.assertNull(this.config.getIntegerProperty("test.string"));
+	}
+
+	/**
+	 * Test get missing double property.
+	 */
+	@Test
+	public final void testGetMissingDoubleProperty() {
+		Assert.assertNull(this.config.getDoubleProperty("test.double.missing"));
+	}
+
+	/**
+	 * Test get missing integer property.
+	 */
+	@Test
+	public final void testGetMissingIntegerProperty() {
+		Assert.assertNull(this.config.getIntegerProperty("test.int.missing"));
+	}
+
+	/**
+	 * Test get missing property.
+	 */
+	@Test
+	public final void testGetMissingProperty() {
+		Assert.assertNull(this.config.getProperty("test.string.missing"));
+	}
+
+	/**
+	 * Test get property.
+	 */
+	@Test
+	public final void testGetProperty() {
+		Assert.assertEquals("eggs and bacon", this.config.getProperty("test.string"));
 	}
 }
