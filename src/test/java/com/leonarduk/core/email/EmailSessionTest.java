@@ -38,7 +38,7 @@ public class EmailSessionTest {
 	 *             the exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public final void setUp() throws Exception {
 		this.userName = "testuser";
 		this.password = "testpassword";
 		this.server = "testserver";
@@ -51,7 +51,7 @@ public class EmailSessionTest {
 	 * Test get authenticator.
 	 */
 	@Test
-	public void testGetAuthenticator() {
+	public final void testGetAuthenticator() {
 		final Authenticator authenticator = this.session.getAuthenticator(this.userName,
 		        this.password);
 		Assert.assertNotNull(authenticator);
@@ -64,14 +64,15 @@ public class EmailSessionTest {
 	 *             the exception
 	 */
 	@Test
-	public void testGetSession() throws Exception {
-		final Session session = this.session.getSession();
-		Assert.assertNotNull(session);
-		Assert.assertEquals(this.server, session.getProperty(EmailSession.MAIL_SMTP_HOST));
+	public final void testGetSession() throws Exception {
+		final Session localSession = this.session.getSession();
+		Assert.assertNotNull(localSession);
+		Assert.assertEquals(this.server, localSession.getProperty(EmailSession.MAIL_SMTP_HOST));
 		Assert.assertEquals(this.port,
-		        session.getProperty(EmailSession.MAIL_SMTP_SOCKET_FACTORY_PORT));
-		Assert.assertEquals(this.userName, session.getProperty(EmailSession.MAIL_STMP_USER));
-		Assert.assertEquals(this.password, session.getProperty(EmailSession.MAIL_SMTP_PASSWORD));
+		        localSession.getProperty(EmailSession.MAIL_SMTP_SOCKET_FACTORY_PORT));
+		Assert.assertEquals(this.userName, localSession.getProperty(EmailSession.MAIL_STMP_USER));
+		Assert.assertEquals(this.password,
+		        localSession.getProperty(EmailSession.MAIL_SMTP_PASSWORD));
 
 	}
 }

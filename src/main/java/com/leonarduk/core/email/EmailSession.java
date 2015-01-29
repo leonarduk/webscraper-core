@@ -60,8 +60,8 @@ public class EmailSession {
 	 *            the port
 	 * @return the session
 	 */
-	public Session createSession(final String user, final String password, final String server,
-			final String port) {
+	public final Session createSession(final String user, final String password,
+			final String server, final String port) {
 
 		final Properties props = new Properties();
 		props.put(EmailSession.MAIL_SMTP_HOST, server);
@@ -74,9 +74,9 @@ public class EmailSession {
 
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put(EmailSession.MAIL_SMTP_PASSWORD, password);
-		final Session session = Session.getDefaultInstance(props,
+		final Session localSession = Session.getDefaultInstance(props,
 				this.getAuthenticator(user, password));
-		return session;
+		return localSession;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class EmailSession {
 	 *            the password
 	 * @return the authenticator
 	 */
-	public Authenticator getAuthenticator(final String userName, final String password) {
+	public final Authenticator getAuthenticator(final String userName, final String password) {
 		final Authenticator auth = new Authenticator() {
 			@Override
 			public PasswordAuthentication getPasswordAuthentication() {
@@ -103,7 +103,7 @@ public class EmailSession {
 	 *
 	 * @return the session
 	 */
-	public Session getSession() {
+	public final Session getSession() {
 		return this.session;
 	}
 

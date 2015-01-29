@@ -16,22 +16,36 @@ import org.powermock.api.support.membermodification.MemberModifier;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+/**
+ * The Class EmailSenderTest.
+ */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Transport.class })
 public class EmailSenderTest {
 
+	/** The sender. */
 	private EmailSender	sender;
+
+	/** The from email. */
 	private String	    fromEmail;
+
+	/** The from name. */
 	private String	    fromName;
+
+	/** The subject. */
 	private String	    subject;
+
+	/** The msg body. */
 	private String	    msgBody;
+
+	/** The to. */
 	private String[]	to;
 
 	/**
 	 * Sets the up.
 	 */
 	@Before
-	public void setUp() {
+	public final void setUp() {
 		this.sender = new EmailSender();
 		this.to = new String[] { "test1@localhost", "test2@localhost" };
 		this.fromEmail = "testsender@test";
@@ -40,8 +54,14 @@ public class EmailSenderTest {
 
 	}
 
+	/**
+	 * Test create message.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
-	public void testCreateMessage() throws Exception {
+	public final void testCreateMessage() throws Exception {
 		final EmailSession session = Mockito.mock(EmailSession.class);
 		final boolean html = true;
 		final Message message = this.sender.createMessage(this.fromEmail, this.fromName,
@@ -49,8 +69,14 @@ public class EmailSenderTest {
 		Assert.assertNotNull(message);
 	}
 
+	/**
+	 * Test send message.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
-	public void testSendMessage() throws Exception {
+	public final void testSendMessage() throws Exception {
 		final EmailSession session = Mockito.mock(EmailSession.class);
 		MemberModifier.suppress(MemberMatcher.method(Transport.class, "send", Message.class));
 
