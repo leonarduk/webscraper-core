@@ -1,5 +1,5 @@
 /**
- *
+ * All rights reserved. @Leonard UK Ltd.
  */
 package com.leonarduk.core.db.demo;
 
@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Test.
  */

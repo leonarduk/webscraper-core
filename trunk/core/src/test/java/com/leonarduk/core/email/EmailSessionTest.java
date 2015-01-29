@@ -1,5 +1,7 @@
 /**
+ * All rights reserved. @Leonard UK Ltd.
  *
+ * @author stephen
  */
 package com.leonarduk.core.email;
 
@@ -17,19 +19,19 @@ import org.junit.Test;
 public class EmailSessionTest {
 
 	/** The user name. */
-	private String	     userName;
+	private String userName;
 
 	/** The password. */
-	private String	     password;
+	private String password;
 
 	/** The server. */
-	private String	     server;
+	private String server;
 
 	/** The port. */
-	private String	     port;
+	private String port;
 
 	/** The session. */
-	private EmailSession	session;
+	private EmailSession session;
 
 	/**
 	 * Sets the up.
@@ -53,7 +55,7 @@ public class EmailSessionTest {
 	@Test
 	public final void testGetAuthenticator() {
 		final Authenticator authenticator = this.session.getAuthenticator(this.userName,
-		        this.password);
+				this.password);
 		Assert.assertNotNull(authenticator);
 	}
 
@@ -69,10 +71,10 @@ public class EmailSessionTest {
 		Assert.assertNotNull(localSession);
 		Assert.assertEquals(this.server, localSession.getProperty(EmailSession.MAIL_SMTP_HOST));
 		Assert.assertEquals(this.port,
-		        localSession.getProperty(EmailSession.MAIL_SMTP_SOCKET_FACTORY_PORT));
+				localSession.getProperty(EmailSession.MAIL_SMTP_SOCKET_FACTORY_PORT));
 		Assert.assertEquals(this.userName, localSession.getProperty(EmailSession.MAIL_STMP_USER));
 		Assert.assertEquals(this.password,
-		        localSession.getProperty(EmailSession.MAIL_SMTP_PASSWORD));
+				localSession.getProperty(EmailSession.MAIL_SMTP_PASSWORD));
 
 	}
 }
