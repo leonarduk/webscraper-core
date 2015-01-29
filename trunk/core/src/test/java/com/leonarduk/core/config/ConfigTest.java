@@ -1,5 +1,5 @@
 /**
- *
+ * All rights reserved. @Leonard UK Ltd.
  */
 package com.leonarduk.core.config;
 
@@ -26,7 +26,7 @@ public class ConfigTest {
 	 *             the exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public final void setUp() throws Exception {
 		this.config = new Config("test.properties");
 	}
 

@@ -8,8 +8,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestClass.
+ */
 public class TestClass {
-
 	/**
 	 * The main method.
 	 *
@@ -36,5 +39,12 @@ public class TestClass {
 
 		em.close();
 		emf.close();
+	}
+
+	/**
+	 * Instantiates a new test class.
+	 */
+	protected TestClass() {
+
 	}
 }

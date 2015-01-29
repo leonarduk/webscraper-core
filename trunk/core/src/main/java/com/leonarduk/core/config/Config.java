@@ -34,14 +34,14 @@ public class Config {
 		this.props = new Properties();
 
 		final InputStream inputStream = this.getClass().getClassLoader()
-				.getResourceAsStream(propFileName);
+		        .getResourceAsStream(propFileName);
 
 		if (inputStream != null) {
 			this.props.load(inputStream);
 		}
 		else {
 			throw new FileNotFoundException("property file '" + propFileName
-					+ "' not found in the classpath");
+			        + "' not found in the classpath");
 		}
 
 	}
@@ -53,7 +53,7 @@ public class Config {
 	 *            the field name
 	 * @return the array property
 	 */
-	public String[] getArrayProperty(final String fieldName) {
+	public final String[] getArrayProperty(final String fieldName) {
 		final String value = this.getProperty(fieldName);
 		if (null == value) {
 			return null;
@@ -67,10 +67,8 @@ public class Config {
 	 * @param fieldName
 	 *            the field name
 	 * @return the double property
-	 * @throws NumberFormatException
-	 *             the number format exception
 	 */
-	public Double getDoubleProperty(final String fieldName) throws NumberFormatException {
+	public final Double getDoubleProperty(final String fieldName) {
 		final String value = this.getProperty(fieldName);
 		if (null == value) {
 			return null;
@@ -84,10 +82,8 @@ public class Config {
 	 * @param fieldName
 	 *            the field name
 	 * @return the integer property
-	 * @throws NumberFormatException
-	 *             the number format exception
 	 */
-	public Integer getIntegerProperty(final String fieldName) throws NumberFormatException {
+	public final Integer getIntegerProperty(final String fieldName) {
 		final String value = this.getProperty(fieldName);
 		if (null == value) {
 			return null;
@@ -102,7 +98,7 @@ public class Config {
 	 *            the field name
 	 * @return the property
 	 */
-	public String getProperty(final String fieldName) {
+	public final String getProperty(final String fieldName) {
 		return this.props.getProperty(fieldName);
 	}
 }

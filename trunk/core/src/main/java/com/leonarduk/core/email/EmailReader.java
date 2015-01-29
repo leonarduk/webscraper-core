@@ -17,14 +17,30 @@ import javax.mail.Store;
 import javax.mail.StoreClosedException;
 import javax.mail.internet.InternetAddress;
 
+/**
+ * The Class EmailReader.
+ */
 public class EmailReader {
 
+	/**
+	 * The Enum ServerType.
+	 */
 	enum ServerType {
-		imap, pop3;
+
+		/** The imap. */
+		imap,
+		/** The pop3. */
+		pop3;
 	}
 
 	// Main Function for The readEmail Class
-	public static void main(final String args[]) {
+	/**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 */
+	public static void main(final String[] args) {
 		// Creating new readEmail Object
 		final EmailReader readMail = new EmailReader();
 
@@ -37,10 +53,19 @@ public class EmailReader {
 	}
 
 	// Constructor Call
+	/**
+	 * Instantiates a new email reader.
+	 */
 	public EmailReader() {
 	}
 
 	// Responsible for printing Data to Console
+	/**
+	 * Prints the data.
+	 *
+	 * @param data
+	 *            the data
+	 */
 	private void printData(final String data) {
 		System.out.println(data);
 	}
@@ -57,8 +82,8 @@ public class EmailReader {
 	 * @param serverType
 	 *            the server type
 	 */
-	public void processMail(final String server, final String userName, final String password,
-			final ServerType serverType) {
+	public final void processMail(final String server, final String userName,
+			final String password, final ServerType serverType) {
 		Session session = null;
 		Store store = null;
 		Folder folder = null;
@@ -110,7 +135,8 @@ public class EmailReader {
 
 					// If the "personal" information has no entry, check the
 					// address for the sender information
-					this.printData("If the personal information has no entry, check the address for the sender information.");
+					this.printData("If the personal information has no entry, "
+							+ "check the address for the sender information.");
 
 					if (sender == null) {
 						sender = ((InternetAddress) message.getFrom()[0]).getAddress();
@@ -132,15 +158,14 @@ public class EmailReader {
 					for (int i = 0; i < multipart.getCount(); i++) {
 						// Retrieve the next part
 						part = multipart.getBodyPart(i);
-
-						// Get the content type
 						contentType = part.getContentType();
 
 						// Display the content type
 						this.printData("Content: " + contentType);
 
 						if (contentType.startsWith("text/plain")) {
-							this.printData("---------reading content type text/plain  mail -------------");
+							this.printData("---------" + "reading content type text/plain  mail "
+									+ "-------------");
 
 							System.out.println(part.getContent());
 						}
@@ -157,7 +182,8 @@ public class EmailReader {
 
 					// If the "personal" information has no entry, check the
 					// address for the sender information
-					this.printData("If the personal information has no entry, check the address for the sender information.");
+					this.printData("If the personal information has no entry, "
+							+ "check the address for the sender information.");
 
 					if (sender == null) {
 						sender = ((InternetAddress) message.getFrom()[0]).getAddress();

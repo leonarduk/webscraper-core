@@ -10,7 +10,6 @@ import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -43,17 +42,15 @@ public class EmailSender {
 	 * @param to
 	 *            the to
 	 * @return the message
-	 * @throws AddressException
-	 *             the address exception
 	 * @throws MessagingException
 	 *             the messaging exception
 	 * @throws UnsupportedEncodingException
 	 *             the unsupported encoding exception
 	 */
-	public Message createMessage(final String fromEmail, final String fromName,
+	public final Message createMessage(final String fromEmail, final String fromName,
 	        final String subject, final String msgBody, final boolean html,
-	        final EmailSession session, final String... to) throws AddressException,
-	        MessagingException, UnsupportedEncodingException {
+	        final EmailSession session, final String... to) throws MessagingException,
+	        UnsupportedEncodingException {
 		final Message msg = new MimeMessage(session.getSession());
 		final InternetAddress[] addressTo = new InternetAddress[to.length];
 		for (int i = 0; i < to.length; i++) {
@@ -91,9 +88,9 @@ public class EmailSender {
 	 * @param to
 	 *            the to
 	 */
-	public void sendMessage(final String fromEmail, final String fromName, final String subject,
-	        final String msgBody, final boolean html, final EmailSession session,
-	        final String... to) {
+	public final void sendMessage(final String fromEmail, final String fromName,
+	        final String subject, final String msgBody, final boolean html,
+	        final EmailSession session, final String... to) {
 		try {
 			EmailSender.logger.info("sendMessage: from " + fromEmail + " to " + to);
 			final Message msg = this.createMessage(fromEmail, fromName, subject, msgBody, html,
