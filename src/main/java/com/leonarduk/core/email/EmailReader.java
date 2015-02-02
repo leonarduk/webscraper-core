@@ -3,6 +3,10 @@
  */
 package com.leonarduk.core.email;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Folder;
 import javax.mail.FolderClosedException;
@@ -16,6 +20,7 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.StoreClosedException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 
 /**
  * The Class EmailReader.
@@ -25,7 +30,7 @@ public class EmailReader {
 	/**
 	 * The Enum ServerType.
 	 */
-	enum ServerType {
+	public enum ServerType {
 
 		/** The imap. */
 		imap,
@@ -48,8 +53,11 @@ public class EmailReader {
 		// readMail.processMail("leonarduk.com", "leonard", "SW179TNKT26LJ",
 		// ServerType.imap);
 
+		final String attachmentsFolder = ".";
+		final EmailProcessor processor = new SimplePrintEmailProcessor();
 		// Calling processMail Function to read from IMAP Account
-		readMail.processMail("localhost", "steve", "", ServerType.pop3);
+		readMail.processMail("localhost", "steve", "", ServerType.pop3, attachmentsFolder,
+				processor);
 	}
 
 	// Constructor Call
@@ -83,11 +91,11 @@ public class EmailReader {
 	 *            the server type
 	 */
 	public final void processMail(final String server, final String userName,
-			final String password, final ServerType serverType) {
+			final String password, final ServerType serverType, final String attachmentsDirectory,
+			final EmailProcessor emailProcessor) {
 		Session session = null;
 		Store store = null;
 		Folder folder = null;
-		Message message = null;
 		Message[] messages = null;
 		Object messagecontentObject = null;
 		String sender = null;
@@ -120,10 +128,11 @@ public class EmailReader {
 			// Retrieve the messages
 			messages = folder.getMessages();
 
+			final List<EmailMessage> emailList = new ArrayList<>();
 			// Loop over all of the messages
-			for (final Message message2 : messages) {
-				// Retrieve the next message to be read
-				message = message2;
+			for (final Message message : messages) {
+				final EmailMessageBuilder emailMessageBuilder = new EmailMessageBuilder();
+				emailMessageBuilder.setSentDate(message.getSentDate());
 
 				// Retrieve the message content
 				messagecontentObject = message.getContent();
@@ -132,22 +141,18 @@ public class EmailReader {
 				if (messagecontentObject instanceof Multipart) {
 					this.printData("Found Email with Attachment");
 					sender = ((InternetAddress) message.getFrom()[0]).getPersonal();
-
 					// If the "personal" information has no entry, check the
 					// address for the sender information
-					this.printData("If the personal information has no entry, "
-							+ "check the address for the sender information.");
 
 					if (sender == null) {
 						sender = ((InternetAddress) message.getFrom()[0]).getAddress();
-						this.printData("sender in NULL. Printing Address:" + sender);
+						// this.printData("sender in NULL. Printing Address:" + sender);
 					}
-					this.printData("Sender -." + sender);
+					emailMessageBuilder.setSender(sender);
 
 					// Get the subject information
 					subject = message.getSubject();
-
-					this.printData("subject=" + subject);
+					emailMessageBuilder.setSubject(subject);
 
 					// Retrieve the Multipart object from the message
 					multipart = (Multipart) message.getContent();
@@ -161,41 +166,38 @@ public class EmailReader {
 						contentType = part.getContentType();
 
 						// Display the content type
-						this.printData("Content: " + contentType);
-
 						if (contentType.startsWith("text/plain")) {
-							this.printData("---------" + "reading content type text/plain  mail "
-									+ "-------------");
-
-							System.out.println(part.getContent());
+							emailMessageBuilder.addContent(part.getContent().toString());
 						}
 						else {
 							// Retrieve the file name
-							final String fileName = part.getFileName();
-							this.printData("retrive the fileName=" + fileName);
+							final String attachmentPath = attachmentsDirectory + File.separator
+									+ part.getFileName();
+							((MimeBodyPart) part).saveFile(attachmentPath);
+							emailMessageBuilder.addFile(attachmentPath);
 						}
 					}
 				}
 				else {
-					this.printData("Found Mail Without Attachment");
+					// this.printData("Found Mail Without Attachment");
 					sender = ((InternetAddress) message.getFrom()[0]).getPersonal();
-
 					// If the "personal" information has no entry, check the
 					// address for the sender information
-					this.printData("If the personal information has no entry, "
-							+ "check the address for the sender information.");
 
 					if (sender == null) {
 						sender = ((InternetAddress) message.getFrom()[0]).getAddress();
-						this.printData("sender in NULL. Printing Address:" + sender);
 					}
+					emailMessageBuilder.setSender(sender);
 
 					// Get the subject information
 					subject = message.getSubject();
-					this.printData("subject=" + subject);
-
-					System.out.println(messagecontentObject.toString());
+					emailMessageBuilder.setSubject(subject);
+					emailMessageBuilder.addContent(messagecontentObject.toString());
 				}
+				final EmailMessage emailMessage = emailMessageBuilder.create();
+				emailProcessor.process(emailMessage);
+
+				emailList.add(emailMessage);
 			}
 
 			// Close the folder
