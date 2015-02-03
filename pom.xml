@@ -78,6 +78,19 @@
 		</extensions>
 	</build>
 	<dependencies>
+		<!-- selenium -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>2.40.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+		<!-- end of selenium -->
+
 		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>

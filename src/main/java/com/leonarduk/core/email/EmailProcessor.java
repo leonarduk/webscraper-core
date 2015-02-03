@@ -14,6 +14,14 @@ package com.leonarduk.core.email;
  */
 public interface EmailProcessor {
 
-	void process(EmailMessage emailMessage);
+	/**
+	 * Process.
+	 *
+	 * @param emailMessage
+	 *            the email message
+	 * @return
+	 * @throws BookkeeperException
+	 */
+	boolean process(EmailMessage emailMessage) throws Exception;
 
 }

@@ -26,10 +26,11 @@ public class EmailMessage {
 	/** The sender. */
 	private final String sender;
 
+	/** The sent date. */
+	private final Date sentDate;
+
 	/** The subject. */
 	private final String subject;
-
-	private final Date sentDate;
 
 	/**
 	 * Instantiates a new email message.
@@ -37,10 +38,11 @@ public class EmailMessage {
 	 * @param sender
 	 *            the sender
 	 * @param sentDate
+	 *            the sent date
 	 * @param subject
 	 *            the subject
-	 * @param string
-	 *            the string
+	 * @param content
+	 *            the content
 	 * @param files
 	 *            the files
 	 */
@@ -53,6 +55,56 @@ public class EmailMessage {
 		this.sentDate = sentDate;
 	}
 
+	/**
+	 * Gets the content buffer.
+	 *
+	 * @return the content buffer
+	 */
+	public String getContentBuffer() {
+		return this.contentBuffer;
+	}
+
+	/**
+	 * Gets the files.
+	 *
+	 * @return the files
+	 */
+	public List<String> getFiles() {
+		return this.files;
+	}
+
+	/**
+	 * Gets the sender.
+	 *
+	 * @return the sender
+	 */
+	public String getSender() {
+		return this.sender;
+	}
+
+	/**
+	 * Gets the sent date.
+	 *
+	 * @return the sent date
+	 */
+	public Date getSentDate() {
+		return this.sentDate;
+	}
+
+	/**
+	 * Gets the subject.
+	 *
+	 * @return the subject
+	 */
+	public String getSubject() {
+		return this.subject;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public final String toString() {
 		return "EmailMessage [contentBuffer=" + this.contentBuffer + ", sender=" + this.sender
