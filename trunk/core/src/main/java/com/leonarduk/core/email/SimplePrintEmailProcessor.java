@@ -3,6 +3,8 @@
  */
 package com.leonarduk.core.email;
 
+import org.apache.log4j.Logger;
+
 /**
  * The Class SimplePrintEmailProcessor.
  *
@@ -13,6 +15,7 @@ package com.leonarduk.core.email;
  * @since 2 Feb 2015
  */
 public class SimplePrintEmailProcessor implements EmailProcessor {
+	static final Logger LOGGER = Logger.getLogger(SimplePrintEmailProcessor.class);
 
 	/*
 	 * (non-Javadoc)
@@ -20,8 +23,12 @@ public class SimplePrintEmailProcessor implements EmailProcessor {
 	 * @see com.leonarduk.core.email.EmailProcessor#process(com.leonarduk.core.email.EmailMessage)
 	 */
 	@Override
-	public void process(final EmailMessage emailMessage) {
-		System.out.println(emailMessage);
+	public final boolean process(final EmailMessage emailMessage) {
+		SimplePrintEmailProcessor.LOGGER.info(emailMessage.getSender() + " : "
+				+ emailMessage.getSubject() + " on " + emailMessage.getSentDate());
+
+		// Returns false so that it doesn't consume the message
+		return false;
 	}
 
 }

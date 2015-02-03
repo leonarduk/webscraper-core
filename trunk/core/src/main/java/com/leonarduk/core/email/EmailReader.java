@@ -22,11 +22,12 @@ import javax.mail.StoreClosedException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 
+import org.apache.log4j.Logger;
+
 /**
  * The Class EmailReader.
  */
 public class EmailReader {
-
 	/**
 	 * The Enum ServerType.
 	 */
@@ -37,6 +38,9 @@ public class EmailReader {
 		/** The pop3. */
 		pop3;
 	}
+
+	/** The Constant LOGGER. */
+	static final Logger LOGGER = Logger.getLogger(EmailReader.class);
 
 	// Main Function for The readEmail Class
 	/**
@@ -67,17 +71,6 @@ public class EmailReader {
 	public EmailReader() {
 	}
 
-	// Responsible for printing Data to Console
-	/**
-	 * Prints the data.
-	 *
-	 * @param data
-	 *            the data
-	 */
-	private void printData(final String data) {
-		System.out.println(data);
-	}
-
 	/**
 	 * Process mail.
 	 *
@@ -89,6 +82,10 @@ public class EmailReader {
 	 *            the password
 	 * @param serverType
 	 *            the server type
+	 * @param attachmentsDirectory
+	 *            the attachments directory
+	 * @param emailProcessor
+	 *            the email processor
 	 */
 	public final void processMail(final String server, final String userName,
 			final String password, final ServerType serverType, final String attachmentsDirectory,
@@ -105,25 +102,26 @@ public class EmailReader {
 		String contentType = null;
 
 		try {
-			this.printData("--------------processing mails started-----------------");
+			EmailReader.LOGGER.info("--------------processing mails started-----------------");
 			session = Session.getDefaultInstance(System.getProperties(), null);
 
-			this.printData("getting the session for accessing email.");
+			EmailReader.LOGGER.info("getting the session for accessing email.");
 			store = session.getStore(serverType.name());
 
 			store.connect(server, userName, password);
-			this.printData("Connection established with IMAP server.");
+			EmailReader.LOGGER.info("Connection established with IMAP server.");
 
 			// Get a handle on the default folder
 			folder = store.getDefaultFolder();
 
-			this.printData("Getting the Inbox folder.");
+			EmailReader.LOGGER.info("Getting the Inbox folder.");
 
 			// Retrieve the "Inbox"
 			folder = folder.getFolder("inbox");
 
 			// Reading the Email Index in Read / Write Mode
 			folder.open(Folder.READ_WRITE);
+			EmailReader.LOGGER.info("Retrieving messages.");
 
 			// Retrieve the messages
 			messages = folder.getMessages();
@@ -137,9 +135,11 @@ public class EmailReader {
 				// Retrieve the message content
 				messagecontentObject = message.getContent();
 
+				EmailReader.LOGGER.debug(message.getAllHeaders());
+
 				// Determine email type
 				if (messagecontentObject instanceof Multipart) {
-					this.printData("Found Email with Attachment");
+					// this.printData("Found Email with Attachment");
 					sender = ((InternetAddress) message.getFrom()[0]).getPersonal();
 					// If the "personal" information has no entry, check the
 					// address for the sender information
@@ -157,7 +157,7 @@ public class EmailReader {
 					// Retrieve the Multipart object from the message
 					multipart = (Multipart) message.getContent();
 
-					this.printData("Retrieve the Multipart object from the message");
+					// this.printData("Retrieve the Multipart object from the message");
 
 					// Loop over the parts of the email
 					for (int i = 0; i < multipart.getCount(); i++) {
@@ -206,32 +206,14 @@ public class EmailReader {
 			// Close the message store
 			store.close();
 		}
-		catch (final AuthenticationFailedException e) {
-			this.printData("Not able to process the mail reading.");
-			e.printStackTrace();
-		}
-		catch (final FolderClosedException e) {
-			this.printData("Not able to process the mail reading.");
-			e.printStackTrace();
-		}
-		catch (final FolderNotFoundException e) {
-			this.printData("Not able to process the mail reading.");
-			e.printStackTrace();
-		}
-		catch (final NoSuchProviderException e) {
-			this.printData("Not able to process the mail reading.");
-			e.printStackTrace();
-		}
-		catch (final ReadOnlyFolderException e) {
-			this.printData("Not able to process the mail reading.");
-			e.printStackTrace();
-		}
-		catch (final StoreClosedException e) {
-			this.printData("Not able to process the mail reading.");
+		catch (final AuthenticationFailedException | FolderClosedException
+				| FolderNotFoundException | NoSuchProviderException | ReadOnlyFolderException
+				| StoreClosedException e) {
+			EmailReader.LOGGER.error("Not able to process the mail reading.");
 			e.printStackTrace();
 		}
 		catch (final Exception e) {
-			this.printData("Not able to process the mail reading.");
+			EmailReader.LOGGER.error("Not able to process the mail reading.");
 			e.printStackTrace();
 		}
 	}
