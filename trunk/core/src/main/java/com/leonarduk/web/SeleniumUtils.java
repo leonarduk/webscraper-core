@@ -9,9 +9,11 @@ import java.io.IOException;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class SeleniumUtils.
  *
@@ -30,10 +32,21 @@ public class SeleniumUtils {
 	 */
 	public static File createTempDir() {
 		final String tmpDirPath = System.getProperty("java.io.tmpdir")
-		        + System.getProperty("file.separator") + RandomStringUtils.randomAlphanumeric(6);
+				+ System.getProperty("file.separator") + RandomStringUtils.randomAlphanumeric(6);
 		final File tempDir = new File(tmpDirPath);
 		final boolean tmpDirCreated = tempDir.mkdir();
 		return tempDir;
+	}
+
+	/**
+	 * Gets the chrome browser driver.
+	 *
+	 * @return the chrome browser driver
+	 */
+	public static WebDriver getChromeBrowserDriver() {
+		System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+		return new ChromeDriver();
 	}
 
 	/**
@@ -57,15 +70,15 @@ public class SeleniumUtils {
 			fp.setPreference("browser.download.dir", tempDir.getCanonicalPath());
 			fp.setPreference("browser.helperApps.alwaysAsk.force", false);
 			fp.setPreference(
-			        "browser.helperApps.neverAsk.saveToDisk",
-			        "application/x-csv,text/html,text/ofx,application/ofx,application/x-ofx,application/x-qif,text/csv,text/x-csv,application/x-download,application/vnd.ms-excel,application/pdf,text/plain");
+					"browser.helperApps.neverAsk.saveToDisk",
+					"application/x-csv,text/html,text/ofx,application/ofx,application/x-ofx,application/x-qif,text/csv,text/x-csv,application/x-download,application/vnd.ms-excel,application/pdf,text/plain");
 			fp.setPreference(
-			        "browser.helperApps.neverAsk.openFile",
-			        "application/x-csv,text/html,text/ofx,application/ofx,application/octet-stream,application/x-ofx,application/vnd.ms-excel,text/csv,text/x-csv,application/x-download,application/vnd.ms-excel,application/pdf,text/plain");
+					"browser.helperApps.neverAsk.openFile",
+					"application/x-csv,text/html,text/ofx,application/ofx,application/octet-stream,application/x-ofx,application/vnd.ms-excel,text/csv,text/x-csv,application/x-download,application/vnd.ms-excel,application/pdf,text/plain");
 		}
 		catch (final IOException e) {
 			throw new IOException("Failed to initialize Firefox with temp directory for downloads",
-			        e);
+					e);
 		}
 
 		final WebDriver driver = new FirefoxDriver(fp);
