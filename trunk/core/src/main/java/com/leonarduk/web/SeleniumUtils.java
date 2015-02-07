@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
@@ -36,17 +35,6 @@ public class SeleniumUtils {
 		final File tempDir = new File(tmpDirPath);
 		final boolean tmpDirCreated = tempDir.mkdir();
 		return tempDir;
-	}
-
-	/**
-	 * Gets the chrome browser driver.
-	 *
-	 * @return the chrome browser driver
-	 */
-	public static WebDriver getChromeBrowserDriver() {
-		System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
-
-		return new ChromeDriver();
 	}
 
 	/**
