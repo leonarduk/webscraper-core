@@ -10,9 +10,9 @@ import java.util.List;
  * The Class EmailProcessorChain.
  *
  * @author Stephen Leonard
- * @version $Author:: $: Author of last commit
- * @version $Rev:: $: Revision of last commit
- * @version $Date:: $: Date of last commit
+ * @version $Author: $: Author of last commit
+ * @version $Rev: $: Revision of last commit
+ * @version $Date$: Date of last commit
  * @since 3 Feb 2015
  */
 public class EmailProcessorChain implements EmailProcessor {
