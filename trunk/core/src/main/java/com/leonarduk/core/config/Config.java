@@ -12,15 +12,15 @@ import java.util.Properties;
  * The Class Config.
  *
  * @author Stephen Leonard
- * @version $Author:: $: Author of last commit
- * @version $Rev:: $: Revision of last commit
- * @version $Date:: $: Date of last commit
+ * @version $Author::$: Author of last commit
+ * @version $Rev::$: Revision of last commit
+ * @version $Date::$: Date of last commit
  * @since 24 Jan 2015
  */
 public class Config {
 
 	/** The props. */
-	private final Properties	props;
+	private final Properties props;
 
 	/**
 	 * Instantiates a new config.
