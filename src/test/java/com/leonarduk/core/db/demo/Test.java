@@ -13,8 +13,8 @@ import javax.persistence.Table;
  *
  * @author stephen
  * @version $Author: $: Author of last commit
- * @version $Rev: $: Revision of last commit
- * @version $Date$: Date of last commit
+ * @version $Rev$: Revision of last commit
+ * @version $Date: 2015-02-08 21:26:51 +0000 (Sun, 08 Feb 2015) $: Date of last commit
  * @since 8 Feb 2015
  */
 @Entity
