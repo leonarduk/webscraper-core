@@ -9,9 +9,9 @@ import org.apache.log4j.Logger;
  * The Class SimplePrintEmailProcessor.
  *
  * @author Stephen Leonard
- * @version $Author$: Author of last commit
+ * @version $Author: leonarduk $: Author of last commit
  * @version $Rev: $: Revision of last commit
- * @version $Date: 2015-02-08 21:17:01 +0000 (Sun, 08 Feb 2015) $: Date of last commit
+ * @version $Date$: Date of last commit
  * @since 2 Feb 2015
  */
 public class SimplePrintEmailProcessor implements EmailProcessor {
