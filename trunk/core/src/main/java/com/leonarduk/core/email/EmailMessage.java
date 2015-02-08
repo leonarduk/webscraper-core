@@ -10,9 +10,9 @@ import java.util.List;
  * The Class EmailMessage.
  *
  * @author Stephen Leonard
- * @version $Author: leonarduk $ Author of last commit
+ * @version $Author$ Author of last commit
  * @version $Rev: 364 $: Revision of last commit
- * @version $Date$: Date of last commit
+ * @version $Date: 2015-02-08 21:15:05 +0000 (Sun, 08 Feb 2015) $: Date of last commit
  * @since 2 Feb 2015
  */
 public class EmailMessage {
