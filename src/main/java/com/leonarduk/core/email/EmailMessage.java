@@ -11,8 +11,8 @@ import java.util.List;
  *
  * @author Stephen Leonard
  * @version $Author: leonarduk $ Author of last commit
- * @version $Rev$: Revision of last commit
- * @version $Date:: $: Date of last commit
+ * @version $Rev: 364 $: Revision of last commit
+ * @version $Date$: Date of last commit
  * @since 2 Feb 2015
  */
 public class EmailMessage {
@@ -47,7 +47,7 @@ public class EmailMessage {
 	 *            the files
 	 */
 	public EmailMessage(final String sender, final Date sentDate, final String subject,
-			final String content, final List<String> files) {
+	        final String content, final List<String> files) {
 		this.sender = sender;
 		this.subject = subject;
 		this.contentBuffer = content;
@@ -102,12 +102,12 @@ public class EmailMessage {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public final String toString() {
 		return "EmailMessage [contentBuffer=" + this.contentBuffer + ", sender=" + this.sender
-				+ ", files=" + this.files + ", subject=" + this.subject + "]";
+		        + ", files=" + this.files + ", subject=" + this.subject + "]";
 	}
 }
