@@ -8,9 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Test.
+ *
+ * @author stephen
+ * @version $Author: $: Author of last commit
+ * @version $Rev: $: Revision of last commit
+ * @version $Date$: Date of last commit
+ * @since 8 Feb 2015
  */
 @Entity
 @Table(name = "test")
@@ -18,11 +23,11 @@ public class Test {
 
 	/** The id. */
 	@Id
-	private int	   id;
+	private int id;
 
 	/** The data. */
 	@Basic
-	private String	data;
+	private String data;
 
 	/**
 	 * Gets the data.

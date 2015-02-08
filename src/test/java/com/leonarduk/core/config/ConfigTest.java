@@ -12,6 +12,12 @@ import org.junit.Test;
 
 /**
  * The Class ConfigTest.
+ *
+ * @author stephen
+ * @version $Author: $: Author of last commit
+ * @version $Rev: $: Revision of last commit
+ * @version $Date$: Date of last commit
+ * @since 8 Feb 2015
  */
 public class ConfigTest {
 

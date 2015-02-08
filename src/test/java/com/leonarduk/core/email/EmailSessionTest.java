@@ -12,9 +12,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class EmailSessionTest.
+ *
+ * @author stephen
+ * @version $Author: $: Author of last commit
+ * @version $Rev: $: Revision of last commit
+ * @version $Date$: Date of last commit
+ * @since 8 Feb 2015
  */
 public class EmailSessionTest {
 
@@ -55,7 +60,7 @@ public class EmailSessionTest {
 	@Test
 	public final void testGetAuthenticator() {
 		final Authenticator authenticator = this.session.getAuthenticator(this.userName,
-				this.password);
+		        this.password);
 		Assert.assertNotNull(authenticator);
 	}
 
@@ -71,10 +76,10 @@ public class EmailSessionTest {
 		Assert.assertNotNull(localSession);
 		Assert.assertEquals(this.server, localSession.getProperty(EmailSession.MAIL_SMTP_HOST));
 		Assert.assertEquals(this.port,
-				localSession.getProperty(EmailSession.MAIL_SMTP_SOCKET_FACTORY_PORT));
+		        localSession.getProperty(EmailSession.MAIL_SMTP_SOCKET_FACTORY_PORT));
 		Assert.assertEquals(this.userName, localSession.getProperty(EmailSession.MAIL_STMP_USER));
 		Assert.assertEquals(this.password,
-				localSession.getProperty(EmailSession.MAIL_SMTP_PASSWORD));
+		        localSession.getProperty(EmailSession.MAIL_SMTP_PASSWORD));
 
 	}
 }
