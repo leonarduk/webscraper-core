@@ -10,7 +10,7 @@ import java.util.List;
  * The Class EmailMessage.
  *
  * @author Stephen Leonard
- * @version $Author:: $: Author of last commit
+ * @version $Author$ Author of last commit
  * @version $Rev:: $: Revision of last commit
  * @version $Date:: $: Date of last commit
  * @since 2 Feb 2015
@@ -47,7 +47,7 @@ public class EmailMessage {
 	 *            the files
 	 */
 	public EmailMessage(final String sender, final Date sentDate, final String subject,
-			final String content, final List<String> files) {
+	        final String content, final List<String> files) {
 		this.sender = sender;
 		this.subject = subject;
 		this.contentBuffer = content;
@@ -60,7 +60,7 @@ public class EmailMessage {
 	 *
 	 * @return the content buffer
 	 */
-	public String getContentBuffer() {
+	public final String getContentBuffer() {
 		return this.contentBuffer;
 	}
 
@@ -69,7 +69,7 @@ public class EmailMessage {
 	 *
 	 * @return the files
 	 */
-	public List<String> getFiles() {
+	public final List<String> getFiles() {
 		return this.files;
 	}
 
@@ -78,7 +78,7 @@ public class EmailMessage {
 	 *
 	 * @return the sender
 	 */
-	public String getSender() {
+	public final String getSender() {
 		return this.sender;
 	}
 
@@ -87,7 +87,7 @@ public class EmailMessage {
 	 *
 	 * @return the sent date
 	 */
-	public Date getSentDate() {
+	public final Date getSentDate() {
 		return this.sentDate;
 	}
 
@@ -96,18 +96,18 @@ public class EmailMessage {
 	 *
 	 * @return the subject
 	 */
-	public String getSubject() {
+	public final String getSubject() {
 		return this.subject;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public final String toString() {
 		return "EmailMessage [contentBuffer=" + this.contentBuffer + ", sender=" + this.sender
-				+ ", files=" + this.files + ", subject=" + this.subject + "]";
+		        + ", files=" + this.files + ", subject=" + this.subject + "]";
 	}
 }
