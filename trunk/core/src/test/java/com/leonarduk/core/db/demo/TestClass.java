@@ -8,9 +8,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TestClass.
+ *
+ * @author stephen
+ * @version $Author: $: Author of last commit
+ * @version $Rev: $: Revision of last commit
+ * @version $Date$: Date of last commit
+ * @since 8 Feb 2015
  */
 public class TestClass {
 	/**

@@ -18,28 +18,35 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * The Class EmailSenderTest.
+ *
+ * @author stephen
+ * @version $Author: $: Author of last commit
+ * @version $Rev: $: Revision of last commit
+ * @version $Date$: Date of last commit
+ * @since 8 Feb 2015
  */
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Transport.class })
 public class EmailSenderTest {
 
 	/** The sender. */
-	private EmailSender	sender;
+	private EmailSender sender;
 
 	/** The from email. */
-	private String	    fromEmail;
+	private String fromEmail;
 
 	/** The from name. */
-	private String	    fromName;
+	private String fromName;
 
 	/** The subject. */
-	private String	    subject;
+	private String subject;
 
 	/** The msg body. */
-	private String	    msgBody;
+	private String msgBody;
 
 	/** The to. */
-	private String[]	to;
+	private String[] to;
 
 	/**
 	 * Sets the up.
@@ -65,7 +72,7 @@ public class EmailSenderTest {
 		final EmailSession session = Mockito.mock(EmailSession.class);
 		final boolean html = true;
 		final Message message = this.sender.createMessage(this.fromEmail, this.fromName,
-		        this.subject, this.msgBody, html, session, this.to);
+				this.subject, this.msgBody, html, session, this.to);
 		Assert.assertNotNull(message);
 	}
 
@@ -81,6 +88,6 @@ public class EmailSenderTest {
 		MemberModifier.suppress(MemberMatcher.method(Transport.class, "send", Message.class));
 
 		this.sender.sendMessage(this.fromEmail, this.fromName, this.subject, this.msgBody, true,
-		        session, this.to);
+				session, this.to);
 	}
 }

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class EmailMessageBuilder.
  *
@@ -69,7 +68,7 @@ public class EmailMessageBuilder {
 	 */
 	public final EmailMessage create() {
 		return new EmailMessage(this.sender, this.sentDate, this.subject,
-		        this.contentBuffer.toString(), this.files);
+				this.contentBuffer.toString(), this.files);
 	}
 
 	/**
