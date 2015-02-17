@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "test")
-public class Test {
+public class Example {
 
 	/** The id. */
 	@Id

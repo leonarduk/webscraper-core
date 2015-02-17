@@ -17,7 +17,7 @@ import javax.persistence.Persistence;
  * @version $Date: 2015-02-08 21:26:51 +0000 (Sun, 08 Feb 2015) $: Date of last commit
  * @since 8 Feb 2015
  */
-public class TestClass {
+public class ExampleClass {
 	/**
 	 * The main method.
 	 *
@@ -29,9 +29,9 @@ public class TestClass {
 		final EntityManager em = emf.createEntityManager();
 		final EntityTransaction tx = em.getTransaction();
 
-		Test test = em.find(Test.class, 1);
+		Example test = em.find(Example.class, 1);
 		if (test == null) {
-			test = new Test();
+			test = new Example();
 			test.setId(1);
 			test.setData("a");
 
@@ -49,7 +49,7 @@ public class TestClass {
 	/**
 	 * Instantiates a new test class.
 	 */
-	protected TestClass() {
+	protected ExampleClass() {
 
 	}
 }
