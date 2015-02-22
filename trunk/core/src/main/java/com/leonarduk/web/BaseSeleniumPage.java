@@ -10,11 +10,28 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.LoadableComponent;
 
+/**
+ * The Class BaseSeleniumPage.
+ *
+ * @author stephen
+ * @version $Author: $: Author of last commit
+ * @version $Rev: $: Revision of last commit
+ * @version $Date$: Date of last commit
+ * @since 18 Feb 2015
+ */
 public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPage> {
 	/** The web driver. */
 	private final WebDriver webDriver;
+
+	/** The Constant LOGGER. */
 	static final Logger LOGGER = Logger.getLogger(BaseSeleniumPage.class);
 
+	/**
+	 * Instantiates a new base selenium page.
+	 *
+	 * @param webDriver
+	 *            the web driver
+	 */
 	public BaseSeleniumPage(final WebDriver webDriver) {
 		super();
 		this.webDriver = webDriver;
@@ -26,7 +43,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 * @param xpath
 	 *            the xpath
 	 */
-	protected void clickField(final String xpath) {
+	protected final void clickField(final String xpath) {
 		this.findElementByXpath(xpath).click();
 	}
 
@@ -39,7 +56,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 *            the xpath
 	 * @return the web element
 	 */
-	protected WebElement enterValueIntoField(final String answer, final String xpath) {
+	protected final WebElement enterValueIntoField(final String answer, final String xpath) {
 		final WebElement element = this.findElementByXpath(xpath);
 		element.clear();
 		element.sendKeys(answer);
@@ -54,7 +71,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 *            the xpath
 	 * @return the web element
 	 */
-	protected WebElement findElementByXpath(final String xpath) {
+	protected final WebElement findElementByXpath(final String xpath) {
 		try {
 			return this.webDriver.findElement(By.xpath(xpath));
 		}
@@ -71,7 +88,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 *
 	 * @return the web driver
 	 */
-	public WebDriver getWebDriver() {
+	public final WebDriver getWebDriver() {
 		return this.webDriver;
 	}
 
@@ -82,14 +99,14 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 *            the password2
 	 * @return the string
 	 */
-	protected int keepNumberOnly(final String password2) {
+	protected final int keepNumberOnly(final String password2) {
 		return Integer.valueOf(password2.replaceAll("\\D+", ""));
 	}
 
 	/**
 	 * Wait for page to load.
 	 */
-	protected void waitForPageToLoad() {
+	protected final void waitForPageToLoad() {
 		try {
 			Thread.sleep(500);
 		}

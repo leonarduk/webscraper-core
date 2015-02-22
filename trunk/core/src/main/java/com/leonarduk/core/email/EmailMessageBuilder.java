@@ -68,7 +68,7 @@ public class EmailMessageBuilder {
 	 */
 	public final EmailMessage create() {
 		return new EmailMessage(this.sender, this.sentDate, this.subject,
-				this.contentBuffer.toString(), this.files);
+		        this.contentBuffer.toString(), this.files);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class EmailMessageBuilder {
 	 * @param sentDate
 	 *            the new sent date
 	 */
-	public void setSentDate(final Date sentDate) {
+	public final void setSentDate(final Date sentDate) {
 		this.sentDate = sentDate;
 	}
 

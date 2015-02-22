@@ -19,8 +19,9 @@ public interface EmailProcessor {
 	 *
 	 * @param emailMessage
 	 *            the email message
-	 * @return
-	 * @throws BookkeeperException
+	 * @return true, if successful
+	 * @throws Exception
+	 *             the exception
 	 */
 	boolean process(EmailMessage emailMessage) throws Exception;
 
