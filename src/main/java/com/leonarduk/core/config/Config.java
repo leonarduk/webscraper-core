@@ -34,14 +34,14 @@ public class Config {
 		this.props = new Properties();
 
 		final InputStream inputStream = this.getClass().getClassLoader()
-		        .getResourceAsStream(propFileName);
+				.getResourceAsStream(propFileName);
 
 		if (inputStream != null) {
 			this.props.load(inputStream);
 		}
 		else {
 			throw new FileNotFoundException("property file '" + propFileName
-			        + "' not found in the classpath");
+					+ "' not found in the classpath");
 		}
 
 	}
@@ -59,6 +59,14 @@ public class Config {
 			return null;
 		}
 		return value.replaceAll("\"", "").split("\\s*,\\s*");
+	}
+
+	public boolean getBooleanProperty(final String fieldName) {
+		final String value = this.getProperty(fieldName);
+		if (null == value) {
+			return false;
+		}
+		return Boolean.valueOf(value);
 	}
 
 	/**

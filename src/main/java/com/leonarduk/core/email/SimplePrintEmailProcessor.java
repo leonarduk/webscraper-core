@@ -15,17 +15,19 @@ import org.apache.log4j.Logger;
  * @since 2 Feb 2015
  */
 public class SimplePrintEmailProcessor implements EmailProcessor {
+
+	/** The Constant LOGGER. */
 	static final Logger LOGGER = Logger.getLogger(SimplePrintEmailProcessor.class);
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.leonarduk.core.email.EmailProcessor#process(com.leonarduk.core.email.EmailMessage)
 	 */
 	@Override
 	public final boolean process(final EmailMessage emailMessage) {
 		SimplePrintEmailProcessor.LOGGER.info(emailMessage.getSender() + " : "
-				+ emailMessage.getSubject() + " on " + emailMessage.getSentDate());
+		        + emailMessage.getSubject() + " on " + emailMessage.getSentDate());
 
 		// Returns false so that it doesn't consume the message
 		return false;
