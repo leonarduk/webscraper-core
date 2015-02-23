@@ -22,8 +22,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
  * @version $Date$: Date of last commit
  * @since 3 Feb 2015
  */
-public class SeleniumUtils {
-
+public final class SeleniumUtils {
 	/**
 	 * Creates the temp dir.
 	 *
@@ -87,6 +86,12 @@ public class SeleniumUtils {
 		final File tempDir = new File(downloadDir);
 
 		return SeleniumUtils.getDownloadCapableBrowser(tempDir);
+	}
+
+	/**
+	 * Instantiates a new selenium utils.
+	 */
+	private SeleniumUtils() {
 	}
 
 }

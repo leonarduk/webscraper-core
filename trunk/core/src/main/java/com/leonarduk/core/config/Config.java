@@ -23,6 +23,13 @@ public class Config {
 	private final Properties props;
 
 	/**
+	 * Instantiates a new empty config .
+	 */
+	public Config() {
+		this.props = new Properties();
+	}
+
+	/**
 	 * Instantiates a new config.
 	 *
 	 * @param propFileName
@@ -31,8 +38,7 @@ public class Config {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public Config(final String propFileName) throws IOException {
-		this.props = new Properties();
-
+		this();
 		final InputStream inputStream = this.getClass().getClassLoader()
 				.getResourceAsStream(propFileName);
 
@@ -61,7 +67,14 @@ public class Config {
 		return value.replaceAll("\"", "").split("\\s*,\\s*");
 	}
 
-	public boolean getBooleanProperty(final String fieldName) {
+	/**
+	 * Gets the boolean property.
+	 *
+	 * @param fieldName
+	 *            the field name
+	 * @return the boolean property
+	 */
+	public final boolean getBooleanProperty(final String fieldName) {
 		final String value = this.getProperty(fieldName);
 		if (null == value) {
 			return false;
@@ -108,5 +121,17 @@ public class Config {
 	 */
 	public final String getProperty(final String fieldName) {
 		return this.props.getProperty(fieldName);
+	}
+
+	/**
+	 * Sets the property.
+	 *
+	 * @param fieldName
+	 *            the field name
+	 * @param value
+	 *            the value
+	 */
+	public final void setProperty(final String fieldName, final String value) {
+		this.props.setProperty(fieldName, value);
 	}
 }

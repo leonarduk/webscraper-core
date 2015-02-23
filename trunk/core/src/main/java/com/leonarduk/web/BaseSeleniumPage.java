@@ -23,6 +23,9 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	/** The web driver. */
 	private final WebDriver webDriver;
 
+	/** The Constant ONE_SECOND_IN_MS. */
+	public static final int ONE_SECOND_IN_MS = 1000;
+
 	/** The Constant LOGGER. */
 	static final Logger LOGGER = Logger.getLogger(BaseSeleniumPage.class);
 
