@@ -21,16 +21,16 @@ public class EmailMessage {
 	private final String contentBuffer;
 
 	/** The files. */
-	private final List<String> files;
+	private final List<String> files_;
 
 	/** The sender. */
-	private final String sender;
+	private final String sender_;
 
 	/** The sent date. */
-	private final Date sentDate;
+	private final Date sentDate_;
 
 	/** The subject. */
-	private final String subject;
+	private final String subject_;
 
 	/**
 	 * Instantiates a new email message.
@@ -48,11 +48,11 @@ public class EmailMessage {
 	 */
 	public EmailMessage(final String sender, final Date sentDate, final String subject,
 	        final String content, final List<String> files) {
-		this.sender = sender;
-		this.subject = subject;
+		this.sender_ = sender;
+		this.subject_ = subject;
 		this.contentBuffer = content;
-		this.files = files;
-		this.sentDate = sentDate;
+		this.files_ = files;
+		this.sentDate_ = sentDate;
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class EmailMessage {
 	 * @return the files
 	 */
 	public final List<String> getFiles() {
-		return this.files;
+		return this.files_;
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class EmailMessage {
 	 * @return the sender
 	 */
 	public final String getSender() {
-		return this.sender;
+		return this.sender_;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class EmailMessage {
 	 * @return the sent date
 	 */
 	public final Date getSentDate() {
-		return this.sentDate;
+		return this.sentDate_;
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class EmailMessage {
 	 * @return the subject
 	 */
 	public final String getSubject() {
-		return this.subject;
+		return this.subject_;
 	}
 
 	/*
@@ -107,7 +107,7 @@ public class EmailMessage {
 	 */
 	@Override
 	public final String toString() {
-		return "EmailMessage [contentBuffer=" + this.contentBuffer + ", sender=" + this.sender
-		        + ", files=" + this.files + ", subject=" + this.subject + "]";
+		return "EmailMessage [contentBuffer=" + this.contentBuffer + ", sender=" + this.sender_
+		        + ", files=" + this.files_ + ", subject=" + this.subject_ + "]";
 	}
 }
