@@ -21,7 +21,7 @@ import org.openqa.selenium.support.ui.LoadableComponent;
  */
 public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPage> {
 	/** The web driver. */
-	private final WebDriver webDriver;
+	private final WebDriver webDriver_;
 
 	/** The Constant ONE_SECOND_IN_MS. */
 	public static final int ONE_SECOND_IN_MS = 1000;
@@ -37,7 +37,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 */
 	public BaseSeleniumPage(final WebDriver webDriver) {
 		super();
-		this.webDriver = webDriver;
+		this.webDriver_ = webDriver;
 	}
 
 	/**
@@ -76,12 +76,12 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 */
 	protected final WebElement findElementByXpath(final String xpath) {
 		try {
-			return this.webDriver.findElement(By.xpath(xpath));
+			return this.webDriver_.findElement(By.xpath(xpath));
 		}
 		catch (final NoSuchElementException e) {
 			BaseSeleniumPage.LOGGER.warn("Could not find " + xpath);
 			this.waitForPageToLoad();
-			return this.webDriver.findElement(By.xpath(xpath));
+			return this.webDriver_.findElement(By.xpath(xpath));
 
 		}
 	}
@@ -92,7 +92,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 * @return the web driver
 	 */
 	public final WebDriver getWebDriver() {
-		return this.webDriver;
+		return this.webDriver_;
 	}
 
 	/**
@@ -111,7 +111,8 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 */
 	protected final void waitForPageToLoad() {
 		try {
-			Thread.sleep(500);
+			final int halfASecond = 500;
+			Thread.sleep(halfASecond);
 		}
 		catch (final InterruptedException e) {
 		}

@@ -19,79 +19,100 @@ import org.openqa.selenium.firefox.FirefoxProfile;
  * @author Stephen Leonard
  * @version $Author: leonarduk $: Author of last commit
  * @version $Rev: $: Revision of last commit
- * @version $Date$: Date of last commit
+ * @version $Date$: Date of last
+ *          commit
  * @since 3 Feb 2015
  */
 public final class SeleniumUtils {
-	/**
-	 * Creates the temp dir.
-	 *
-	 * @return the file
-	 */
-	public static File createTempDir() {
-		final String tmpDirPath = System.getProperty("java.io.tmpdir")
-				+ System.getProperty("file.separator") + RandomStringUtils.randomAlphanumeric(6);
-		final File tempDir = new File(tmpDirPath);
-		final boolean tmpDirCreated = tempDir.mkdir();
-		return tempDir;
-	}
 
-	/**
-	 * Gets the download capable browser.
-	 *
-	 * @param tempDir
-	 *            the temp dir
-	 * @return the download capable browser
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	public static WebDriver getDownloadCapableBrowser(final File tempDir) throws IOException {
-		if (!tempDir.exists()) {
-			throw new FileNotFoundException("Directory " + tempDir + " does not exist");
-		}
+    /**
+     * Creates the temp dir.
+     *
+     * @return the file
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    public static File createTempDir() throws IOException {
+        final int lengthOfNumber = 6;
+        final String tmpDirPath =
+                System.getProperty("java.io.tmpdir")
+                + System.getProperty("file.separator")
+                + RandomStringUtils.randomAlphanumeric(lengthOfNumber);
+        final File tempDir = new File(tmpDirPath);
+        final boolean tmpDirCreated = tempDir.mkdir();
+        if (!tmpDirCreated) {
+            throw new IOException("Failed to create " + tmpDirPath);
+        }
+        return tempDir;
+    }
 
-		final FirefoxProfile fp = new FirefoxProfile();
-		try {
-			fp.setPreference("browser.download.folderList", 2);
-			fp.setPreference("browser.download.manager.showWhenStarting", false);
-			fp.setPreference("browser.download.dir", tempDir.getCanonicalPath());
-			fp.setPreference("browser.helperApps.alwaysAsk.force", false);
-			fp.setPreference(
-					"browser.helperApps.neverAsk.saveToDisk",
-					"application/x-csv,text/html,text/ofx,application/ofx,application/x-ofx,application/x-qif,text/csv,text/x-csv,application/x-download,application/vnd.ms-excel,application/pdf,text/plain");
-			fp.setPreference(
-					"browser.helperApps.neverAsk.openFile",
-					"application/x-csv,text/html,text/ofx,application/ofx,application/octet-stream,application/x-ofx,application/vnd.ms-excel,text/csv,text/x-csv,application/x-download,application/vnd.ms-excel,application/pdf,text/plain");
-		}
-		catch (final IOException e) {
-			throw new IOException("Failed to initialize Firefox with temp directory for downloads",
-					e);
-		}
+    /**
+     * Gets the download capable browser.
+     *
+     * @param tempDir
+     *            the temp dir
+     * @return the download capable browser
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    public static WebDriver getDownloadCapableBrowser(final File tempDir)
+            throws IOException {
+        if (!tempDir.exists()) {
+            throw new FileNotFoundException("Directory " + tempDir
+                    + " does not exist");
+        }
 
-		final WebDriver driver = new FirefoxDriver(fp);
+        final FirefoxProfile fp = new FirefoxProfile();
+        try {
+            fp.setPreference("browser.download.folderList", 2);
+            fp.setPreference("browser.download.manager.showWhenStarting", false);
+            fp.setPreference("browser.download.dir", tempDir.getCanonicalPath());
+            fp.setPreference("browser.helperApps.alwaysAsk.force", false);
+            fp.setPreference(
+                    "browser.helperApps.neverAsk.saveToDisk",
+                    "application/x-csv,text/html,text/ofx,application/ofx,"
+                            + "application/x-ofx,application/x-qif,text/csv,text/x-csv,"
+                            + "application/x-download,application/vnd.ms-excel,"
+                            + "application/pdf,text/plain");
+            fp.setPreference(
+                    "browser.helperApps.neverAsk.openFile",
+                    "application/x-csv,text/html,text/ofx,application/ofx,"
+                            + "application/octet-stream,application/x-ofx,"
+                            + "application/vnd.ms-excel,text/csv,text/x-csv,"
+                            + "application/x-download,application/vnd.ms-excel,"
+                            + "application/pdf,text/plain");
+        }
+        catch (final IOException e) {
+            throw new IOException(
+                    "Failed to initialize Firefox with temp directory for downloads",
+                    e);
+        }
 
-		return driver;
-	}
+        final WebDriver driver = new FirefoxDriver(fp);
 
-	/**
-	 * Gets the download capable browser.
-	 *
-	 * @param downloadDir
-	 *            the download dir
-	 * @return the download capable browser
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	public static WebDriver getDownloadCapableBrowser(final String downloadDir) throws IOException {
-		final File tempDir = new File(downloadDir);
+        return driver;
+    }
 
-		return SeleniumUtils.getDownloadCapableBrowser(tempDir);
-	}
+    /**
+     * Gets the download capable browser.
+     *
+     * @param downloadDir
+     *            the download dir
+     * @return the download capable browser
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    public static WebDriver getDownloadCapableBrowser(final String downloadDir)
+            throws IOException {
+        final File tempDir = new File(downloadDir);
 
-	/**
-	 * Instantiates a new selenium utils.
-	 */
-	private SeleniumUtils() {
-	}
+        return SeleniumUtils.getDownloadCapableBrowser(tempDir);
+    }
+
+    /**
+     * Instantiates a new selenium utils.
+     */
+    private SeleniumUtils() {
+    }
 
 }

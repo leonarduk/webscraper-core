@@ -22,16 +22,16 @@ public class EmailMessageBuilder {
 	private final StringBuilder contentBuffer;
 
 	/** The sender. */
-	private String sender;
+	private String senderString;
 
 	/** The files. */
 	private final List<String> files;
 
 	/** The subject. */
-	private String subject;
+	private String subjectString;
 
 	/** The sent date. */
-	private Date sentDate;
+	private Date sentDate_;
 
 	/**
 	 * Instantiates a new email message builder.
@@ -67,7 +67,7 @@ public class EmailMessageBuilder {
 	 * @return the email message
 	 */
 	public final EmailMessage create() {
-		return new EmailMessage(this.sender, this.sentDate, this.subject,
+		return new EmailMessage(this.senderString, this.sentDate_, this.subjectString,
 		        this.contentBuffer.toString(), this.files);
 	}
 
@@ -78,7 +78,7 @@ public class EmailMessageBuilder {
 	 *            the new sender
 	 */
 	public final void setSender(final String sender) {
-		this.sender = sender;
+		this.senderString = sender;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class EmailMessageBuilder {
 	 *            the new sent date
 	 */
 	public final void setSentDate(final Date sentDate) {
-		this.sentDate = sentDate;
+		this.sentDate_ = sentDate;
 	}
 
 	/**
@@ -98,6 +98,6 @@ public class EmailMessageBuilder {
 	 *            the new subject
 	 */
 	public final void setSubject(final String subject) {
-		this.subject = subject;
+		this.subjectString = subject;
 	}
 }
