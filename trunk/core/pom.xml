@@ -4,7 +4,7 @@
 
 	<groupId>com.leonarduk</groupId>
 	<artifactId>core</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>Core</name>
 	<description>Infrastructure classes</description>
 	<url>http://leonarduk.com/maven2</url>
@@ -17,6 +17,8 @@
 		<junit.version>4.11</junit.version>
 		<java.version>1.8</java.version>
 		<powermock.version>1.6.1</powermock.version>
+		<mockito.version>1.9.5</mockito.version>
+		<javax.mail.version>1.4</javax.mail.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -101,7 +103,7 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.8.5</version>
+			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- Logging -->
@@ -114,7 +116,7 @@
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
-			<version>1.4</version>
+			<version>${javax.mail.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
