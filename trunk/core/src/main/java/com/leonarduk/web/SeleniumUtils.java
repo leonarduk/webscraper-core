@@ -7,12 +7,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SeleniumUtils.
  *
@@ -24,27 +22,6 @@ import org.openqa.selenium.firefox.FirefoxProfile;
  * @since 3 Feb 2015
  */
 public final class SeleniumUtils {
-
-    /**
-     * Creates the temp dir.
-     *
-     * @return the file
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    public static File createTempDir() throws IOException {
-        final int lengthOfNumber = 6;
-        final String tmpDirPath =
-                System.getProperty("java.io.tmpdir")
-                + System.getProperty("file.separator")
-                + RandomStringUtils.randomAlphanumeric(lengthOfNumber);
-        final File tempDir = new File(tmpDirPath);
-        final boolean tmpDirCreated = tempDir.mkdir();
-        if (!tmpDirCreated) {
-            throw new IOException("Failed to create " + tmpDirPath);
-        }
-        return tempDir;
-    }
 
     /**
      * Gets the download capable browser.
@@ -59,34 +36,26 @@ public final class SeleniumUtils {
             throws IOException {
         if (!tempDir.exists()) {
             throw new FileNotFoundException("Directory " + tempDir
-                    + " does not exist");
+                                            + " does not exist");
         }
 
         final FirefoxProfile fp = new FirefoxProfile();
-        try {
-            fp.setPreference("browser.download.folderList", 2);
-            fp.setPreference("browser.download.manager.showWhenStarting", false);
-            fp.setPreference("browser.download.dir", tempDir.getCanonicalPath());
-            fp.setPreference("browser.helperApps.alwaysAsk.force", false);
-            fp.setPreference(
-                    "browser.helperApps.neverAsk.saveToDisk",
-                    "application/x-csv,text/html,text/ofx,application/ofx,"
-                            + "application/x-ofx,application/x-qif,text/csv,text/x-csv,"
-                            + "application/x-download,application/vnd.ms-excel,"
-                            + "application/pdf,text/plain");
-            fp.setPreference(
-                    "browser.helperApps.neverAsk.openFile",
-                    "application/x-csv,text/html,text/ofx,application/ofx,"
-                            + "application/octet-stream,application/x-ofx,"
-                            + "application/vnd.ms-excel,text/csv,text/x-csv,"
-                            + "application/x-download,application/vnd.ms-excel,"
-                            + "application/pdf,text/plain");
-        }
-        catch (final IOException e) {
-            throw new IOException(
-                    "Failed to initialize Firefox with temp directory for downloads",
-                    e);
-        }
+        fp.setPreference("browser.download.folderList", 2);
+        fp.setPreference("browser.download.manager.showWhenStarting", false);
+        fp.setPreference("browser.download.dir", tempDir.getCanonicalPath());
+        fp.setPreference("browser.helperApps.alwaysAsk.force", false);
+        fp.setPreference(
+                "browser.helperApps.neverAsk.saveToDisk",
+                "application/x-csv,text/html,text/ofx,application/ofx,"
+                        + "application/x-ofx,application/x-qif,text/csv,text/x-csv,"
+                        + "application/x-download,application/vnd.ms-excel,"
+                        + "application/pdf,text/plain");
+        fp.setPreference("browser.helperApps.neverAsk.openFile",
+                "application/x-csv,text/html,text/ofx,application/ofx,"
+                        + "application/octet-stream,application/x-ofx,"
+                        + "application/vnd.ms-excel,text/csv,text/x-csv,"
+                        + "application/x-download,application/vnd.ms-excel,"
+                        + "application/pdf,text/plain");
 
         final WebDriver driver = new FirefoxDriver(fp);
 

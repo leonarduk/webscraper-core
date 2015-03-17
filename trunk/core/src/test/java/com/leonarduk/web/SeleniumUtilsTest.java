@@ -1,0 +1,93 @@
+/**
+ * All rights reserved. @Leonard UK Ltd.
+ */
+package com.leonarduk.web;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+
+import com.leonarduk.core.FileUtils;
+
+/**
+ * The Class SeleniumUtilsTest.
+ *
+ * @author stephen
+ * @version $Author: $: Author of last commit
+ * @version $Rev: $: Revision of last commit
+ * @version $Date: $: Date of last commit
+ * @since 11 Mar 2015
+ */
+
+public class SeleniumUtilsTest {
+
+    /**
+     * Sets the up.
+     *
+     * @throws Exception
+     *             the exception
+     */
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    /**
+     * Test get download capable browser file.
+     *
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    @Test
+    public final void testGetDownloadCapableBrowserFile() throws IOException {
+        final File createTempDir = FileUtils.createTempDir();
+        final WebDriver browser =
+                SeleniumUtils.getDownloadCapableBrowser(createTempDir);
+        createTempDir.deleteOnExit();
+        browser.close();
+    }
+
+    /**
+     * Test get download capable browser invalid dir file.
+     *
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    @Test(expected = FileNotFoundException.class)
+    public final void testGetDownloadCapableBrowserInvalidDirFile()
+            throws IOException {
+        SeleniumUtils.getDownloadCapableBrowser(new File("invalidpath"));
+    }
+
+    /**
+     * Test get download capable browser invalid dir string.
+     *
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    @Test(expected = FileNotFoundException.class)
+    public final void testGetDownloadCapableBrowserInvalidDirString()
+            throws IOException {
+        SeleniumUtils.getDownloadCapableBrowser("invalidpath");
+    }
+
+    /**
+     * Test get download capable browser string.
+     *
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    @Test
+    public final void testGetDownloadCapableBrowserString() throws IOException {
+        final File createTempDir = FileUtils.createTempDir();
+        final WebDriver browser =
+                SeleniumUtils.getDownloadCapableBrowser(createTempDir
+                        .getAbsolutePath());
+        createTempDir.deleteOnExit();
+        browser.close();
+
+    }
+}
