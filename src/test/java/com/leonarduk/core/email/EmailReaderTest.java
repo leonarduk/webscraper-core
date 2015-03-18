@@ -6,14 +6,22 @@ package com.leonarduk.core.email;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
+import java.io.IOException;
 
+import javax.mail.Address;
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Session;
+import javax.mail.Store;
+import javax.mail.internet.InternetAddress;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -75,15 +83,38 @@ public class EmailReaderTest {
 
     /**
      * Test process mail.
+     * 
+     * @throws MessagingException
+     * @throws IOException
      */
     @Test
-    @Ignore
-    public void testProcessMail() {
+    public void testProcessMail() throws MessagingException, IOException {
 
         Session.getDefaultInstance(System.getProperties(), null);
+        PowerMockito.mockStatic(Session.class);
         Session mockSession = Mockito.mock(Session.class);
-        Mockito.when(
-                mockSession.getDefaultInstance(System.getProperties(), null))
+        Store store = Mockito.mock(Store.class);
+        Folder folder = Mockito.mock(Folder.class);
+        Mockito.when(store.getDefaultFolder()).thenReturn(folder);
+        Mockito.when(folder.getFolder("inbox")).thenReturn(folder);
+
+        Message testMessage = Mockito.mock(Message.class);
+        InternetAddress address = Mockito.mock(InternetAddress.class);
+        Mockito.when(address.getPersonal()).thenReturn("test@email.com");
+        Address[] addresses = {
+            address
+        };
+        Mockito.when(testMessage.getContent()).thenReturn("body text");
+        Mockito.when(testMessage.getFrom()).thenReturn(addresses);
+        Message[] messages = new Message[] {
+            testMessage
+        };
+        Mockito.when(folder.getMessages()).thenReturn(messages);
+
+        Mockito.when(mockSession.getStore(Matchers.anyString())).thenReturn(
+                store);
+
+        Mockito.when(Session.getDefaultInstance(System.getProperties(), null))
                 .thenReturn(mockSession);
 
         reader.processMail(server, userName, password, serverType,

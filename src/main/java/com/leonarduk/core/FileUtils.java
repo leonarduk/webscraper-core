@@ -84,19 +84,12 @@ public final class FileUtils {
     public static void writeStringToFile(
             final String fileName,
             final String contents) throws IOException {
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter(fileName));
+        try (BufferedWriter writer =
+                new BufferedWriter(new FileWriter(fileName))) {
             final String[] lines = contents.split(FileUtils.CARRIAGE_RETURN);
             for (final String line : lines) {
                 writer.write(line);
                 writer.newLine();
-
-            }
-        }
-        finally {
-            if (writer != null) {
-                writer.close();
             }
         }
     }
@@ -105,6 +98,7 @@ public final class FileUtils {
      * Instantiates a new file utils.
      */
     private FileUtils() {
+        throw new UnsupportedOperationException();
     }
 
 }

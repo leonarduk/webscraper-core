@@ -5,13 +5,22 @@ package com.leonarduk.web;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({
+    Thread.class
+})
 public class BaseSeleniumPageTest {
 
     private WebDriver mockDriver;
@@ -42,9 +51,9 @@ public class BaseSeleniumPageTest {
         this.mockWebElement = Mockito.mock(WebElement.class);
         this.testAttribute = "TEST";
         Mockito.when(this.mockWebElement.getAttribute(this.testAttribute))
-        .thenReturn("testValue");
+                .thenReturn("testValue");
         Mockito.when(this.mockDriver.findElement(By.xpath(this.xpath)))
-        .thenReturn(this.mockWebElement);
+                .thenReturn(this.mockWebElement);
 
     }
 
@@ -93,4 +102,16 @@ public class BaseSeleniumPageTest {
         this.testClass.waitForPageToLoad();
     }
 
+    @Test
+    @Ignore
+    public final void testWaitForPageToLoadInterrupted()
+            throws NoSuchMethodException,
+            SecurityException,
+            Exception {
+        PowerMockito.mockStatic(Thread.class);
+        PowerMockito.doThrow(new InterruptedException()).when(Thread.class,
+                Thread.class.getDeclaredMethod("sleep", Long.class));
+
+        this.testClass.waitForPageToLoad();
+    }
 }
