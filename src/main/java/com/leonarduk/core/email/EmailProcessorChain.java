@@ -28,7 +28,12 @@ public class EmailProcessorChain implements EmailProcessor {
         this.processors = new LinkedList<>();
     }
 
-    public int size() {
+    /**
+     * Size.
+     *
+     * @return the int
+     */
+    public final int size() {
         return this.processors.size();
     }
 

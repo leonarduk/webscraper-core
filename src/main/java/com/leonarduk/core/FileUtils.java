@@ -20,12 +20,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public final class FileUtils {
 
-    public static String CARRIAGE_RETURN = "\n";
-    public static String FILE_SEPARATOR = System.getProperty("file.separator");
+    /** The carriage return. */
+    public static final String CARRIAGE_RETURN = "\n";
 
-    public static File createTempDir() throws IOException {
-        return createTempDir(System.getProperty("java.io.tmpdir"));
-    }
+    /** The file separator. */
+    public static final String FILE_SEPARATOR = System
+            .getProperty("file.separator");
 
     /**
      * Creates the temp dir.
@@ -34,7 +34,20 @@ public final class FileUtils {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static File createTempDir(String baseDir) throws IOException {
+    public static File createTempDir() throws IOException {
+        return createTempDir(System.getProperty("java.io.tmpdir"));
+    }
+
+    /**
+     * Creates the temp dir.
+     *
+     * @param baseDir
+     *            the base dir
+     * @return the file
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    public static File createTempDir(final String baseDir) throws IOException {
         final int lengthOfNumber = 6;
         final String tmpDirPath =
                 baseDir + FileUtils.FILE_SEPARATOR

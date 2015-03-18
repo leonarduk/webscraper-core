@@ -31,7 +31,7 @@ public class EmailMessageBuilder {
 	private String subjectString;
 
 	/** The sent date. */
-	private Date sentDate_;
+	private Date sentdate;
 
 	/**
 	 * Instantiates a new email message builder.
@@ -67,7 +67,7 @@ public class EmailMessageBuilder {
 	 * @return the email message
 	 */
 	public final EmailMessage create() {
-		return new EmailMessage(this.senderString, this.sentDate_, this.subjectString,
+		return new EmailMessage(this.senderString, this.sentdate, this.subjectString,
 		        this.contentBuffer.toString(), this.files);
 	}
 
@@ -88,7 +88,7 @@ public class EmailMessageBuilder {
 	 *            the new sent date
 	 */
 	public final void setSentDate(final Date sentDate) {
-		this.sentDate_ = sentDate;
+		this.sentdate = sentDate;
 	}
 
 	/**
