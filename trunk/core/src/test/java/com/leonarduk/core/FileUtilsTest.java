@@ -4,7 +4,10 @@
 package com.leonarduk.core;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,9 +38,23 @@ public class FileUtilsTest {
         Assert.assertEquals(contents, FileUtils.getFileContents(fileName));
     }
 
+    @Test(expected = FileNotFoundException.class)
+    public final void testWriteFileFailInvalidDir() throws IOException {
+        final String fileName = "/root/file.tmp";
+        final String contents = "test file\nline2\nline3";
+        FileUtils.writeStringToFile(fileName, contents);
+    }
+
     @Test(expected = IOException.class)
     public final void testCreateTempDirFail() throws IOException {
         FileUtils.createTempDir("/root");
 
+    }
+
+    @Test(expected = InvocationTargetException.class)
+    public final void testConstructor() throws Exception {
+        Constructor<FileUtils> c = FileUtils.class.getDeclaredConstructor();
+        c.setAccessible(true);
+        c.newInstance();
     }
 }

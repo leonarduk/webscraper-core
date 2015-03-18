@@ -6,8 +6,9 @@ package com.leonarduk.web;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -24,15 +25,12 @@ import com.leonarduk.core.FileUtils;
  */
 
 public class SeleniumUtilsTest {
-
-    /**
-     * Sets the up.
-     *
-     * @throws Exception
-     *             the exception
-     */
-    @Before
-    public void setUp() throws Exception {
+    @Test(expected = InvocationTargetException.class)
+    public final void testConstructor() throws Exception {
+        Constructor<SeleniumUtils> c =
+                SeleniumUtils.class.getDeclaredConstructor();
+        c.setAccessible(true);
+        c.newInstance();
     }
 
     /**

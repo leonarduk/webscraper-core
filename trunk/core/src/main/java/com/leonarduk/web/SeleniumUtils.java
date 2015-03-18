@@ -82,6 +82,7 @@ public final class SeleniumUtils {
      * Instantiates a new selenium utils.
      */
     private SeleniumUtils() {
+        throw new UnsupportedOperationException();
     }
 
 }
