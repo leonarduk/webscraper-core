@@ -24,11 +24,22 @@ import org.junit.Test;
  */
 public class EmailMessageTest {
 
+    /** The sender. */
     private String sender;
+
+    /** The sent date. */
     private Date sentDate;
+
+    /** The subject. */
     private String subject;
+
+    /** The content. */
     private String content;
+
+    /** The files. */
     private List<String> files;
+
+    /** The message. */
     private EmailMessage message;
 
     /**
@@ -38,7 +49,7 @@ public class EmailMessageTest {
      *             the exception
      */
     @Before
-    public void setUp() throws Exception {
+    public final void setUp() throws Exception {
         sender = "test@sender.com";
         sentDate = new Date();
         subject = "test subject";
@@ -104,9 +115,9 @@ public class EmailMessageTest {
      */
     @Test
     public final void testToString() {
-        assertEquals(
-                "EmailMessage [contentBuffer=this is a test email\n"
-                        + "sfsd, sender=test@sender.com, files=[/file/location1, /file/location2], subject=test subject]",
+        assertEquals("EmailMessage [contentBuffer=this is a test email\n"
+                     + "sfsd, sender=test@sender.com, files=[/file/location1,"
+                     + " /file/location2], subject=test subject]",
                 this.message.toString());
     }
 }

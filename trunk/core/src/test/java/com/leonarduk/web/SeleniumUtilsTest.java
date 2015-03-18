@@ -25,6 +25,13 @@ import com.leonarduk.core.FileUtils;
  */
 
 public class SeleniumUtilsTest {
+
+    /**
+     * Test constructor.
+     *
+     * @throws Exception
+     *             the exception
+     */
     @Test(expected = InvocationTargetException.class)
     public final void testConstructor() throws Exception {
         Constructor<SeleniumUtils> c =

@@ -1,3 +1,6 @@
+/**
+ * All rights reserved. @Leonard UK Ltd.
+ */
 package com.leonarduk.core.email;
 
 import static org.junit.Assert.assertEquals;
@@ -10,20 +13,42 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * The Class EmailMessageBuilderTest.
+ *
+ * @author stephen
+ * @version $Author: $: Author of last commit
+ * @version $Rev: $: Revision of last commit
+ * @version $Date: $: Date of last commit
+ * @since 18 Mar 2015
+ */
 public class EmailMessageBuilderTest {
 
+    /** The builder. */
     private EmailMessageBuilder builder;
 
+    /**
+     * Sets the up.
+     *
+     * @throws Exception
+     *             the exception
+     */
     @Before
-    public void setUp() throws Exception {
+    public final void setUp() throws Exception {
         builder = new EmailMessageBuilder();
     }
 
+    /**
+     * Test email message builder.
+     */
     @Test
     public final void testEmailMessageBuilder() {
         assertNotNull(this.builder);
     }
 
+    /**
+     * Test add file.
+     */
     @Test
     public final void testAddFile() {
         String pathname = "/test/location";
@@ -34,6 +59,9 @@ public class EmailMessageBuilderTest {
         assertEquals(files, this.builder.create().getFiles());
     }
 
+    /**
+     * Test add content.
+     */
     @Test
     public final void testAddContent() {
         String testData = "test content";
@@ -45,6 +73,9 @@ public class EmailMessageBuilderTest {
                 .getContentBuffer());
     }
 
+    /**
+     * Test set sender.
+     */
     @Test
     public final void testSetSender() {
         String testData = "test@Sender.com";
@@ -53,6 +84,9 @@ public class EmailMessageBuilderTest {
 
     }
 
+    /**
+     * Test set sent date.
+     */
     @Test
     public final void testSetSentDate() {
         Date testData = new Date();
@@ -61,6 +95,9 @@ public class EmailMessageBuilderTest {
 
     }
 
+    /**
+     * Test set subject.
+     */
     @Test
     public final void testSetSubject() {
         String testData = "subject";

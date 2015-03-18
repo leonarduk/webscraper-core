@@ -59,6 +59,9 @@ public class ConfigTest {
                 this.config.getArrayProperty("test.string.array"));
     }
 
+    /**
+     * Test get null array property.
+     */
     @Test
     public final void testGetNullArrayProperty() {
         Assert.assertNull(this.config
@@ -85,6 +88,9 @@ public class ConfigTest {
                 this.config.getIntegerProperty("test.int"), 0);
     }
 
+    /**
+     * Test get boolean property.
+     */
     @Test
     public final void testGetBooleanProperty() {
         final boolean expected = true;
@@ -92,6 +98,9 @@ public class ConfigTest {
                 this.config.getBooleanProperty("test.bool"));
     }
 
+    /**
+     * Test get null boolean property.
+     */
     @Test
     public final void testGetNullBooleanProperty() {
         Assert.assertFalse(this.config.getBooleanProperty("test.bool.missing"));
@@ -146,6 +155,9 @@ public class ConfigTest {
                 this.config.getProperty("test.string"));
     }
 
+    /**
+     * Test set property.
+     */
     @Test
     public final void testSetProperty() {
         String value = "specificValue";

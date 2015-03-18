@@ -21,16 +21,16 @@ public class EmailMessage {
 	private final String contentBuffer;
 
 	/** The files. */
-	private final List<String> files_;
+	private final List<String> filesList;
 
 	/** The sender. */
-	private final String sender_;
+	private final String senderString;
 
 	/** The sent date. */
-	private final Date sentDate_;
+	private final Date sentdate;
 
 	/** The subject. */
-	private final String subject_;
+	private final String subjectString;
 
 	/**
 	 * Instantiates a new email message.
@@ -48,11 +48,11 @@ public class EmailMessage {
 	 */
 	public EmailMessage(final String sender, final Date sentDate, final String subject,
 	        final String content, final List<String> files) {
-		this.sender_ = sender;
-		this.subject_ = subject;
+		this.senderString = sender;
+		this.subjectString = subject;
 		this.contentBuffer = content;
-		this.files_ = files;
-		this.sentDate_ = sentDate;
+		this.filesList = files;
+		this.sentdate = sentDate;
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class EmailMessage {
 	 * @return the files
 	 */
 	public final List<String> getFiles() {
-		return this.files_;
+		return this.filesList;
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class EmailMessage {
 	 * @return the sender
 	 */
 	public final String getSender() {
-		return this.sender_;
+		return this.senderString;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class EmailMessage {
 	 * @return the sent date
 	 */
 	public final Date getSentDate() {
-		return this.sentDate_;
+		return this.sentdate;
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class EmailMessage {
 	 * @return the subject
 	 */
 	public final String getSubject() {
-		return this.subject_;
+		return this.subjectString;
 	}
 
 	/*
@@ -107,7 +107,7 @@ public class EmailMessage {
 	 */
 	@Override
 	public final String toString() {
-		return "EmailMessage [contentBuffer=" + this.contentBuffer + ", sender=" + this.sender_
-		        + ", files=" + this.files_ + ", subject=" + this.subject_ + "]";
+		return "EmailMessage [contentBuffer=" + this.contentBuffer + ", sender=" + this.senderString
+		        + ", files=" + this.filesList + ", subject=" + this.subjectString + "]";
 	}
 }

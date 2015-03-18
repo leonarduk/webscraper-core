@@ -21,9 +21,9 @@ import org.openqa.selenium.support.ui.LoadableComponent;
  * @since 18 Feb 2015
  */
 public abstract class BaseSeleniumPage extends
-LoadableComponent<BaseSeleniumPage> {
+        LoadableComponent<BaseSeleniumPage> {
     /** The web driver. */
-    private final WebDriver webDriver_;
+    private final WebDriver webdriver;
 
     /** The Constant ONE_SECOND_IN_MS. */
     public static final int ONE_SECOND_IN_MS = 1000;
@@ -39,7 +39,7 @@ LoadableComponent<BaseSeleniumPage> {
      */
     public BaseSeleniumPage(final WebDriver webDriver) {
         super();
-        this.webDriver_ = webDriver;
+        this.webdriver = webDriver;
     }
 
     /**
@@ -80,7 +80,7 @@ LoadableComponent<BaseSeleniumPage> {
      */
     protected final WebElement findElementByXpath(final String xpath) {
         final WebElement findElement =
-                this.webDriver_.findElement(By.xpath(xpath));
+                this.webdriver.findElement(By.xpath(xpath));
         if (null == findElement) {
             throw new NoSuchElementException("Could not find xpath " + xpath);
         }
@@ -94,7 +94,7 @@ LoadableComponent<BaseSeleniumPage> {
      * @return the web driver
      */
     public final WebDriver getWebDriver() {
-        return this.webDriver_;
+        return this.webdriver;
     }
 
     /**
@@ -117,6 +117,7 @@ LoadableComponent<BaseSeleniumPage> {
             Thread.sleep(halfASecond);
         }
         catch (final InterruptedException e) {
+            LOGGER.info("Interrupted");
         }
     }
 

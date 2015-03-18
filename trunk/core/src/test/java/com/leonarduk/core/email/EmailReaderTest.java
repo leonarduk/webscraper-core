@@ -44,12 +44,25 @@ import com.leonarduk.core.email.EmailReader.ServerType;
 })
 public class EmailReaderTest {
 
+    /** The reader. */
     private EmailReader reader;
+
+    /** The server. */
     private String server;
+
+    /** The user name. */
     private String userName;
+
+    /** The password. */
     private String password;
+
+    /** The server type. */
     private ServerType serverType;
+
+    /** The attachments directory. */
     private String attachmentsDirectory;
+
+    /** The email processor. */
     private EmailProcessor emailProcessor;
 
     /**
@@ -59,7 +72,7 @@ public class EmailReaderTest {
      *             the exception
      */
     @Before
-    public void setUp() throws Exception {
+    public final void setUp() throws Exception {
         reader = new EmailReader();
 
         this.server = "localhost";
@@ -77,18 +90,20 @@ public class EmailReaderTest {
      * Test email reader.
      */
     @Test
-    public void testEmailReader() {
+    public final void testEmailReader() {
         assertNotNull(this.reader);
     }
 
     /**
      * Test process mail.
-     * 
+     *
      * @throws MessagingException
+     *             the messaging exception
      * @throws IOException
+     *             Signals that an I/O exception has occurred.
      */
     @Test
-    public void testProcessMail() throws MessagingException, IOException {
+    public final void testProcessMail() throws MessagingException, IOException {
 
         Session.getDefaultInstance(System.getProperties(), null);
         PowerMockito.mockStatic(Session.class);
