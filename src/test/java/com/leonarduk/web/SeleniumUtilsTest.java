@@ -50,7 +50,7 @@ public class SeleniumUtilsTest {
     public final void testGetDownloadCapableBrowserFile() throws IOException {
         final File createTempDir = FileUtils.createTempDir();
         final WebDriver browser =
-                SeleniumUtils.getDownloadCapableBrowser(createTempDir);
+                SeleniumUtils.getDownloadCapableBrowser(createTempDir, true);
         createTempDir.deleteOnExit();
         browser.close();
     }
@@ -64,7 +64,7 @@ public class SeleniumUtilsTest {
     @Test(expected = FileNotFoundException.class)
     public final void testGetDownloadCapableBrowserInvalidDirFile()
             throws IOException {
-        SeleniumUtils.getDownloadCapableBrowser(new File("invalidpath"));
+        SeleniumUtils.getDownloadCapableBrowser(new File("invalidpath"), true);
     }
 
     /**
@@ -76,7 +76,7 @@ public class SeleniumUtilsTest {
     @Test(expected = FileNotFoundException.class)
     public final void testGetDownloadCapableBrowserInvalidDirString()
             throws IOException {
-        SeleniumUtils.getDownloadCapableBrowser("invalidpath");
+        SeleniumUtils.getDownloadCapableBrowser("invalidpath", true);
     }
 
     /**
@@ -89,8 +89,8 @@ public class SeleniumUtilsTest {
     public final void testGetDownloadCapableBrowserString() throws IOException {
         final File createTempDir = FileUtils.createTempDir();
         final WebDriver browser =
-                SeleniumUtils.getDownloadCapableBrowser(createTempDir
-                        .getAbsolutePath());
+                SeleniumUtils.getDownloadCapableBrowser(
+                        createTempDir.getAbsolutePath(), true);
         createTempDir.deleteOnExit();
         browser.close();
 

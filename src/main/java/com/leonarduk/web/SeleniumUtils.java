@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
@@ -23,6 +24,11 @@ import org.openqa.selenium.firefox.FirefoxProfile;
  */
 public final class SeleniumUtils {
 
+    public static WebDriver getDownloadCapableBrowser(final File tempDir)
+            throws IOException {
+        return getDownloadCapableBrowser(tempDir, false);
+    }
+
     /**
      * Gets the download capable browser.
      *
@@ -32,8 +38,9 @@ public final class SeleniumUtils {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static WebDriver getDownloadCapableBrowser(final File tempDir)
-            throws IOException {
+    public static WebDriver getDownloadCapableBrowser(
+            final File tempDir,
+            boolean runInBackground) throws IOException {
         if (!tempDir.exists()) {
             throw new FileNotFoundException("Directory " + tempDir
                                             + " does not exist");
@@ -57,9 +64,16 @@ public final class SeleniumUtils {
                         + "application/x-download,application/vnd.ms-excel,"
                         + "application/pdf,text/plain");
 
-        final WebDriver driver = new FirefoxDriver(fp);
+        if (runInBackground) {
+            String xport = System.getProperty("Importal.xvfb.id", ":1");
+            System.out.println("XVFB: " + xport);
+            FirefoxBinary firefoxBinary = new FirefoxBinary();
+            firefoxBinary.setEnvironmentProperty("DISPLAY", xport);
 
-        return driver;
+            return new FirefoxDriver(firefoxBinary, fp);
+        }
+
+        return new FirefoxDriver(fp);
     }
 
     /**
@@ -73,9 +87,16 @@ public final class SeleniumUtils {
      */
     public static WebDriver getDownloadCapableBrowser(final String downloadDir)
             throws IOException {
-        final File tempDir = new File(downloadDir);
+        return SeleniumUtils.getDownloadCapableBrowser(downloadDir, false);
+    }
 
-        return SeleniumUtils.getDownloadCapableBrowser(tempDir);
+    public static WebDriver getDownloadCapableBrowser(
+            final String downloadDir,
+            boolean runInBackground) throws IOException {
+        final File tempDir = new File(downloadDir);
+        return SeleniumUtils
+                .getDownloadCapableBrowser(tempDir, runInBackground);
+
     }
 
     /**
