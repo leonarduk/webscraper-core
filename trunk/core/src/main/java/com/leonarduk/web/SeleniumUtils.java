@@ -66,7 +66,7 @@ public final class SeleniumUtils {
 
         if (runInBackground) {
             String xport = System.getProperty("Importal.xvfb.id", ":1");
-            System.out.println("XVFB: " + xport);
+            // System.out.println("XVFB: " + xport);
             FirefoxBinary firefoxBinary = new FirefoxBinary();
             firefoxBinary.setEnvironmentProperty("DISPLAY", xport);
 
