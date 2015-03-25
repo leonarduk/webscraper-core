@@ -25,6 +25,8 @@ public abstract class BaseSeleniumPage extends
     /** The web driver. */
     private final WebDriver webdriver;
 
+    private final String expectedUrl;
+
     /** The Constant ONE_SECOND_IN_MS. */
     public static final int ONE_SECOND_IN_MS = 1000;
 
@@ -36,10 +38,16 @@ public abstract class BaseSeleniumPage extends
      *
      * @param webDriver
      *            the web driver
+     * @param expectedUrl
      */
-    public BaseSeleniumPage(final WebDriver webDriver) {
+    public BaseSeleniumPage(final WebDriver webDriver, String expectedUrl) {
         super();
+        this.expectedUrl = expectedUrl;
         this.webdriver = webDriver;
+    }
+
+    public String getExpectedUrl() {
+        return expectedUrl;
     }
 
     /**
@@ -121,4 +129,16 @@ public abstract class BaseSeleniumPage extends
         }
     }
 
+    @Override
+    protected final void isLoaded() {
+        if (!this.getWebDriver().getCurrentUrl().equals(this.expectedUrl)) {
+            this.load();
+        }
+        if (!this.getWebDriver().getCurrentUrl().equals(this.expectedUrl)) {
+            throw new RuntimeException(this.expectedUrl
+                                       + " is  not loaded. Instead is "
+                                       + this.getWebDriver().getCurrentUrl());
+        }
+
+    }
 }
