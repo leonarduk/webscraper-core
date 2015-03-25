@@ -62,11 +62,7 @@ public class BaseSeleniumPageTest {
     @Before
     public final void setUp() throws Exception {
         this.mockDriver = Mockito.mock(WebDriver.class);
-        this.testClass = new BaseSeleniumPage(this.mockDriver) {
-
-            @Override
-            protected void isLoaded() {
-            }
+        this.testClass = new BaseSeleniumPage(this.mockDriver, testAttribute) {
 
             @Override
             protected void load() {
