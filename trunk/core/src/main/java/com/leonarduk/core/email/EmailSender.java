@@ -93,6 +93,7 @@ public class EmailSender {
      * @param to
      *            the to
      * @throws EmailException
+     *             the email exception
      */
     public final void sendMessage(
             final String fromEmail,
