@@ -4,7 +4,9 @@
 package com.leonarduk.web;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,6 +29,8 @@ public abstract class BaseSeleniumPage extends
 
     private final String expectedUrl;
 
+    private boolean acceptNextAlert = true;
+
     /** The Constant ONE_SECOND_IN_MS. */
     public static final int ONE_SECOND_IN_MS = 1000;
 
@@ -39,14 +43,20 @@ public abstract class BaseSeleniumPage extends
      * @param webDriver
      *            the web driver
      * @param expectedUrl
+     *            the expected url
      */
-    public BaseSeleniumPage(final WebDriver webDriver, String expectedUrl) {
+    public BaseSeleniumPage(final WebDriver webDriver, final String expectedUrl) {
         super();
         this.expectedUrl = expectedUrl;
         this.webdriver = webDriver;
     }
 
-    public String getExpectedUrl() {
+    /**
+     * Gets the expected url.
+     *
+     * @return the expected url
+     */
+    public final String getExpectedUrl() {
         return expectedUrl;
     }
 
@@ -116,6 +126,43 @@ public abstract class BaseSeleniumPage extends
         return Integer.valueOf(password2.replaceAll("\\D+", ""));
     }
 
+    public boolean isElementPresent(By by) {
+        try {
+            this.getWebDriver().findElement(by);
+            return true;
+        }
+        catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public boolean isAlertPresent() {
+        try {
+            this.getWebDriver().switchTo().alert();
+            return true;
+        }
+        catch (NoAlertPresentException e) {
+            return false;
+        }
+    }
+
+    public String closeAlertAndGetItsText() {
+        try {
+            Alert alert = this.getWebDriver().switchTo().alert();
+            String alertText = alert.getText();
+            if (acceptNextAlert) {
+                alert.accept();
+            }
+            else {
+                alert.dismiss();
+            }
+            return alertText;
+        }
+        finally {
+            acceptNextAlert = true;
+        }
+    }
+
     /**
      * Wait for page to load.
      */
@@ -134,10 +181,10 @@ public abstract class BaseSeleniumPage extends
         if (!this.getWebDriver().getCurrentUrl().equals(this.expectedUrl)) {
             this.load();
         }
-        if (!this.getWebDriver().getCurrentUrl().equals(this.expectedUrl)) {
+        String url = this.getWebDriver().getCurrentUrl();
+        if (!url.equals(this.expectedUrl)) {
             throw new RuntimeException(this.expectedUrl
-                                       + " is  not loaded. Instead is "
-                                       + this.getWebDriver().getCurrentUrl());
+                                       + " is  not loaded. Instead is " + url);
         }
 
     }

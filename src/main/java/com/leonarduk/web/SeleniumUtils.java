@@ -24,6 +24,15 @@ import org.openqa.selenium.firefox.FirefoxProfile;
  */
 public final class SeleniumUtils {
 
+    /**
+     * Gets the download capable browser.
+     *
+     * @param tempDir
+     *            the temp dir
+     * @return the download capable browser
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
     public static WebDriver getDownloadCapableBrowser(final File tempDir)
             throws IOException {
         return getDownloadCapableBrowser(tempDir, false);
@@ -34,13 +43,15 @@ public final class SeleniumUtils {
      *
      * @param tempDir
      *            the temp dir
+     * @param runInBackground
+     *            the run in background
      * @return the download capable browser
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
     public static WebDriver getDownloadCapableBrowser(
             final File tempDir,
-            boolean runInBackground) throws IOException {
+            final boolean runInBackground) throws IOException {
         if (!tempDir.exists()) {
             throw new FileNotFoundException("Directory " + tempDir
                                             + " does not exist");
@@ -90,9 +101,20 @@ public final class SeleniumUtils {
         return SeleniumUtils.getDownloadCapableBrowser(downloadDir, false);
     }
 
+    /**
+     * Gets the download capable browser.
+     *
+     * @param downloadDir
+     *            the download dir
+     * @param runInBackground
+     *            the run in background
+     * @return the download capable browser
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
     public static WebDriver getDownloadCapableBrowser(
             final String downloadDir,
-            boolean runInBackground) throws IOException {
+            final boolean runInBackground) throws IOException {
         final File tempDir = new File(downloadDir);
         return SeleniumUtils
                 .getDownloadCapableBrowser(tempDir, runInBackground);
