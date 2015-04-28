@@ -182,7 +182,7 @@ public abstract class BaseSeleniumPage extends
             this.load();
         }
         String url = this.getWebDriver().getCurrentUrl();
-        if (!url.equals(this.expectedUrl)) {
+        if (!url.startsWith(this.expectedUrl)) {
             throw new RuntimeException(this.expectedUrl
                                        + " is  not loaded. Instead is " + url);
         }
