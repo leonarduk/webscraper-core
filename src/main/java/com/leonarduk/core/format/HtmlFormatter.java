@@ -3,6 +3,7 @@
  */
 package com.leonarduk.core.format;
 
+import org.apache.log4j.Logger;
 
 /**
  * The Class HtmlFormatter.
@@ -14,6 +15,7 @@ package com.leonarduk.core.format;
  * @since 28 Jan 2015
  */
 public class HtmlFormatter implements Formatter {
+    static final Logger LOGGER = Logger.getLogger(HtmlFormatter.class);
 
     /**
      * Creates the node.
@@ -85,6 +87,7 @@ public class HtmlFormatter implements Formatter {
 
     @Override
     public String formatBody(String text) {
+        LOGGER.info("Format: " + text);
         return text.replaceAll("\n", getNewLine());
     }
 }
