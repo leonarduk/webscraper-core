@@ -169,7 +169,7 @@ public abstract class BaseSeleniumPage extends
     protected final void waitForPageToLoad() {
         try {
             final int halfASecond = 500;
-            Thread.sleep(halfASecond);
+            Thread.sleep(10 * halfASecond);
         }
         catch (final InterruptedException e) {
             LOGGER.info("Interrupted");
