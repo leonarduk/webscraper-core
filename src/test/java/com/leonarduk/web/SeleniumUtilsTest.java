@@ -3,6 +3,8 @@
  */
 package com.leonarduk.web;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,73 +28,72 @@ import com.leonarduk.core.FileUtils;
 
 public class SeleniumUtilsTest {
 
-    /**
-     * Test constructor.
-     *
-     * @throws Exception
-     *             the exception
-     */
-    @Test(expected = InvocationTargetException.class)
-    public final void testConstructor() throws Exception {
-        Constructor<SeleniumUtils> c =
-                SeleniumUtils.class.getDeclaredConstructor();
-        c.setAccessible(true);
-        c.newInstance();
-    }
+	@Test
+	public final void testIsInternetAvailable() throws Exception {
+		assertFalse(SeleniumUtils.isInternetAvailable());
+	}
+	
+	/**
+	 * Test constructor.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
+	@Test(expected = InvocationTargetException.class)
+	public final void testConstructor() throws Exception {
+		Constructor<SeleniumUtils> c = SeleniumUtils.class.getDeclaredConstructor();
+		c.setAccessible(true);
+		c.newInstance();
+	}
 
-    /**
-     * Test get download capable browser file.
-     *
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    @Test
-    public final void testGetDownloadCapableBrowserFile() throws IOException {
-        final File createTempDir = FileUtils.createTempDir();
-        final WebDriver browser =
-                SeleniumUtils.getDownloadCapableBrowser(createTempDir, true);
-        createTempDir.deleteOnExit();
-        browser.close();
-    }
+	/**
+	 * Test get download capable browser file.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public final void testGetDownloadCapableBrowserFile() throws IOException {
+		final File createTempDir = FileUtils.createTempDir();
+		final WebDriver browser = SeleniumUtils.getDownloadCapableBrowser(createTempDir, true);
+		createTempDir.deleteOnExit();
+		browser.close();
+	}
 
-    /**
-     * Test get download capable browser invalid dir file.
-     *
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    @Test(expected = FileNotFoundException.class)
-    public final void testGetDownloadCapableBrowserInvalidDirFile()
-            throws IOException {
-        SeleniumUtils.getDownloadCapableBrowser(new File("invalidpath"), true);
-    }
+	/**
+	 * Test get download capable browser invalid dir file.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test(expected = FileNotFoundException.class)
+	public final void testGetDownloadCapableBrowserInvalidDirFile() throws IOException {
+		SeleniumUtils.getDownloadCapableBrowser(new File("invalidpath"), true);
+	}
 
-    /**
-     * Test get download capable browser invalid dir string.
-     *
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    @Test(expected = FileNotFoundException.class)
-    public final void testGetDownloadCapableBrowserInvalidDirString()
-            throws IOException {
-        SeleniumUtils.getDownloadCapableBrowser("invalidpath", true);
-    }
+	/**
+	 * Test get download capable browser invalid dir string.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test(expected = FileNotFoundException.class)
+	public final void testGetDownloadCapableBrowserInvalidDirString() throws IOException {
+		SeleniumUtils.getDownloadCapableBrowser("invalidpath", true);
+	}
 
-    /**
-     * Test get download capable browser string.
-     *
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    @Test
-    public final void testGetDownloadCapableBrowserString() throws IOException {
-        final File createTempDir = FileUtils.createTempDir();
-        final WebDriver browser =
-                SeleniumUtils.getDownloadCapableBrowser(
-                        createTempDir.getAbsolutePath(), true);
-        createTempDir.deleteOnExit();
-        browser.close();
+	/**
+	 * Test get download capable browser string.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public final void testGetDownloadCapableBrowserString() throws IOException {
+		final File createTempDir = FileUtils.createTempDir();
+		final WebDriver browser = SeleniumUtils.getDownloadCapableBrowser(createTempDir.getAbsolutePath(), true);
+		createTempDir.deleteOnExit();
+		browser.close();
 
-    }
+	}
 }
