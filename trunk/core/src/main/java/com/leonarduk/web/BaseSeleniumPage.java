@@ -170,6 +170,10 @@ public abstract class BaseSeleniumPage extends
         try {
             final int halfASecond = 500;
             Thread.sleep(10 * halfASecond);
+            if(!SeleniumUtils.isInternetAvailable()){
+            	LOGGER.warn("no internet");
+            	waitForPageToLoad();
+            }
         }
         catch (final InterruptedException e) {
             LOGGER.info("Interrupted");

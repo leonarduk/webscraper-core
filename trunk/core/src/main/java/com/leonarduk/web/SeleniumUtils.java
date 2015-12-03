@@ -6,6 +6,9 @@ package com.leonarduk.web;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
@@ -24,6 +27,18 @@ import org.openqa.selenium.firefox.FirefoxProfile;
  */
 public final class SeleniumUtils {
 
+	public static boolean isInternetAvailable() {
+		try {
+			URI testUrl = new URI("http://google.co.uk");
+			testUrl.toURL().openConnection().connect();
+			return true;
+		} catch (URISyntaxException e) {
+		} catch (MalformedURLException e) {
+		} catch (IOException e) {
+		}
+		
+		return false;
+	}
     /**
      * Gets the download capable browser.
      *
