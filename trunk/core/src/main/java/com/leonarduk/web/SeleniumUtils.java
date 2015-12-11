@@ -99,7 +99,8 @@ public final class SeleniumUtils {
             return new FirefoxDriver(firefoxBinary, fp);
         }
 
-        return new FirefoxDriver(fp);
+        FirefoxDriver firefoxDriver = new FirefoxDriver(fp);
+		return firefoxDriver;
     }
 
     /**
