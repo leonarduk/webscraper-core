@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.leonarduk</groupId>
-	<artifactId>core</artifactId>
+	<artifactId>web-scrapercore</artifactId>
 	<version>1.5</version>
 	<name>Core</name>
 	<description>Infrastructure classes</description>
@@ -87,8 +87,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-
-	</plugins>
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
