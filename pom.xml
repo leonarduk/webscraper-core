@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.leonarduk</groupId>
-	<artifactId>web-scrapercore</artifactId>
-	<version>1.5</version>
+	<artifactId>webscraper-core</artifactId>
+	<version>1.0.0</version>
 	<name>Core</name>
 	<description>Infrastructure classes</description>
 	<url>http://leonarduk.com/maven2</url>
