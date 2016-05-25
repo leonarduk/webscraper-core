@@ -55,6 +55,17 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
+						<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.3</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
@@ -167,12 +178,6 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
-	<distributionManagement>
-		<repository>
-			<id>leonarduk-ftp</id>
-			<url>ftp://leonarduk.com/public_html/maven2</url>
-		</repository>
-	</distributionManagement>
 	<organization>
 		<name>Leonard UK Ltd</name>
 		<url>http://leonarduk.com</url>
@@ -199,5 +204,16 @@
 			<timezone>0</timezone>
 			<url>http://uk.linkedin.com/in/steveleonard/</url>
 		</developer>
-	</developers>
+	</developers><!-- to get to sona type and onto maven central -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
+			</url>
+		</repository>
+	</distributionManagement>
 </project>
