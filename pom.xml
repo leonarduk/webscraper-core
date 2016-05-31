@@ -4,7 +4,7 @@
 
 	<groupId>com.leonarduk</groupId>
 	<artifactId>webscraper-core</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<name>Core</name>
 	<description>Infrastructure classes</description>
 	<url>http://leonarduk.com/maven2</url>
@@ -71,6 +71,19 @@
 					<workingDirectory>FORK_DIRECTORY_${surefire.forkNumber}
 					</workingDirectory>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 
@@ -186,7 +199,8 @@
 		</repository>
 	</distributionManagement>
 	<scm>
-		<connection>scm:git:git@github.com:leonarduk/webscraper-core.git</connection>
+		<connection>scm:git:git@github.com:leonarduk/webscraper-core.git
+		</connection>
 		<developerConnection>scm:git:git@github.com:leonarduk/webscraper-core.git
 		</developerConnection>
 		<url>git@github.com:leonarduk/webscraper-core.git</url>
