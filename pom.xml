@@ -4,7 +4,11 @@
 
 	<groupId>com.leonarduk</groupId>
 	<artifactId>webscraper-core</artifactId>
+<<<<<<< HEAD
 	<version>1.0.3</version>
+=======
+	<version>1.0.2</version>
+>>>>>>> branch 'master' of https://github.com/leonarduk/webscraper-core.git
 	<name>Core</name>
 	<description>Infrastructure classes</description>
 	<url>http://leonarduk.com/maven2</url>
