@@ -22,7 +22,7 @@
 		<selenium.version>2.47.1</selenium.version>
 	</properties>
 	<repositories>
-	
+
 		<repository>
 			<id>central.maven.org</id>
 			<url>http://central.maven.org/maven2/</url>
@@ -45,7 +45,7 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
-						<plugin>
+			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
 				<version>1.6.3</version>
@@ -65,13 +65,15 @@
 					<reuseForks>true</reuseForks>
 					<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
 					<systemPropertyVariables>
-						<databaseSchema>MY_TEST_SCHEMA_${surefire.forkNumber}</databaseSchema>
+						<databaseSchema>MY_TEST_SCHEMA_${surefire.forkNumber}
+						</databaseSchema>
 					</systemPropertyVariables>
-					<workingDirectory>FORK_DIRECTORY_${surefire.forkNumber}</workingDirectory>
+					<workingDirectory>FORK_DIRECTORY_${surefire.forkNumber}
+					</workingDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
-		
+
 	</build>
 	<dependencies>
 		<!-- selenium -->
@@ -160,7 +162,7 @@
 		<developer>
 			<id>leonarduk</id>
 			<name>Stephen Leonard</name>
-			<email>sourceforge@leonarduk.com</email>
+			<email>github@leonarduk.com</email>
 			<roles>
 				<role>Project Manager</role>
 				<role>Architect</role>
@@ -183,4 +185,10 @@
 			</url>
 		</repository>
 	</distributionManagement>
+	<scm>
+		<connection>scm:git:git@github.com:leonarduk/webscraper-core.git</connection>
+		<developerConnection>scm:git:git@github.com:leonarduk/webscraper-core.git
+		</developerConnection>
+		<url>git@github.com:leonarduk/webscraper-core.git</url>
+	</scm>
 </project>
