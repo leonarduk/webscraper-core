@@ -85,10 +85,6 @@
 							<goal>sign</goal>
 						</goals>
 					</execution>
-					<configuration>
-					<nonsense></nonsense>
-					<homedir>
-					</homedir></configuration>
 				</executions>
 			</plugin>
 			<plugin>
