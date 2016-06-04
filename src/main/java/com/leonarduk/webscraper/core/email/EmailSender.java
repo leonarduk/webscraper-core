@@ -19,5 +19,4 @@ public interface EmailSender {
 
 	void sendMessage(String fromEmail, String fromName, String subject, String msgBody,
 	        boolean html, EmailSession session, String[] to) throws EmailException;
-
 }
