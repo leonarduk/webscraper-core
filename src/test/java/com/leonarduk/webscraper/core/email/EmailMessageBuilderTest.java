@@ -13,7 +13,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.leonarduk.webscraper.core.email.EmailMessageBuilder;
+import com.leonarduk.webscraper.core.email.impl.EmailMessageBuilderImpl;
 
 /**
  * The Class EmailMessageBuilderTest.
@@ -27,7 +27,7 @@ import com.leonarduk.webscraper.core.email.EmailMessageBuilder;
 public class EmailMessageBuilderTest {
 
     /** The builder. */
-    private EmailMessageBuilder builder;
+    private EmailMessageBuilderImpl builder;
 
     /**
      * Sets the up.
@@ -37,7 +37,7 @@ public class EmailMessageBuilderTest {
      */
     @Before
     public final void setUp() throws Exception {
-        builder = new EmailMessageBuilder();
+        builder = new EmailMessageBuilderImpl();
     }
 
     /**

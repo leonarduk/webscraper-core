@@ -1,103 +1,25 @@
 /**
- * All rights reserved. @Leonard UK Ltd.
+ * EmailMessageBuilder
+ *
+ * @author ${author}
+ * @since 04-Jun-2016
  */
 package com.leonarduk.webscraper.core.email;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-/**
- * The Class EmailMessageBuilder.
- *
- * @author Stephen Leonard
- * @version $Author: leonarduk $: Author of last commit
- * @version $Rev: $: Revision of last commit
- * @version $Date$: Date of last commit
- * @since 2 Feb 2015
- */
-public class EmailMessageBuilder {
+public interface EmailMessageBuilder {
 
-	/** The content buffer. */
-	private final StringBuilder contentBuffer;
+	void addContent(String content);
 
-	/** The sender. */
-	private String senderString;
+	void addFile(String fileName);
 
-	/** The files. */
-	private final List<String> files;
+	EmailMessage create();
 
-	/** The subject. */
-	private String subjectString;
+	void setSender(String sender);
 
-	/** The sent date. */
-	private Date sentdate;
+	void setSentDate(Date sentDate);
 
-	/**
-	 * Instantiates a new email message builder.
-	 */
-	public EmailMessageBuilder() {
-		this.contentBuffer = new StringBuilder();
-		this.files = new ArrayList<String>();
-	}
+	void setSubject(String subject);
 
-	/**
-	 * Adds the content.
-	 *
-	 * @param content
-	 *            the content
-	 */
-	public final void addContent(final String content) {
-		this.contentBuffer.append(content);
-	}
-
-	/**
-	 * Adds the file.
-	 *
-	 * @param fileName
-	 *            the file name
-	 */
-	public final void addFile(final String fileName) {
-		this.files.add(fileName);
-	}
-
-	/**
-	 * Creates the.
-	 *
-	 * @return the email message
-	 */
-	public final EmailMessage create() {
-		return new EmailMessage(this.senderString, this.sentdate, this.subjectString,
-		        this.contentBuffer.toString(), this.files);
-	}
-
-	/**
-	 * Sets the sender.
-	 *
-	 * @param sender
-	 *            the new sender
-	 */
-	public final void setSender(final String sender) {
-		this.senderString = sender;
-	}
-
-	/**
-	 * Sets the sent date.
-	 *
-	 * @param sentDate
-	 *            the new sent date
-	 */
-	public final void setSentDate(final Date sentDate) {
-		this.sentdate = sentDate;
-	}
-
-	/**
-	 * Sets the subject.
-	 *
-	 * @param subject
-	 *            the new subject
-	 */
-	public final void setSubject(final String subject) {
-		this.subjectString = subject;
-	}
 }

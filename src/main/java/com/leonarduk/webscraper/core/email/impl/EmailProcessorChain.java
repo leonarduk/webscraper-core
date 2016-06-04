@@ -1,10 +1,13 @@
 /**
  * All rights reserved. @Leonard UK Ltd.
  */
-package com.leonarduk.webscraper.core.email;
+package com.leonarduk.webscraper.core.email.impl;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import com.leonarduk.webscraper.core.email.EmailMessage;
+import com.leonarduk.webscraper.core.email.EmailProcessor;
 
 /**
  * The Class EmailProcessorChain.

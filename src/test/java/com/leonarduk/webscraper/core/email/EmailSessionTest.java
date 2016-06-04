@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.leonarduk.webscraper.core.email.EmailSession;
+import com.leonarduk.webscraper.core.email.impl.EmailSessionImpl;
 
 /**
  * The Class EmailSessionTest.
@@ -38,7 +38,7 @@ public class EmailSessionTest {
 	private String port;
 
 	/** The session. */
-	private EmailSession session;
+	private EmailSessionImpl session;
 
 	/**
 	 * Sets the up.
@@ -53,7 +53,7 @@ public class EmailSessionTest {
 		this.server = "testserver";
 		this.port = "1234";
 
-		this.session = new EmailSession(this.userName, this.password, this.server, this.port);
+		this.session = new EmailSessionImpl(this.userName, this.password, this.server, this.port);
 	}
 
 	/**
@@ -76,12 +76,12 @@ public class EmailSessionTest {
 	public final void testGetSession() throws Exception {
 		final Session localSession = this.session.getSession();
 		Assert.assertNotNull(localSession);
-		Assert.assertEquals(this.server, localSession.getProperty(EmailSession.MAIL_SMTP_HOST));
+		Assert.assertEquals(this.server, localSession.getProperty(EmailSessionImpl.MAIL_SMTP_HOST));
 		Assert.assertEquals(this.port,
-		        localSession.getProperty(EmailSession.MAIL_SMTP_SOCKET_FACTORY_PORT));
-		Assert.assertEquals(this.userName, localSession.getProperty(EmailSession.MAIL_STMP_USER));
+		        localSession.getProperty(EmailSessionImpl.MAIL_SMTP_SOCKET_FACTORY_PORT));
+		Assert.assertEquals(this.userName, localSession.getProperty(EmailSessionImpl.MAIL_STMP_USER));
 		Assert.assertEquals(this.password,
-		        localSession.getProperty(EmailSession.MAIL_SMTP_PASSWORD));
+		        localSession.getProperty(EmailSessionImpl.MAIL_SMTP_PASSWORD));
 
 	}
 }

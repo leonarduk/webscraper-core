@@ -1,9 +1,12 @@
 /**
  * All rights reserved. @Leonard UK Ltd.
  */
-package com.leonarduk.webscraper.core.email;
+package com.leonarduk.webscraper.core.email.impl;
 
 import org.apache.log4j.Logger;
+
+import com.leonarduk.webscraper.core.email.EmailMessage;
+import com.leonarduk.webscraper.core.email.EmailProcessor;
 
 /**
  * The Class SimplePrintEmailProcessor.

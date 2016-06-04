@@ -8,7 +8,7 @@ import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
 import com.leonarduk.webscraper.core.email.EmailMessage;
-import com.leonarduk.webscraper.core.email.SimplePrintEmailProcessor;
+import com.leonarduk.webscraper.core.email.impl.SimplePrintEmailProcessor;
 
 /**
  * The Class SimplePrintEmailProcessorTest.
