@@ -34,7 +34,7 @@ import com.leonarduk.webscraper.core.email.impl.EmailSessionImpl;
 public class EmailSenderTest {
 
 	/** The sender. */
-	private EmailSender sender;
+	private EmailSenderImpl sender;
 
 	/** The from email. */
 	private String fromEmail;

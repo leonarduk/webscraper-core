@@ -99,6 +99,7 @@ public class EmailSenderImpl implements EmailSender {
 	public final void sendMessage(final String fromEmail, final String fromName,
 	        final String subject, final String msgBody, final boolean html,
 	        final EmailSession session, final String... to) throws EmailException {
+
 		try {
 			EmailSenderImpl.logger
 			        .info("sendMessage: from " + fromEmail + " to " + Arrays.asList(to));
