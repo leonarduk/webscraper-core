@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * The Class Config.
  *
@@ -39,17 +41,17 @@ public class Config {
 	 */
 	public Config(final String propFileName) throws IOException {
 		this();
-		final InputStream inputStream = this.getClass().getClassLoader()
-				.getResourceAsStream(propFileName);
+		try (final InputStream inputStream = this.getClass().getClassLoader()
+		        .getResourceAsStream(propFileName);) {
 
-		if (inputStream != null) {
-			this.props.load(inputStream);
+			if (inputStream != null) {
+				this.props.load(inputStream);
+			}
+			else {
+				throw new FileNotFoundException(
+				        "property file '" + propFileName + "' not found in the classpath");
+			}
 		}
-		else {
-			throw new FileNotFoundException("property file '" + propFileName
-					+ "' not found in the classpath");
-		}
-
 	}
 
 	/**
@@ -79,7 +81,7 @@ public class Config {
 		if (null == value) {
 			return false;
 		}
-		return Boolean.valueOf(value);
+		return Boolean.valueOf(value).booleanValue();
 	}
 
 	/**
@@ -120,6 +122,10 @@ public class Config {
 	 * @return the property
 	 */
 	public final String getProperty(final String fieldName) {
+		final String property = System.getProperty(fieldName);
+		if (StringUtils.isNotEmpty(property)) {
+			return property;
+		}
 		return this.props.getProperty(fieldName);
 	}
 
