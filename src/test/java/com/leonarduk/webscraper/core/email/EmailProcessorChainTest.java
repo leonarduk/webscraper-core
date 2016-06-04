@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import com.leonarduk.webscraper.core.email.EmailMessage;
 import com.leonarduk.webscraper.core.email.EmailProcessor;
-import com.leonarduk.webscraper.core.email.EmailProcessorChain;
+import com.leonarduk.webscraper.core.email.impl.EmailProcessorChain;
 
 /**
  * The Class EmailProcessorChainTest.

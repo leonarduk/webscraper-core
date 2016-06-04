@@ -16,8 +16,8 @@ import org.powermock.api.support.membermodification.MemberModifier;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.leonarduk.webscraper.core.email.EmailSender;
-import com.leonarduk.webscraper.core.email.EmailSession;
+import com.leonarduk.webscraper.core.email.impl.EmailSenderImpl;
+import com.leonarduk.webscraper.core.email.impl.EmailSessionImpl;
 
 /**
  * The Class EmailSenderTest.
@@ -34,7 +34,7 @@ import com.leonarduk.webscraper.core.email.EmailSession;
 public class EmailSenderTest {
 
 	/** The sender. */
-	private EmailSender sender;
+	private EmailSenderImpl sender;
 
 	/** The from email. */
 	private String fromEmail;
@@ -56,7 +56,7 @@ public class EmailSenderTest {
 	 */
 	@Before
 	public final void setUp() {
-		this.sender = new EmailSender();
+		this.sender = new EmailSenderImpl();
 		this.to = new String[] { "test1@localhost", "test2@localhost" };
 		this.fromEmail = "testsender@test";
 		this.fromName = "Test Sender";
@@ -72,7 +72,7 @@ public class EmailSenderTest {
 	 */
 	@Test
 	public final void testCreateMessage() throws Exception {
-		final EmailSession session = Mockito.mock(EmailSession.class);
+		final EmailSessionImpl session = Mockito.mock(EmailSessionImpl.class);
 		final boolean html = true;
 		final Message message = this.sender.createMessage(this.fromEmail, this.fromName,
 				this.subject, this.msgBody, html, session, this.to);
@@ -87,7 +87,7 @@ public class EmailSenderTest {
 	 */
 	@Test
 	public final void testSendMessage() throws Exception {
-		final EmailSession session = Mockito.mock(EmailSession.class);
+		final EmailSessionImpl session = Mockito.mock(EmailSessionImpl.class);
 		MemberModifier.suppress(MemberMatcher.method(Transport.class, "send", Message.class));
 
 		this.sender.sendMessage(this.fromEmail, this.fromName, this.subject, this.msgBody, true,
