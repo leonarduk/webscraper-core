@@ -4,7 +4,7 @@
 
 	<groupId>com.leonarduk</groupId>
 	<artifactId>webscraper-core</artifactId>
-	<version>1.0.8-SNAPSHOT</version> 
+	<version>1.0.8-SNAPSHOT</version>
 	<name>Core</name>
 	<description>Infrastructure classes</description>
 	<url>http://leonarduk.com/maven2</url>
@@ -20,6 +20,7 @@
 		<mockito.version>1.9.5</mockito.version>
 		<javax.mail.version>1.4</javax.mail.version>
 		<selenium.version>2.47.1</selenium.version>
+		<jacoco.version>0.7.6.201602180812</jacoco.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -97,6 +98,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 	<profiles>
@@ -192,6 +213,12 @@
 			<artifactId>slf4j-simple</artifactId>
 			<version>1.6.4</version>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>${jacoco.version}</version>
+			<type>maven-plugin</type>
 		</dependency>
 	</dependencies>
 	<organization>
