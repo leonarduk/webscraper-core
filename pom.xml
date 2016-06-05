@@ -22,7 +22,6 @@
 		<selenium.version>2.47.1</selenium.version>
 	</properties>
 	<repositories>
-
 		<repository>
 			<id>central.maven.org</id>
 			<url>http://central.maven.org/maven2/</url>
