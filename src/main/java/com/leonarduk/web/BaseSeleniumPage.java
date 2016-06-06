@@ -18,11 +18,16 @@ import org.openqa.selenium.support.ui.LoadableComponent;
  * @author stephen
  * @version $Author: $: Author of last commit
  * @version $Rev: $: Revision of last commit
- * @version $Date$: Date of last
- *          commit
+ * @version $Date$: Date of last commit
  * @since 18 Feb 2015
  */
 public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPage> {
+	/** The Constant ONE_SECOND_IN_MS. */
+	public static final int ONE_SECOND_IN_MS = 1000;
+
+	/** The Constant LOGGER. */
+	private static final Logger LOGGER = Logger.getLogger(BaseSeleniumPage.class);
+
 	/** The web driver. */
 	private final WebDriver webdriver;
 
@@ -30,11 +35,21 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 
 	private boolean acceptNextAlert = true;
 
-	/** The Constant ONE_SECOND_IN_MS. */
-	public static final int ONE_SECOND_IN_MS = 1000;
-
-	/** The Constant LOGGER. */
-	static final Logger LOGGER = Logger.getLogger(BaseSeleniumPage.class);
+	public static void waitForPageToLoad(final WebDriver webDriver2) {
+		try {
+			final int halfASecond = 500;
+			Thread.sleep(10 * halfASecond);
+			if (!SeleniumUtils.isInternetAvailable()) {
+				BaseSeleniumPage.LOGGER
+				        .warn("no internet - can't load " + webDriver2.getCurrentUrl());
+				BaseSeleniumPage.waitForPageToLoad(webDriver2);
+				webDriver2.get(webDriver2.getCurrentUrl());
+			}
+		}
+		catch (final InterruptedException e) {
+			BaseSeleniumPage.LOGGER.info("Interrupted");
+		}
+	}
 
 	/**
 	 * Instantiates a new base selenium page.
@@ -51,15 +66,6 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	}
 
 	/**
-	 * Gets the expected url.
-	 *
-	 * @return the expected url
-	 */
-	public final String getExpectedUrl() {
-		return expectedUrl;
-	}
-
-	/**
 	 * Click field.
 	 *
 	 * @param xpath
@@ -67,6 +73,23 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 */
 	protected final void clickField(final String xpath) {
 		this.findElementByXpath(xpath).click();
+	}
+
+	public String closeAlertAndGetItsText() {
+		try {
+			final Alert alert = this.getWebDriver().switchTo().alert();
+			final String alertText = alert.getText();
+			if (this.acceptNextAlert) {
+				alert.accept();
+			}
+			else {
+				alert.dismiss();
+			}
+			return alertText;
+		}
+		finally {
+			this.acceptNextAlert = true;
+		}
 	}
 
 	/**
@@ -103,12 +126,53 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	}
 
 	/**
+	 * Gets the expected url.
+	 *
+	 * @return the expected url
+	 */
+	public final String getExpectedUrl() {
+		return this.expectedUrl;
+	}
+
+	/**
 	 * Gets the web driver.
 	 *
 	 * @return the web driver
 	 */
 	public final WebDriver getWebDriver() {
 		return this.webdriver;
+	}
+
+	public boolean isAlertPresent() {
+		try {
+			this.getWebDriver().switchTo().alert();
+			return true;
+		}
+		catch (final NoAlertPresentException e) {
+			return false;
+		}
+	}
+
+	public boolean isElementPresent(final By by) {
+		try {
+			this.getWebDriver().findElement(by);
+			return true;
+		}
+		catch (final NoSuchElementException e) {
+			return false;
+		}
+	}
+
+	@Override
+	protected final void isLoaded() {
+		if (!this.getWebDriver().getCurrentUrl().equals(this.expectedUrl)) {
+			this.load();
+		}
+		final String url = this.getWebDriver().getCurrentUrl();
+		if (!url.startsWith(this.expectedUrl)) {
+			throw new RuntimeException(this.expectedUrl + " is  not loaded. Instead is " + url);
+		}
+
 	}
 
 	/**
@@ -122,70 +186,11 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 		return Integer.valueOf(password2.replaceAll("\\D+", ""));
 	}
 
-	public boolean isElementPresent(By by) {
-		try {
-			this.getWebDriver().findElement(by);
-			return true;
-		} catch (NoSuchElementException e) {
-			return false;
-		}
-	}
-
-	public boolean isAlertPresent() {
-		try {
-			this.getWebDriver().switchTo().alert();
-			return true;
-		} catch (NoAlertPresentException e) {
-			return false;
-		}
-	}
-
-	public String closeAlertAndGetItsText() {
-		try {
-			Alert alert = this.getWebDriver().switchTo().alert();
-			String alertText = alert.getText();
-			if (acceptNextAlert) {
-				alert.accept();
-			} else {
-				alert.dismiss();
-			}
-			return alertText;
-		} finally {
-			acceptNextAlert = true;
-		}
-	}
-
 	/**
 	 * Wait for page to load.
 	 */
 	public final void waitForPageToLoad() {
-		WebDriver webDriver2 = getWebDriver();
-		waitForPageToLoad(webDriver2);
-	}
-
-	public static void waitForPageToLoad(WebDriver webDriver2) {
-		try {
-			final int halfASecond = 500;
-			Thread.sleep(10 * halfASecond);
-			if (!SeleniumUtils.isInternetAvailable()) {
-				LOGGER.warn("no internet - can't load " + webDriver2.getCurrentUrl());
-				waitForPageToLoad(webDriver2);
-				webDriver2.get(webDriver2.getCurrentUrl());
-			}
-		} catch (final InterruptedException e) {
-			LOGGER.info("Interrupted");
-		}
-	}
-
-	@Override
-	protected final void isLoaded() {
-		if (!this.getWebDriver().getCurrentUrl().equals(this.expectedUrl)) {
-			this.load();
-		}
-		String url = this.getWebDriver().getCurrentUrl();
-		if (!url.startsWith(this.expectedUrl)) {
-			throw new RuntimeException(this.expectedUrl + " is  not loaded. Instead is " + url);
-		}
-
+		final WebDriver webDriver2 = this.getWebDriver();
+		BaseSeleniumPage.waitForPageToLoad(webDriver2);
 	}
 }
