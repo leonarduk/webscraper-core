@@ -8,49 +8,51 @@ package com.leonarduk.webscraper.core.format;
  */
 public interface Formatter {
 
-    /**
-     * Format header.
-     *
-     * @param header
-     *            the header
-     * @return the string
-     */
-    String formatHeader(String header);
+	String formatBody(String text);
 
-    /**
-     * Format link.
-     *
-     * @param link
-     *            the link
-     * @param name
-     *            the name
-     * @return the string
-     */
-    String formatLink(String link, String name);
+	/**
+	 * Format header.
+	 *
+	 * @param header
+	 *            the header
+	 * @return the string
+	 */
+	String formatHeader(String header);
 
-    /**
-     * Format sub header.
-     *
-     * @param header
-     *            the header
-     * @return the string
-     */
-    String formatSubHeader(String header);
+	/**
+	 * Format link.
+	 *
+	 * @param link
+	 *            the link
+	 * @param name
+	 *            the name
+	 * @return the string
+	 */
+	String formatLink(String link, String name);
 
-    /**
-     * Gets the new line.
-     *
-     * @return the new line
-     */
-    String getNewLine();
+	String formatSmall(String note);
 
-    /**
-     * Gets the new section.
-     *
-     * @return the new section
-     */
-    String getNewSection();
+	/**
+	 * Format sub header.
+	 *
+	 * @param header
+	 *            the header
+	 * @return the string
+	 */
+	String formatSubHeader(String header);
 
-    String formatBody(String text);
+	/**
+	 * Gets the new line.
+	 *
+	 * @return the new line
+	 */
+	String getNewLine();
+
+	/**
+	 * Gets the new section.
+	 *
+	 * @return the new section
+	 */
+	String getNewSection();
 
 }
