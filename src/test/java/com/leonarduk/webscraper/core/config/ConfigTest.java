@@ -167,6 +167,39 @@ public class ConfigTest {
 		Assert.assertEquals("eggs and bacon", this.config.getProperty(fieldName));
 	}
 
+	@Test
+	public final void testSetArrayProperty() {
+		final String[] value = { "specificValue", "anotherValue" };
+		final String key = "Random";
+		this.config.setArrayProperty(key, value);
+		Assert.assertArrayEquals(value, this.config.getArrayProperty(key));
+	}
+
+	@Test
+	public final void testSetBooleanProperty() {
+		final boolean value = true;
+		final String key = "Random";
+		this.config.setBooleanProperty(key, value);
+		Assert.assertEquals(Boolean.valueOf(value),
+		        Boolean.valueOf(this.config.getBooleanProperty(key)));
+	}
+
+	@Test
+	public final void testSetDoubleProperty() {
+		final double value = 123.12;
+		final String key = "Random";
+		this.config.setDoubleProperty(key, value);
+		Assert.assertEquals(Double.valueOf(value), this.config.getDoubleProperty(key));
+	}
+
+	@Test
+	public final void testSetIntegerProperty() {
+		final int value = 123;
+		final String key = "Random";
+		this.config.setIntegerProperty(key, value);
+		Assert.assertEquals(Integer.valueOf(value), this.config.getIntegerProperty(key));
+	}
+
 	/**
 	 * Test set property.
 	 */
