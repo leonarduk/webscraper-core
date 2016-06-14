@@ -10,6 +10,8 @@ import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Joiner;
+
 /**
  * The Class Config.
  *
@@ -129,6 +131,22 @@ public class Config {
 		return this.props.getProperty(fieldName);
 	}
 
+	public final void setArrayProperty(final String fieldName, final String[] value) {
+		this.props.setProperty(fieldName, Joiner.on(",").join(value));
+	}
+
+	public final void setBooleanProperty(final String fieldName, final boolean value) {
+		this.props.setProperty(fieldName, String.valueOf(value));
+	}
+
+	public final void setDoubleProperty(final String fieldName, final double value) {
+		this.props.setProperty(fieldName, String.valueOf(value));
+	}
+
+	public final void setIntegerProperty(final String fieldName, final int value) {
+		this.props.setProperty(fieldName, String.valueOf(value));
+	}
+
 	/**
 	 * Sets the property.
 	 *
@@ -140,4 +158,5 @@ public class Config {
 	public final void setProperty(final String fieldName, final String value) {
 		this.props.setProperty(fieldName, value);
 	}
+
 }
