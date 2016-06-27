@@ -5,7 +5,6 @@ package com.leonarduk.web;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -13,7 +12,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -64,6 +62,7 @@ public class BaseSeleniumPageTest {
 
 			@Override
 			protected void load() {
+				//
 			}
 		};
 
@@ -89,7 +88,13 @@ public class BaseSeleniumPageTest {
 	 */
 	@Test
 	public final void testClickField() {
-		this.testClass.clickField(this.xpath);
+		try {
+			this.testClass.clickField(this.xpath);
+		}
+		catch (final NoSuchElementException e) {
+			System.out.println(e);
+			Assert.fail("Should not get this error");
+		}
 	}
 
 	/**
@@ -97,8 +102,14 @@ public class BaseSeleniumPageTest {
 	 */
 	@Test
 	public final void testEnterValueIntoField() {
-		final String xpathString = "xpath";
-		this.testClass.enterValueIntoField("test", xpathString);
+		try {
+			final String xpathString = "xpath";
+			this.testClass.enterValueIntoField("test", xpathString);
+		}
+		catch (final NoSuchElementException e) {
+			System.out.println(e);
+			Assert.fail("Should not get this error");
+		}
 	}
 
 	/**
@@ -137,28 +148,4 @@ public class BaseSeleniumPageTest {
 		Assert.assertEquals(expected, this.testClass.keepNumberOnly("234dsf"));
 	}
 
-	/**
-	 * Test wait for page to load.
-	 */
-	@Test
-	@Ignore
-	public final void testWaitForPageToLoad() {
-		this.testClass.waitForPageToLoad();
-	}
-
-	/**
-	 * Test wait for page to load interrupted.
-	 *
-	 * @throws Exception
-	 *             the exception
-	 */
-	@Test
-	@Ignore
-	public final void testWaitForPageToLoadInterrupted() throws Exception {
-		PowerMockito.mockStatic(Thread.class);
-		PowerMockito.doThrow(new InterruptedException()).when(Thread.class,
-		        Thread.class.getDeclaredMethod("sleep", Long.class));
-
-		this.testClass.waitForPageToLoad();
-	}
 }

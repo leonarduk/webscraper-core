@@ -34,14 +34,7 @@ import com.leonarduk.webscraper.core.email.ServerType;
  */
 public class EmailReaderImpl implements EmailReader {
 	/** The Constant LOGGER. */
-	static final Logger LOGGER = Logger.getLogger(EmailReader.class);
-
-	// Constructor Call
-	/**
-	 * Instantiates a new email reader.
-	 */
-	public EmailReaderImpl() {
-	}
+	private static final Logger LOGGER = Logger.getLogger(EmailReader.class);
 
 	/**
 	 * Process mail.

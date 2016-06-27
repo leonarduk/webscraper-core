@@ -90,7 +90,12 @@ public class EmailSenderTest {
 		final EmailSessionImpl session = Mockito.mock(EmailSessionImpl.class);
 		MemberModifier.suppress(MemberMatcher.method(Transport.class, "send", Message.class));
 
-		this.sender.sendMessage(this.fromEmail, this.fromName, this.subject, this.msgBody, true,
-		        session, this.to);
+		try {
+			this.sender.sendMessage(this.fromEmail, this.fromName, this.subject, this.msgBody, true,
+			        session, this.to);
+		}
+		catch (final Exception e) {
+			Assert.fail("Caught exception");
+		}
 	}
 }
