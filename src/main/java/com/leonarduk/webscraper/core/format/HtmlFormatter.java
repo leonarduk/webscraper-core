@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
  * @since 28 Jan 2015
  */
 public class HtmlFormatter implements Formatter {
-	static final Logger LOGGER = Logger.getLogger(HtmlFormatter.class);
+	private static final Logger LOGGER = Logger.getLogger(HtmlFormatter.class);
 
 	/**
 	 * Creates the node.
