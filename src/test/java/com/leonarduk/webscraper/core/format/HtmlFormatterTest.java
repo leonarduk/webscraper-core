@@ -20,7 +20,7 @@ import org.junit.Test;
  */
 public class HtmlFormatterTest {
 
-	HtmlFormatter formatter;
+	private HtmlFormatter formatter;
 
 	/**
 	 * @throws java.lang.Exception

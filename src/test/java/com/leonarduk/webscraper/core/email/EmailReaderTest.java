@@ -124,8 +124,12 @@ public class EmailReaderTest {
 		Mockito.when(Session.getDefaultInstance(System.getProperties(), null))
 		        .thenReturn(mockSession);
 
-		this.reader.processMail(this.server, this.userName, this.password, this.serverType,
-		        this.attachmentsDirectory, this.emailProcessor);
+		try {
+			this.reader.processMail(this.server, this.userName, this.password, this.serverType,
+			        this.attachmentsDirectory, this.emailProcessor);
+		}
+		catch (final Exception e) {
+			Assert.fail("Caught exception");
+		}
 	}
-
 }

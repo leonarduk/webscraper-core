@@ -20,11 +20,11 @@ import com.leonarduk.webscraper.core.email.EmailProcessor;
 public class SimplePrintEmailProcessor implements EmailProcessor {
 
 	/** The Constant LOGGER. */
-	static final Logger LOGGER = Logger.getLogger(SimplePrintEmailProcessor.class);
+	private static final Logger LOGGER = Logger.getLogger(SimplePrintEmailProcessor.class);
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.leonarduk.core.email.EmailProcessor#process(com.leonarduk.core.email.EmailMessage)
 	 */
 	@Override

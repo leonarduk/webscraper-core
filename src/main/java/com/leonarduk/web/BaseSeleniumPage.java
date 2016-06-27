@@ -12,6 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.LoadableComponent;
 
+import com.thoughtworks.selenium.SeleniumException;
+
 /**
  * The Class BaseSeleniumPage.
  *
@@ -170,7 +172,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 		}
 		final String url = this.getWebDriver().getCurrentUrl();
 		if (!url.startsWith(this.expectedUrl)) {
-			throw new RuntimeException(this.expectedUrl + " is  not loaded. Instead is " + url);
+			throw new SeleniumException(this.expectedUrl + " is  not loaded. Instead is " + url);
 		}
 
 	}
