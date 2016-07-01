@@ -23,7 +23,8 @@ import com.thoughtworks.selenium.SeleniumException;
  * @version $Date$: Date of last commit
  * @since 18 Feb 2015
  */
-public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPage> {
+public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPage>
+        implements AutoCloseable {
 	/** The Constant ONE_SECOND_IN_MS. */
 	public static final int ONE_SECOND_IN_MS = 1000;
 
@@ -75,6 +76,11 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 */
 	protected final void clickField(final String xpath) {
 		this.findElementByXpath(xpath).click();
+	}
+
+	@Override
+	public void close() throws Exception {
+		this.getWebDriver().close();
 	}
 
 	public String closeAlertAndGetItsText() {
