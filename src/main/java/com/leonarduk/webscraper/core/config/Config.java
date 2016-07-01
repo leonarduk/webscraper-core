@@ -33,6 +33,10 @@ public class Config {
 		this.props = new Properties();
 	}
 
+	public Config(final Properties properties) {
+		this.props = properties;
+	}
+
 	/**
 	 * Instantiates a new config.
 	 *

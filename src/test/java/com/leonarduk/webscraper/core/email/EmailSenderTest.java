@@ -18,6 +18,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.leonarduk.webscraper.core.email.impl.EmailSenderImpl;
 import com.leonarduk.webscraper.core.email.impl.EmailSessionImpl;
+import com.leonarduk.webscraper.core.format.Formatter;
+import com.leonarduk.webscraper.core.format.HtmlFormatter;
 
 /**
  * The Class EmailSenderTest.
@@ -51,6 +53,8 @@ public class EmailSenderTest {
 	/** The to. */
 	private String[] to;
 
+	private Formatter formatter;
+
 	/**
 	 * Sets the up.
 	 */
@@ -61,7 +65,8 @@ public class EmailSenderTest {
 		this.fromEmail = "testsender@test";
 		this.fromName = "Test Sender";
 		this.subject = "Test subject";
-
+		this.formatter = new HtmlFormatter();
+		this.msgBody = this.formatter.formatHeader("test message contents");
 	}
 
 	/**
@@ -73,10 +78,12 @@ public class EmailSenderTest {
 	@Test
 	public final void testCreateMessage() throws Exception {
 		final EmailSessionImpl session = Mockito.mock(EmailSessionImpl.class);
-		final boolean html = true;
+
 		final Message message = this.sender.createMessage(this.fromEmail, this.fromName,
-		        this.subject, this.msgBody, html, session, this.to);
+		        this.subject, this.msgBody, this.formatter, session, this.to);
 		Assert.assertNotNull(message);
+		Assert.assertEquals("<html><body><h1>test message contents</h1></body></html>",
+		        message.getContent());
 	}
 
 	/**
@@ -91,11 +98,12 @@ public class EmailSenderTest {
 		MemberModifier.suppress(MemberMatcher.method(Transport.class, "send", Message.class));
 
 		try {
-			this.sender.sendMessage(this.fromEmail, this.fromName, this.subject, this.msgBody, true,
-			        session, this.to);
+			this.sender.sendMessage(this.fromEmail, this.fromName, this.subject, this.msgBody,
+			        this.formatter, session, this.to);
 		}
 		catch (final Exception e) {
 			Assert.fail("Caught exception");
 		}
 	}
+
 }

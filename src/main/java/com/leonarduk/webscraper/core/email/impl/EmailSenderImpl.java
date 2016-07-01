@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 import com.leonarduk.webscraper.core.email.EmailException;
 import com.leonarduk.webscraper.core.email.EmailSender;
 import com.leonarduk.webscraper.core.email.EmailSession;
+import com.leonarduk.webscraper.core.format.Formatter;
 
 /**
  * The Class EmailSender.
@@ -53,7 +54,7 @@ public class EmailSenderImpl implements EmailSender {
 	 */
 	@Override
 	public final Message createMessage(final String fromEmail, final String fromName,
-	        final String subject, final String msgBody, final boolean html,
+	        final String subject, final String msgBody, final Formatter formatter,
 	        final EmailSession session, final String... to)
 	                throws MessagingException, UnsupportedEncodingException {
 		final Message msg = new MimeMessage(session.getSession());
@@ -66,8 +67,15 @@ public class EmailSenderImpl implements EmailSender {
 		msg.setFrom(new InternetAddress(fromEmail, fromName));
 		msg.setSentDate(new Date());
 		msg.setSubject(subject);
-		if (html) {
-			msg.setContent(msgBody, "text/html");
+		if (formatter.isHtml()) {
+			final StringBuilder buf = new StringBuilder();
+
+			buf.append(formatter.startFile());
+			buf.append(msgBody);
+			buf.append(formatter.endFile());
+
+			msg.setContent(buf.toString(), "text/html");
+
 		}
 		else {
 			msg.setText(msgBody);
@@ -97,14 +105,14 @@ public class EmailSenderImpl implements EmailSender {
 	 */
 	@Override
 	public final void sendMessage(final String fromEmail, final String fromName,
-	        final String subject, final String msgBody, final boolean html,
+	        final String subject, final String msgBody, final Formatter formatter,
 	        final EmailSession session, final String... to) throws EmailException {
 
 		try {
 			EmailSenderImpl.logger
 			        .info("sendMessage: from " + fromEmail + " to " + Arrays.asList(to));
 			EmailSenderImpl.logger.debug("Text\n" + msgBody);
-			final Message msg = this.createMessage(fromEmail, fromName, subject, msgBody, html,
+			final Message msg = this.createMessage(fromEmail, fromName, subject, msgBody, formatter,
 			        session, to);
 
 			Transport.send(msg);
