@@ -29,29 +29,6 @@ public class EmailSenderImpl implements EmailSender {
 	/** The logger. */
 	private static Logger logger = Logger.getLogger(EmailSenderImpl.class);
 
-	/**
-	 * Creates the message.
-	 *
-	 * @param fromEmail
-	 *            the from email
-	 * @param fromName
-	 *            the from name
-	 * @param subject
-	 *            the subject
-	 * @param msgBody
-	 *            the msg body
-	 * @param html
-	 *            the html
-	 * @param session
-	 *            the session
-	 * @param to
-	 *            the to
-	 * @return the message
-	 * @throws MessagingException
-	 *             the messaging exception
-	 * @throws UnsupportedEncodingException
-	 *             the unsupported encoding exception
-	 */
 	@Override
 	public final Message createMessage(final String fromEmail, final String fromName,
 	        final String subject, final String msgBody, final Formatter formatter,
@@ -83,26 +60,6 @@ public class EmailSenderImpl implements EmailSender {
 		return msg;
 	}
 
-	/**
-	 * Send message.
-	 *
-	 * @param fromEmail
-	 *            the from email
-	 * @param fromName
-	 *            the from name
-	 * @param subject
-	 *            the subject
-	 * @param msgBody
-	 *            the msg body
-	 * @param html
-	 *            the html
-	 * @param session
-	 *            the session
-	 * @param to
-	 *            the to
-	 * @throws EmailException
-	 *             the email exception
-	 */
 	@Override
 	public final void sendMessage(final String fromEmail, final String fromName,
 	        final String subject, final String msgBody, final Formatter formatter,
