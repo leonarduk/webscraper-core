@@ -11,12 +11,14 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
+import com.leonarduk.webscraper.core.format.Formatter;
+
 public interface EmailSender {
 
 	Message createMessage(String fromEmail, String fromName, String subject, String msgBody,
-	        boolean html, EmailSession session, String[] to)
+	        Formatter formatter, EmailSession session, String[] to)
 	                throws MessagingException, UnsupportedEncodingException;
 
 	void sendMessage(String fromEmail, String fromName, String subject, String msgBody,
-	        boolean html, EmailSession session, String[] to) throws EmailException;
+	        Formatter formatter, EmailSession session, String[] to) throws EmailException;
 }

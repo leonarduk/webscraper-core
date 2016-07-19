@@ -8,6 +8,8 @@ package com.leonarduk.webscraper.core.format;
  */
 public interface Formatter {
 
+	String endFile();
+
 	String formatBody(String text);
 
 	/**
@@ -54,5 +56,9 @@ public interface Formatter {
 	 * @return the new section
 	 */
 	String getNewSection();
+
+	boolean isHtml();
+
+	String startFile();
 
 }

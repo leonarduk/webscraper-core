@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.leonarduk.webscraper.core.config;
 
 import java.io.FileNotFoundException;

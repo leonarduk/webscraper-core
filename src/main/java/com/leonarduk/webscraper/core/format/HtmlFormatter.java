@@ -37,6 +37,11 @@ public class HtmlFormatter implements Formatter {
 	}
 
 	@Override
+	public String endFile() {
+		return new StringBuilder("</body></html>").toString();
+	}
+
+	@Override
 	public String formatBody(final String text) {
 		HtmlFormatter.LOGGER.info("Format: " + text);
 		return text.replaceAll("\n", this.getNewLine());
@@ -98,5 +103,15 @@ public class HtmlFormatter implements Formatter {
 	@Override
 	public final String getNewSection() {
 		return "<hr/>";
+	}
+
+	@Override
+	public boolean isHtml() {
+		return true;
+	}
+
+	@Override
+	public String startFile() {
+		return new StringBuilder("<html><body>").toString();
 	}
 }
