@@ -4,13 +4,11 @@
 
 	<groupId>com.leonarduk</groupId>
 	<artifactId>webscraper-core</artifactId>
-	<version>1.0.12</version>
+	<version>1.0.13</version>
 	<name>Core</name>
 	<description>Infrastructure classes</description>
 	<url>http://leonarduk.com/maven2</url>
-	<prerequisites>
-		<maven>2.2.1</maven>
-	</prerequisites>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<log4j.version>1.2.17</log4j.version>
@@ -24,6 +22,10 @@
 	</properties>
 	<repositories>
 		<repository>
+			<id>sonatype</id>
+			<url>https://oss.sonatype.org/content/groups/public</url>
+		</repository>
+		<repository>
 			<id>central.maven.org</id>
 			<url>http://central.maven.org/maven2/</url>
 		</repository>
@@ -31,7 +33,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<plugins>
-		<plugin>
+			<plugin>
 				<!-- run the integration tests -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -242,6 +244,11 @@
 			<version>${jacoco.version}</version>
 			<type>maven-plugin</type>
 		</dependency>
+		<dependency>
+			<groupId>org.htmlparser</groupId>
+			<artifactId>htmlparser</artifactId>
+			<version>2.1</version>
+		</dependency>
 	</dependencies>
 	<organization>
 		<name>Leonard UK Ltd</name>
@@ -254,7 +261,7 @@
 			<url>http://www.spdx.org/licenses/GPL-3.0+</url>
 		</license>
 	</licenses>
-	
+
 	<developers>
 		<developer>
 			<id>leonarduk</id>
