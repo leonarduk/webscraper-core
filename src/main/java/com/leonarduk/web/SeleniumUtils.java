@@ -6,7 +6,6 @@ package com.leonarduk.web;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -16,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -31,12 +31,11 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  */
 public final class SeleniumUtils {
 
-	public static WebDriver getChrome(final File downloadFilepath, final boolean runInBackground)
-	        throws IOException {
+	public static WebDriver getChrome(final File downloadFilepath) {
 		System.setProperty("webdriver.chrome.driver",
 		        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe");
 		final HashMap<String, Object> chromePrefs = new HashMap<>();
-		chromePrefs.put("profile.default_content_settings.popups", 0);
+		chromePrefs.put("profile.default_content_settings.popups", Integer.valueOf(0));
 		chromePrefs.put("download.default_directory", downloadFilepath);
 		final ChromeOptions options = new ChromeOptions();
 		final HashMap<String, Object> chromeOptionsMap = new HashMap<>();
@@ -140,7 +139,11 @@ public final class SeleniumUtils {
 			final FirefoxBinary firefoxBinary = new FirefoxBinary();
 			firefoxBinary.setEnvironmentProperty("DISPLAY", xport);
 
-			return new FirefoxDriver(firefoxBinary, fp);
+			final FirefoxOptions options = new FirefoxOptions();
+			options.setBinary(firefoxBinary);
+			options.setProfile(fp);
+			final FirefoxDriver firefoxDriver = new FirefoxDriver(options);
+			return firefoxDriver;
 		}
 
 		final FirefoxDriver firefoxDriver = new FirefoxDriver(fp);
@@ -153,14 +156,9 @@ public final class SeleniumUtils {
 			testUrl.toURL().openConnection().connect();
 			return true;
 		}
-		catch (final URISyntaxException e) {
+		catch (@SuppressWarnings("unused") URISyntaxException | IOException e) {
+			return false;
 		}
-		catch (final MalformedURLException e) {
-		}
-		catch (final IOException e) {
-		}
-
-		return false;
 	}
 
 	/**

@@ -16,9 +16,9 @@ import com.leonarduk.webscraper.core.format.Formatter;
 public interface EmailSender {
 
 	Message createMessage(String fromEmail, String fromName, String subject, String msgBody,
-	        Formatter formatter, EmailSession session, String[] to)
-	                throws MessagingException, UnsupportedEncodingException;
+	        Formatter formatter, EmailSession session, String... to)
+	        throws MessagingException, UnsupportedEncodingException;
 
 	void sendMessage(String fromEmail, String fromName, String subject, String msgBody,
-	        Formatter formatter, EmailSession session, String[] to) throws EmailException;
+	        Formatter formatter, EmailSession session, String... to) throws EmailException;
 }
