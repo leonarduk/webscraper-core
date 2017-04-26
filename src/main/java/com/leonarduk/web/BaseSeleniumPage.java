@@ -12,8 +12,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.LoadableComponent;
 
-import com.thoughtworks.selenium.SeleniumException;
-
 /**
  * The Class BaseSeleniumPage.
  *
@@ -26,17 +24,17 @@ import com.thoughtworks.selenium.SeleniumException;
 public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPage>
         implements AutoCloseable {
 	/** The Constant ONE_SECOND_IN_MS. */
-	public static final int ONE_SECOND_IN_MS = 1000;
+	public static final int		ONE_SECOND_IN_MS	= 1000;
 
 	/** The Constant LOGGER. */
-	private static final Logger LOGGER = Logger.getLogger(BaseSeleniumPage.class);
+	private static final Logger	LOGGER				= Logger.getLogger(BaseSeleniumPage.class);
 
 	/** The web driver. */
-	private final WebDriver webdriver;
+	private final WebDriver		webdriver;
 
-	private final String expectedUrl;
+	private final String		expectedUrl;
 
-	private boolean acceptNextAlert = true;
+	private boolean				acceptNextAlert		= true;
 
 	public static void waitForPageToLoad(final WebDriver webDriver2) {
 		try {
@@ -50,7 +48,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 			}
 		}
 		catch (final InterruptedException e) {
-			BaseSeleniumPage.LOGGER.info("Interrupted");
+			BaseSeleniumPage.LOGGER.info("Interrupted", e);
 		}
 	}
 
@@ -156,7 +154,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 			this.getWebDriver().switchTo().alert();
 			return true;
 		}
-		catch (final NoAlertPresentException e) {
+		catch (@SuppressWarnings("unused") final NoAlertPresentException e) {
 			return false;
 		}
 	}
@@ -166,7 +164,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 			this.getWebDriver().findElement(by);
 			return true;
 		}
-		catch (final NoSuchElementException e) {
+		catch (@SuppressWarnings("unused") final NoSuchElementException e) {
 			return false;
 		}
 	}
@@ -191,7 +189,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 * @return the string
 	 */
 	protected final int keepNumberOnly(final String password2) {
-		return Integer.valueOf(password2.replaceAll("\\D+", ""));
+		return Integer.valueOf(password2.replaceAll("\\D+", "")).intValue();
 	}
 
 	/**
