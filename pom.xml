@@ -4,7 +4,7 @@
 
 	<groupId>com.leonarduk</groupId>
 	<artifactId>webscraper-core</artifactId>
-	<version>1.0.15</version>
+	<version>1.0.16</version>
 	<name>Core</name>
 	<description>Infrastructure classes</description>
 	<url>http://leonarduk.com/maven2</url>
@@ -18,7 +18,7 @@
 		<mockito.version>1.9.5</mockito.version>
 		<javax.mail.version>1.4</javax.mail.version>
 		<selenium.version>3.4.0</selenium.version>
-		<jacoco.version>0.7.6.201602180812</jacoco.version>
+		<jacoco.version>0.7.9</jacoco.version>
 	</properties>
 	<repositories>
 		<repository>
