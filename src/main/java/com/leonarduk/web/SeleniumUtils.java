@@ -151,8 +151,12 @@ public final class SeleniumUtils {
 	}
 
 	public static boolean isInternetAvailable() {
+		return SeleniumUtils.isInternetAvailable("http://google.co.uk");
+	}
+
+	public static boolean isInternetAvailable(final String exampleUrl) {
 		try {
-			final URI testUrl = new URI("http://google.co.uk");
+			final URI testUrl = new URI(exampleUrl);
 			testUrl.toURL().openConnection().connect();
 			return true;
 		}
