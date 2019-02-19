@@ -17,8 +17,11 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import com.google.common.collect.ImmutableMap;
 
 /**
  * The Class SeleniumUtils.
@@ -33,7 +36,7 @@ public final class SeleniumUtils {
 
 	public static WebDriver getChrome(final File downloadFilepath) {
 		System.setProperty("webdriver.chrome.driver",
-		        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe");
+				"C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe");
 		final HashMap<String, Object> chromePrefs = new HashMap<>();
 		chromePrefs.put("profile.default_content_settings.popups", Integer.valueOf(0));
 		chromePrefs.put("download.default_directory", downloadFilepath);
@@ -52,11 +55,9 @@ public final class SeleniumUtils {
 	/**
 	 * Gets the download capable browser.
 	 *
-	 * @param tempDir
-	 *            the temp dir
+	 * @param tempDir the temp dir
 	 * @return the download capable browser
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static WebDriver getDownloadCapableBrowser(final File tempDir) throws IOException {
 		return SeleniumUtils.getDownloadCapableBrowser(tempDir, false);
@@ -65,16 +66,13 @@ public final class SeleniumUtils {
 	/**
 	 * Gets the download capable browser.
 	 *
-	 * @param tempDir
-	 *            the temp dir
-	 * @param runInBackground
-	 *            the run in background
+	 * @param tempDir         the temp dir
+	 * @param runInBackground the run in background
 	 * @return the download capable browser
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static WebDriver getDownloadCapableBrowser(final File tempDir,
-	        final boolean runInBackground) throws IOException {
+	public static WebDriver getDownloadCapableBrowser(final File tempDir, final boolean runInBackground)
+			throws IOException {
 		if (!tempDir.exists()) {
 			throw new FileNotFoundException("Directory " + tempDir + " does not exist");
 		}
@@ -86,11 +84,9 @@ public final class SeleniumUtils {
 	/**
 	 * Gets the download capable browser.
 	 *
-	 * @param downloadDir
-	 *            the download dir
+	 * @param downloadDir the download dir
 	 * @return the download capable browser
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static WebDriver getDownloadCapableBrowser(final String downloadDir) throws IOException {
 		return SeleniumUtils.getDownloadCapableBrowser(downloadDir, false);
@@ -99,55 +95,42 @@ public final class SeleniumUtils {
 	/**
 	 * Gets the download capable browser.
 	 *
-	 * @param downloadDir
-	 *            the download dir
-	 * @param runInBackground
-	 *            the run in background
+	 * @param downloadDir     the download dir
+	 * @param runInBackground the run in background
 	 * @return the download capable browser
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static WebDriver getDownloadCapableBrowser(final String downloadDir,
-	        final boolean runInBackground) throws IOException {
+	public static WebDriver getDownloadCapableBrowser(final String downloadDir, final boolean runInBackground)
+			throws IOException {
 		final File tempDir = new File(downloadDir);
 		return SeleniumUtils.getDownloadCapableBrowser(tempDir, runInBackground);
 
 	}
 
-	public static WebDriver getFirefox(final File tempDir, final boolean runInBackground)
-	        throws IOException {
-		final FirefoxProfile fp = new FirefoxProfile();
-		fp.setPreference("browser.download.folderList", 2);
-		fp.setPreference("browser.download.manager.showWhenStarting", false);
-		fp.setPreference("browser.download.dir", tempDir.getCanonicalPath());
-		fp.setPreference("browser.helperApps.alwaysAsk.force", false);
-		fp.setPreference("browser.helperApps.neverAsk.saveToDisk",
-		        "application/x-csv,text/html,text/ofx,application/ofx,"
-		                + "application/x-ofx,application/x-qif,text/csv,text/x-csv,"
-		                + "application/x-download,application/vnd.ms-excel,"
-		                + "application/pdf,text/plain");
-		fp.setPreference("browser.helperApps.neverAsk.openFile",
-		        "application/x-csv,text/html,text/ofx,application/ofx,"
-		                + "application/octet-stream,application/x-ofx,"
-		                + "application/vnd.ms-excel,text/csv,text/x-csv,"
-		                + "application/x-download,application/vnd.ms-excel,"
-		                + "application/pdf,text/plain");
+	public static WebDriver getFirefox(final File tempDir, final boolean runInBackground) throws IOException {
+		FirefoxOptions fp = new FirefoxOptions().addPreference("browser.download.folderList", 2)
+				.addPreference("browser.download.manager.showWhenStarting", false)
+				.addPreference("browser.download.dir", tempDir.getCanonicalPath())
+				.addPreference("browser.helperApps.alwaysAsk.force", false)
+				.addPreference("browser.helperApps.neverAsk.saveToDisk",
+						"application/x-csv,text/html,text/ofx,application/ofx,"
+								+ "application/x-ofx,application/x-qif,text/csv,text/x-csv,"
+								+ "application/x-download,application/vnd.ms-excel," + "application/pdf,text/plain")
+				.addPreference("browser.helperApps.neverAsk.openFile",
+						"application/x-csv,text/html,text/ofx,application/ofx,"
+								+ "application/octet-stream,application/x-ofx,"
+								+ "application/vnd.ms-excel,text/csv,text/x-csv,"
+								+ "application/x-download,application/vnd.ms-excel," + "application/pdf,text/plain");
 
 		if (runInBackground) {
 			final String xport = System.getProperty("Importal.xvfb.id", ":1");
 			// System.out.println("XVFB: " + xport);
-			final FirefoxBinary firefoxBinary = new FirefoxBinary();
-			firefoxBinary.setEnvironmentProperty("DISPLAY", xport);
-
-			final FirefoxOptions options = new FirefoxOptions();
-			options.setBinary(firefoxBinary);
-			options.setProfile(fp);
-			final FirefoxDriver firefoxDriver = new FirefoxDriver(options);
-			return firefoxDriver;
+			return new FirefoxDriver(
+					new GeckoDriverService.Builder().usingDriverExecutable(new File("path/to/geckodriver.exe"))
+							.withEnvironment(ImmutableMap.of("DISPLAY", xport)).build());
 		}
 
-		final FirefoxDriver firefoxDriver = new FirefoxDriver(fp);
-		return firefoxDriver;
+		return new FirefoxDriver(fp);
 	}
 
 	public static boolean isInternetAvailable() {
@@ -159,8 +142,7 @@ public final class SeleniumUtils {
 			final URI testUrl = new URI(exampleUrl);
 			testUrl.toURL().openConnection().connect();
 			return true;
-		}
-		catch (@SuppressWarnings("unused") URISyntaxException | IOException e) {
+		} catch (@SuppressWarnings("unused") URISyntaxException | IOException e) {
 			return false;
 		}
 	}
