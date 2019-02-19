@@ -35,5 +35,46 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/steph/.m2/repository/org/mockito/mockito-all/1.10.19/mockito-all-1.10.19.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/steph/.m2/repository/org/mockito/mockito-all/1.10.19/mockito-all-1.10.19-javadoc.jar!/"/>
+			<attribute name="maven.groupId" value="org.mockito"/>
+			<attribute name="maven.artifactId" value="mockito-all"/>
+			<attribute name="maven.version" value="1.10.19"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/steph/.m2/repository/org/powermock/powermock-api-mockito/1.6.1/powermock-api-mockito-1.6.1.jar" sourcepath="C:/Users/steph/.m2/repository/org/powermock/powermock-api-mockito/1.6.1/powermock-api-mockito-1.6.1-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
+			<attribute name="maven.groupId" value="org.powermock"/>
+			<attribute name="maven.artifactId" value="powermock-api-mockito"/>
+			<attribute name="maven.version" value="1.6.1"/>
+			<attribute name="maven.scope" value="test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/steph/.m2/repository/org/powermock/powermock-api-support/1.6.1/powermock-api-support-1.6.1.jar" sourcepath="C:/Users/steph/.m2/repository/org/powermock/powermock-api-support/1.6.1/powermock-api-support-1.6.1-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
+			<attribute name="maven.groupId" value="org.powermock"/>
+			<attribute name="maven.artifactId" value="powermock-api-support"/>
+			<attribute name="maven.version" value="1.6.1"/>
+			<attribute name="maven.scope" value="test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/steph/.m2/repository/org/powermock/powermock-core/1.6.1/powermock-core-1.6.1.jar" sourcepath="C:/Users/steph/.m2/repository/org/powermock/powermock-core/1.6.1/powermock-core-1.6.1-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
+			<attribute name="maven.groupId" value="org.powermock"/>
+			<attribute name="maven.artifactId" value="powermock-core"/>
+			<attribute name="maven.version" value="1.6.1"/>
+			<attribute name="maven.scope" value="test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

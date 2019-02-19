@@ -16,7 +16,8 @@ import org.junit.Test;
  * @author stephen
  * @version $Author: $: Author of last commit
  * @version $Rev$: Revision of last commit
- * @version $Date: 2015-02-08 21:26:51 +0000 (Sun, 08 Feb 2015) $: Date of last commit
+ * @version $Date: 2015-02-08 21:26:51 +0000 (Sun, 08 Feb 2015) $: Date of last
+ *          commit
  * @since 8 Feb 2015
  */
 public class ConfigTest {
@@ -27,8 +28,7 @@ public class ConfigTest {
 	/**
 	 * Sets the up.
 	 *
-	 * @throws Exception
-	 *             the exception
+	 * @throws Exception the exception
 	 */
 	@Before
 	public final void setUp() throws Exception {
@@ -36,15 +36,23 @@ public class ConfigTest {
 	}
 
 	/**
+	 * 
 	 * Test config.
 	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@SuppressWarnings("unused")
 	@Test(expected = FileNotFoundException.class)
 	public final void testConfig() throws IOException {
 		new Config("missing.test.properties");
+	}
+
+	@Test
+	public final void testConfigOveride() throws IOException {
+		final String fieldName = "test.string2";
+		System.setProperty(fieldName, "toast");
+		Assert.assertEquals("toast", new Config("test.properties").getProperty(fieldName));
+
 	}
 
 	/**
@@ -62,8 +70,7 @@ public class ConfigTest {
 	@Test
 	public final void testGetBooleanProperty() {
 		final boolean expected = true;
-		Assert.assertEquals(Boolean.valueOf(expected),
-		        Boolean.valueOf(this.config.getBooleanProperty("test.bool")));
+		Assert.assertEquals(Boolean.valueOf(expected), Boolean.valueOf(this.config.getBooleanProperty("test.bool")));
 	}
 
 	/**
@@ -72,8 +79,7 @@ public class ConfigTest {
 	@Test
 	public final void testGetDoubleProperty() {
 		final double expected = 12.34;
-		Assert.assertEquals(expected, this.config.getDoubleProperty("test.double").doubleValue(),
-		        0);
+		Assert.assertEquals(expected, this.config.getDoubleProperty("test.double").doubleValue(), 0);
 	}
 
 	/**
@@ -146,7 +152,8 @@ public class ConfigTest {
 	 */
 	@Test
 	public final void testGetProperty() {
-		Assert.assertEquals("eggs and bacon", this.config.getProperty("test.string"));
+		Assert.assertEquals("eggs and bacon", 
+				this.config.getProperty("test.string"));
 	}
 
 	@Test
@@ -180,8 +187,7 @@ public class ConfigTest {
 		final boolean value = true;
 		final String key = "Random";
 		this.config.setBooleanProperty(key, value);
-		Assert.assertEquals(Boolean.valueOf(value),
-		        Boolean.valueOf(this.config.getBooleanProperty(key)));
+		Assert.assertEquals(Boolean.valueOf(value), Boolean.valueOf(this.config.getBooleanProperty(key)));
 	}
 
 	@Test

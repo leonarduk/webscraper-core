@@ -54,6 +54,13 @@ public class Config {
 				throw new FileNotFoundException(
 				        "property file '" + propFileName + "' not found in the classpath");
 			}
+			
+			for (Object key : this.props.keySet()) {
+			      String override = System.getProperty((String) key);
+			      if (null!= override && !override.isEmpty()) {
+			        props.put(key, override);
+			      }
+			    }
 		}
 	}
 
