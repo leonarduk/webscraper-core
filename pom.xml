@@ -5,7 +5,7 @@
 
 	<groupId>com.leonarduk</groupId>
 	<artifactId>webscraper-core</artifactId>
-	<version>1.0.20-SNAPSHOT</version>
+	<version>1.0.20</version>
 	<name>Core</name>
 	<description>Infrastructure classes</description>
 	<url>http://leonarduk.com/maven2</url>

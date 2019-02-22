@@ -17,23 +17,29 @@ import org.apache.log4j.Logger;
 public class HtmlFormatter implements Formatter {
 	private static final Logger LOGGER = Logger.getLogger(HtmlFormatter.class);
 
+	public String addHeader(final String value) {
+		return this.createNode(value, "th");
+	}
+
+	public String addValue(final String value) {
+		return this.createNode(value, "td");
+	}
+
 	/**
 	 * Creates the node.
 	 *
-	 * @param value
-	 *            the value
-	 * @param node
-	 *            the node
+	 * @param value the value
+	 * @param node  the node
 	 * @return the string
 	 */
 	private String createNode(final String value, final String node) {
-		return new StringBuilder("<").append(node).append(">").append(value).append("</")
-		        .append(node).append(">").toString();
+		return new StringBuilder("<").append(node).append(">").append(value).append("</").append(node).append(">")
+				.toString();
 	}
 
 	private String createNode(final String value, final String nodeName, final String attributes) {
-		return new StringBuilder("<").append(nodeName).append(" ").append(attributes).append(">")
-		        .append(value).append("</").append(nodeName).append(">").toString();
+		return new StringBuilder("<").append(nodeName).append(" ").append(attributes).append(">").append(value)
+				.append("</").append(nodeName).append(">").toString();
 	}
 
 	@Override
@@ -60,7 +66,8 @@ public class HtmlFormatter implements Formatter {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.leonarduk.itemfinder.format.Formatter#formatLink(java.lang.String, java.lang.String)
+	 * @see com.leonarduk.itemfinder.format.Formatter#formatLink(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
 	public final String formatLink(final String link, final String name) {
@@ -78,7 +85,8 @@ public class HtmlFormatter implements Formatter {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.leonarduk.itemfinder.format.Formatter#formatSubHeader(java.lang.String )
+	 * @see
+	 * com.leonarduk.itemfinder.format.Formatter#formatSubHeader(java.lang.String )
 	 */
 	@Override
 	public final String formatSubHeader(final String header) {
