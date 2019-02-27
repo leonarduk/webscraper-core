@@ -13,10 +13,8 @@ import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -41,6 +39,7 @@ public final class SeleniumUtils {
 		chromePrefs.put("profile.default_content_settings.popups", Integer.valueOf(0));
 		chromePrefs.put("download.default_directory", downloadFilepath);
 		final ChromeOptions options = new ChromeOptions();
+
 		final HashMap<String, Object> chromeOptionsMap = new HashMap<>();
 		options.setExperimentalOption("prefs", chromePrefs);
 		options.addArguments("--test-type");
@@ -113,13 +112,13 @@ public final class SeleniumUtils {
 				.addPreference("browser.download.dir", tempDir.getCanonicalPath())
 				.addPreference("browser.helperApps.alwaysAsk.force", false)
 				.addPreference("browser.helperApps.neverAsk.saveToDisk",
-						"application/x-csv,text/html,text/ofx,application/ofx,"
-								+ "application/x-ofx,application/x-qif,text/csv,text/x-csv,"
+						"application/x-csv,text/html,text/ofx,text/qif,application/ofx,qif File"
+								+ "application/x-msmoney,application/x-ofx,application/x-qif,application/qif,text/qif,text/csv,text/x-csv,"
 								+ "application/x-download,application/vnd.ms-excel," + "application/pdf,text/plain")
 				.addPreference("browser.helperApps.neverAsk.openFile",
-						"application/x-csv,text/html,text/ofx,application/ofx,"
+						"application/x-msmoney,application/x-csv,text/html,text/ofx,application/ofx,"
 								+ "application/octet-stream,application/x-ofx,"
-								+ "application/vnd.ms-excel,text/csv,text/x-csv,"
+								+ "application/vnd.ms-excel,text/csv,text/x-csv,application/qif,text/qif,"
 								+ "application/x-download,application/vnd.ms-excel," + "application/pdf,text/plain");
 
 		if (runInBackground) {
@@ -129,6 +128,7 @@ public final class SeleniumUtils {
 					new GeckoDriverService.Builder().usingDriverExecutable(new File("path/to/geckodriver.exe"))
 							.withEnvironment(ImmutableMap.of("DISPLAY", xport)).build());
 		}
+
 
 		return new FirefoxDriver(fp);
 	}
