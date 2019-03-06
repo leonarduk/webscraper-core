@@ -34,61 +34,59 @@ public class EmailSessionImpl implements EmailSession {
 	/**
 	 * Instantiates a new email session.
 	 *
-	 * @param user
-	 *            the user
-	 * @param password
-	 *            the password
-	 * @param server
-	 *            the server
-	 * @param port
-	 *            the port
+	 * @param user     the user
+	 * @param password the password
+	 * @param server   the server
+	 * @param port     the port
+	 * @param useSsl
 	 */
-	public EmailSessionImpl(final String user, final String password, final String server,
-	        final String port) {
-		this.session = this.createSession(user, password, server, port);
+	public EmailSessionImpl(final String user, final String password, final String server, final String port,
+			boolean useSsl) {
+		this.session = this.createSession(user, password, server, port, useSsl);
 		// InternetAddress from = new InternetAddress(address, personal);
 	}
 
 	/**
 	 * Creates the session.
 	 *
-	 * @param user
-	 *            the user
-	 * @param password
-	 *            the password
-	 * @param server
-	 *            the server
-	 * @param port
-	 *            the port
+	 * @param user     the user
+	 * @param password the password
+	 * @param server   the server
+	 * @param port     the port
 	 * @return the session
 	 */
 	@Override
-	public final Session createSession(final String user, final String password,
-	        final String server, final String port) {
+	public final Session createSession(final String user, final String password, final String server, final String port,
+			boolean useSsl) {
 
 		final Properties props = new Properties();
 		props.put(EmailSessionImpl.MAIL_SMTP_HOST, server);
 		// If you want to use SSL
 		props.put(EmailSessionImpl.MAIL_SMTP_SOCKET_FACTORY_PORT, port);
-		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.port", port);
 		props.put(EmailSessionImpl.MAIL_STMP_USER, user);
-		// If you want you use TLS
-		props.put("mail.smtp.auth", "true");
-
-		props.put("mail.smtp.starttls.enable", "true");
 		props.put(EmailSessionImpl.MAIL_SMTP_PASSWORD, password);
-		final Session localSession = Session.getDefaultInstance(props,
-		        this.getAuthenticator(user, password));
+		
+		if (useSsl) {
+			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+			// If you want you use TLS
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.ssl.trust", "*");
+			props.put("mail.smtp.socketFactory.fallback", "false");
+
+			props.put("mail.smtp.starttls.enable", useSsl);
+		}
+		
+		final Session localSession = Session.getDefaultInstance(props, this.getAuthenticator(user, password));
 		return localSession;
 	}
 
 	/**
 	 * Gets the authenticator.
 	 *
-	 * @param userName
-	 *            the user name
-	 * @param password
-	 *            the password
+	 * @param userName the user name
+	 * @param password the password
 	 * @return the authenticator
 	 */
 	@Override

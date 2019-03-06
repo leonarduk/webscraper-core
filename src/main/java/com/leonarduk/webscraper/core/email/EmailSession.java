@@ -11,7 +11,7 @@ import javax.mail.Session;
 
 public interface EmailSession {
 
-	Session createSession(String user, String password, String server, String port);
+	Session createSession(String user, String password, String server, String port, boolean useSsl);
 
 	Authenticator getAuthenticator(String userName, String password);
 
