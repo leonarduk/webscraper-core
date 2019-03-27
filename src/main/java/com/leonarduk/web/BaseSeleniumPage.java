@@ -21,33 +21,28 @@ import org.openqa.selenium.support.ui.LoadableComponent;
  * @version $Date$: Date of last commit
  * @since 18 Feb 2015
  */
-public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPage>
-        implements AutoCloseable {
-	/** The Constant ONE_SECOND_IN_MS. */
-	public static final int		ONE_SECOND_IN_MS	= 1000;
+public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPage> implements AutoCloseable {
 
 	/** The Constant LOGGER. */
-	private static final Logger	LOGGER				= Logger.getLogger(BaseSeleniumPage.class);
+	private static final Logger LOGGER = Logger.getLogger(BaseSeleniumPage.class);
 
 	/** The web driver. */
-	private final WebDriver		webdriver;
+	private final WebDriver webdriver;
 
-	private final String		expectedUrl;
+	private final String expectedUrl;
 
-	private boolean				acceptNextAlert		= true;
+	private boolean acceptNextAlert = true;
 
 	public static void waitForPageToLoad(final WebDriver webDriver2) {
 		try {
 			final int halfASecond = 500;
 			Thread.sleep(10 * halfASecond);
 			if (!SeleniumUtils.isInternetAvailable()) {
-				BaseSeleniumPage.LOGGER
-				        .warn("no internet - can't load " + webDriver2.getCurrentUrl());
+				BaseSeleniumPage.LOGGER.warn("no internet - can't load " + webDriver2.getCurrentUrl());
 				BaseSeleniumPage.waitForPageToLoad(webDriver2);
 				webDriver2.get(webDriver2.getCurrentUrl());
 			}
-		}
-		catch (final InterruptedException e) {
+		} catch (final InterruptedException e) {
 			BaseSeleniumPage.LOGGER.info("Interrupted", e);
 		}
 	}
@@ -55,10 +50,8 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	/**
 	 * Instantiates a new base selenium page.
 	 *
-	 * @param webDriver
-	 *            the web driver
-	 * @param expectedUrl
-	 *            the expected url
+	 * @param webDriver   the web driver
+	 * @param expectedUrl the expected url
 	 */
 	public BaseSeleniumPage(final WebDriver webDriver, final String expectedUrl) {
 		super();
@@ -69,8 +62,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	/**
 	 * Click field.
 	 *
-	 * @param xpath
-	 *            the xpath
+	 * @param xpath the xpath
 	 */
 	protected final void clickField(final String xpath) {
 		this.findElementByXpath(xpath).click();
@@ -78,22 +70,20 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 
 	@Override
 	public void close() throws Exception {
-		this.getWebDriver().close();
+		this.webdriver.close();
 	}
 
 	public String closeAlertAndGetItsText() {
 		try {
-			final Alert alert = this.getWebDriver().switchTo().alert();
+			final Alert alert = this.webdriver.switchTo().alert();
 			final String alertText = alert.getText();
 			if (this.acceptNextAlert) {
 				alert.accept();
-			}
-			else {
+			} else {
 				alert.dismiss();
 			}
 			return alertText;
-		}
-		finally {
+		} finally {
 			this.acceptNextAlert = true;
 		}
 	}
@@ -101,10 +91,8 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	/**
 	 * Enter value into field.
 	 *
-	 * @param answer
-	 *            the answer
-	 * @param xpath
-	 *            the xpath
+	 * @param answer the answer
+	 * @param xpath  the xpath
 	 * @return the web element
 	 */
 	protected final WebElement enterValueIntoField(final String answer, final String xpath) {
@@ -118,8 +106,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	/**
 	 * Find element by xpath.
 	 *
-	 * @param xpath
-	 *            the xpath
+	 * @param xpath the xpath
 	 * @return the web element
 	 */
 	protected final WebElement findElementByXpath(final String xpath) {
@@ -149,32 +136,34 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 		return this.webdriver;
 	}
 
+	public final BrowserController getBrowserController() {
+		return new SeleniumBrowserController(this.webdriver);
+	}
+
 	public boolean isAlertPresent() {
 		try {
-			this.getWebDriver().switchTo().alert();
+			this.webdriver.switchTo().alert();
 			return true;
-		}
-		catch (@SuppressWarnings("unused") final NoAlertPresentException e) {
+		} catch (@SuppressWarnings("unused") final NoAlertPresentException e) {
 			return false;
 		}
 	}
 
 	public boolean isElementPresent(final By by) {
 		try {
-			this.getWebDriver().findElement(by);
+			this.webdriver.findElement(by);
 			return true;
-		}
-		catch (@SuppressWarnings("unused") final NoSuchElementException e) {
+		} catch (@SuppressWarnings("unused") final NoSuchElementException e) {
 			return false;
 		}
 	}
 
 	@Override
 	protected final void isLoaded() {
-		if (!this.getWebDriver().getCurrentUrl().equals(this.expectedUrl)) {
+		if (!this.webdriver.getCurrentUrl().equals(this.expectedUrl)) {
 			this.load();
 		}
-		final String url = this.getWebDriver().getCurrentUrl();
+		final String url = this.webdriver.getCurrentUrl();
 		if (!url.startsWith(this.expectedUrl)) {
 			throw new SeleniumException(this.expectedUrl + " is  not loaded. Instead is " + url);
 		}
@@ -184,8 +173,7 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	/**
 	 * Keep number only.
 	 *
-	 * @param password2
-	 *            the password2
+	 * @param password2 the password2
 	 * @return the string
 	 */
 	protected final int keepNumberOnly(final String password2) {
@@ -196,7 +184,6 @@ public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPag
 	 * Wait for page to load.
 	 */
 	public final void waitForPageToLoad() {
-		final WebDriver webDriver2 = this.getWebDriver();
-		BaseSeleniumPage.waitForPageToLoad(webDriver2);
+		BaseSeleniumPage.waitForPageToLoad(this.webdriver);
 	}
 }

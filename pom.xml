@@ -5,7 +5,7 @@
 
 	<groupId>com.leonarduk</groupId>
 	<artifactId>webscraper-core</artifactId>
-	<version>1.0.23-SNAPSHOT</version>
+	<version>1.0.23</version>
 	<name>Core</name>
 	<description>Infrastructure classes</description>
 	<url>http://leonarduk.com/maven2</url>
@@ -452,11 +452,24 @@
 			<version>${jacoco.version}</version>
 			<type>maven-plugin</type>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/us.codecraft/xsoup -->
+<dependency>
+    <groupId>us.codecraft</groupId>
+    <artifactId>xsoup</artifactId>
+    <version>0.3.1</version>
+</dependency>
+		
 		<dependency>
 			<groupId>org.htmlparser</groupId>
 			<artifactId>htmlparser</artifactId>
 			<version>2.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.11.3</version>
+		</dependency>
+		
 	</dependencies>
 	<organization>
 		<name>Leonard UK Ltd</name>

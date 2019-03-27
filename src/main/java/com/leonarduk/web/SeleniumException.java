@@ -1,5 +1,7 @@
 package com.leonarduk.web;
 
+import java.io.IOException;
+
 public class SeleniumException extends RuntimeException {
 
 	/**
@@ -9,6 +11,10 @@ public class SeleniumException extends RuntimeException {
 
 	public SeleniumException(final String string) {
 		super(string);
+	}
+
+	public SeleniumException(String string, IOException e) {
+		super(string, e);
 	}
 
 }
