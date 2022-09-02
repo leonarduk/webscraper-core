@@ -22,8 +22,8 @@ import javax.mail.StoreClosedException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 
-import org.apache.log4j.Logger;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.leonarduk.webscraper.core.email.EmailMessage;
 import com.leonarduk.webscraper.core.email.EmailProcessor;
 import com.leonarduk.webscraper.core.email.EmailReader;
@@ -34,7 +34,7 @@ import com.leonarduk.webscraper.core.email.ServerType;
  */
 public class EmailReaderImpl implements EmailReader {
 	/** The Constant LOGGER. */
-	private static final Logger LOGGER = Logger.getLogger(EmailReader.class);
+	private static final Logger LOGGER = LogManager.getLogger(EmailReader.class);
 
 	/**
 	 * Process mail.

@@ -3,7 +3,8 @@
  */
 package com.leonarduk.webscraper.core.email.impl;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.leonarduk.webscraper.core.email.EmailMessage;
 import com.leonarduk.webscraper.core.email.EmailProcessor;
@@ -20,8 +21,8 @@ import com.leonarduk.webscraper.core.email.EmailProcessor;
 public class SimplePrintEmailProcessor implements EmailProcessor {
 
 	/** The Constant LOGGER. */
-	private static final Logger LOGGER = Logger.getLogger(SimplePrintEmailProcessor.class);
-
+	private static final Logger LOGGER = LogManager.getLogger(SimplePrintEmailProcessor.class);
+	Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 	/*
 	 * (non-Javadoc)
 	 *

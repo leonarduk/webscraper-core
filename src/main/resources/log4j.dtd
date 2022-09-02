@@ -99,14 +99,14 @@ element. -->
 >
 
 
-<!-- The priority class is org.apache.log4j.Level by default -->
+<!-- The priority class is org.apache.logging.log4j.Level by default -->
 <!ELEMENT priority (param*)>
 <!ATTLIST priority
   class   CDATA	#IMPLIED
   value	  CDATA #REQUIRED
 >
 
-<!-- The level class is org.apache.log4j.Level by default -->
+<!-- The level class is org.apache.logging.log4j.Level by default -->
 <!ELEMENT level (param*)>
 <!ATTLIST level
   class   CDATA	#IMPLIED

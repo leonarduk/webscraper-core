@@ -3,7 +3,8 @@ package com.leonarduk.web;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -14,7 +15,7 @@ import com.google.common.collect.Lists;
 import us.codecraft.xsoup.Xsoup;
 
 public class JSoupBrowserController implements BrowserController {
-	private final Logger LOG = Logger.getLogger(JSoupBrowserController.class);
+	private final Logger LOG = LogManager.getLogger(JSoupBrowserController.class);
 	private Document doc;
 
 	public JSoupBrowserController() {

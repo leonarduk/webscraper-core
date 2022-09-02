@@ -14,8 +14,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.log4j.Logger;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.leonarduk.webscraper.core.email.EmailException;
 import com.leonarduk.webscraper.core.email.EmailSender;
 import com.leonarduk.webscraper.core.email.EmailSession;
@@ -27,7 +27,7 @@ import com.leonarduk.webscraper.core.format.Formatter;
 public class EmailSenderImpl implements EmailSender {
 
 	/** The logger. */
-	private static Logger logger = Logger.getLogger(EmailSenderImpl.class);
+	private static Logger logger = LogManager.getLogger(EmailSenderImpl.class);
 
 	@Override
 	public final Message createMessage(final String fromEmail, final String fromName,

@@ -3,7 +3,8 @@
  */
 package com.leonarduk.web;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -24,7 +25,7 @@ import org.openqa.selenium.support.ui.LoadableComponent;
 public abstract class BaseSeleniumPage extends LoadableComponent<BaseSeleniumPage> implements AutoCloseable {
 
 	/** The Constant LOGGER. */
-	private static final Logger LOGGER = Logger.getLogger(BaseSeleniumPage.class);
+	private static final Logger LOGGER = LogManager.getLogger(BaseSeleniumPage.class);
 
 	/** The web driver. */
 	private final WebDriver webdriver;
