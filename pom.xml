@@ -12,8 +12,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<log4j.version>2.18.0</log4j.version>
-		<junit.version>4.13.1</junit.version>
+		<log4j.version>2.19.0</log4j.version>
+		<junit.version>4.13.2</junit.version>
 		<java.version>11</java.version>
 		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 		<maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
@@ -21,7 +21,7 @@
 		<maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
 		<maven-failsafe-plugin.version>3.0.0-M3</maven-failsafe-plugin.version>
 		<powermock-junit4.version>1.7.4</powermock-junit4.version>
-		<powermock-mockito.version>1.7.1</powermock-mockito.version>
+		<powermock-mockito.version>1.7.4</powermock-mockito.version>
 		<mockito.version>1.8.5</mockito.version>
 		<maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
 		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
@@ -348,7 +348,7 @@
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
-			<version>3.2.10</version>
+			<version>3.3.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
@@ -431,7 +431,7 @@
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
-			<version>10.14.2.0</version>
+			<version>10.16.1.1</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
