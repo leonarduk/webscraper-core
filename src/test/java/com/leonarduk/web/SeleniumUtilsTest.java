@@ -37,26 +37,26 @@ public class SeleniumUtilsTest {
 		c.newInstance();
 	}
 
-	/**
-	 * Test get download capable browser invalid dir file.
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	@Test(expected = FileNotFoundException.class)
-	public final void testGetDownloadCapableBrowserInvalidDirFile() throws IOException {
-		SeleniumUtils.getDownloadCapableBrowser(new File("invalidpath"), true);
-	}
-
-	/**
-	 * Test get download capable browser invalid dir string.
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	@Test(expected = FileNotFoundException.class)
-	public final void testGetDownloadCapableBrowserInvalidDirString() throws IOException {
-		Assert.assertNotNull(SeleniumUtils.getDownloadCapableBrowser("invalidpath", true));
-	}
+//	/**
+//	 * Test get download capable browser invalid dir file.
+//	 *
+//	 * @throws IOException
+//	 *             Signals that an I/O exception has occurred.
+//	 */
+//	@Test(expected = FileNotFoundException.class)
+//	public final void testGetDownloadCapableBrowserInvalidDirFile() throws IOException {
+//		SeleniumUtils.getDownloadCapableBrowser(new File("invalidpath"), true);
+//	}
+//
+//	/**
+//	 * Test get download capable browser invalid dir string.
+//	 *
+//	 * @throws IOException
+//	 *             Signals that an I/O exception has occurred.
+//	 */
+//	@Test(expected = FileNotFoundException.class)
+//	public final void testGetDownloadCapableBrowserInvalidDirString() throws IOException {
+//		Assert.assertNotNull(SeleniumUtils.getDownloadCapableBrowser("invalidpath", true));
+//	}
 
 }

@@ -5,7 +5,7 @@
 
     <groupId>com.leonarduk</groupId>
     <artifactId>webscraper-core</artifactId>
-    <version>1.0.25-SNAPSHOT</version>
+    <version>1.0.24</version>
     <name>Core</name>
     <description>Infrastructure classes</description>
     <url>http://leonarduk.com/maven2</url>
@@ -31,7 +31,7 @@
         <javax.mail.version>1.5.0-b01</javax.mail.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
-        <selenium.version>4.19.1</selenium.version>
+        <selenium.version>4.21.0</selenium.version>
         <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
         <jacoco.version>0.8.12</jacoco.version>
@@ -75,19 +75,6 @@
                     <releaseProfiles>release</releaseProfiles>
                     <goals>deploy</goals>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -339,7 +326,6 @@
             <artifactId>powermock-reflect</artifactId>
             <version>${powermock-junit4.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.powermock/powermock-core -->
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-core</artifactId>
@@ -352,17 +338,20 @@
             <version>${powermock-junit4.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-core</artifactId>
-            <version>${powermock-junit4.version}</version>
-        </dependency>
+
         <!-- selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
