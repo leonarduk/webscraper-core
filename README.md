@@ -6,4 +6,4 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.leonarduk/webscraper-core/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.leonarduk/webscraper-core)
 
 Used by
-* [leonarduk/webscraper-core](https://github.com/leonarduk/webscraper-core)
+* [leonarduk/pension-risk-management-system](https://github.com/leonarduk/pension-risk-management-system)
