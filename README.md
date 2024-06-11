@@ -4,6 +4,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/54fd223faa12484f8c3255f50085456b)](https://app.codacy.com/gh/leonarduk/webscraper-core/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![codecov](https://codecov.io/gh/leonarduk/webscraper-core/branch/master/graph/badge.svg)](https://codecov.io/gh/leonarduk/webscraper-core)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.leonarduk/webscraper-core/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.leonarduk/webscraper-core)
+[![Known Vulnerabilities](https://snyk.io/test/github/leonarduk/webscraper-core/badge.svg)](https://snyk.io/test/github/leonarduk/webscraper-core)
 
 Used by
 * [leonarduk/pension-risk-management-system](https://github.com/leonarduk/pension-risk-management-system)
