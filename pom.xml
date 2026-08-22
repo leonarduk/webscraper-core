@@ -14,8 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j.version>2.25.3</log4j.version>
         <junit.version>4.13.2</junit.version>
-        <java.version>17</java.version>
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <java.version>25</java.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
         <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
